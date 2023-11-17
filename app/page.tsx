@@ -13,7 +13,8 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="flex items-center space-around">
+      <div className="flex-col items-center space-y-12 p-12">
+        <Card />
         <Card />
         <Card />
       </div>
