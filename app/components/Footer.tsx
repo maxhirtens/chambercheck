@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className="bg-darkGrayishBlue mt-auto">
       {/* <!-- Flex Container --> */}
       <div className="container flex flex-col-reverse justify-between px-6 py-10 mx-auto space-y-8 md:flex-row md:space-y-0">
         {/* <!-- Logo and social links container --> */}
@@ -12,15 +12,16 @@ const Footer = () => {
             Copyright &copy; 2023, All Rights Reserved
           </div>
           {/* <!-- Logo --> */}
-          <div>
-            <p>ChamberCheck Logo</p>
+          <div className="flex flex-col space-y-3 text-white">
+            <p>ChamberCheck Logo Light</p>
           </div>
           {/* <!-- Social Links Container --> */}
           <div className="flex justify-center space-x-4">
             {/* <!-- Link 1 --> */}
             <a href="#">
               <Image
-                src="img/icon-facebook.svg"
+                className="w-auto"
+                src="/img/icon-facebook.svg"
                 alt=""
                 width={30}
                 height={30}
@@ -28,16 +29,19 @@ const Footer = () => {
             </a>
             {/* <!-- Link 2 --> */}
             <a href="#">
-              <Image src="img/icon-youtube.svg" alt="" width={30} height={30} />
-            </a>
-            {/* <!-- Link 3 --> */}
-            <a href="#">
-              <Image src="img/icon-twitter.svg" alt="" width={30} height={30} />
+              <Image
+                className="w-auto"
+                src="/img/icon-youtube.svg"
+                alt=""
+                width={30}
+                height={30}
+              />
             </a>
             {/* <!-- Link 4 --> */}
             <a href="#">
               <Image
-                src="img/icon-pinterest.svg"
+                className="w-auto"
+                src="/img/icon-pinterest.svg"
                 alt=""
                 width={30}
                 height={30}
@@ -46,7 +50,8 @@ const Footer = () => {
             {/* <!-- Link 5 --> */}
             <a href="#">
               <Image
-                src="img/icon-instagram.svg"
+                className="w-auto"
+                src="/img/icon-instagram.svg"
                 alt=""
                 width={30}
                 height={30}
