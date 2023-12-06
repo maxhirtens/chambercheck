@@ -13,7 +13,16 @@ const Footer = () => {
           </div>
           {/* <!-- Logo --> */}
           <div className="flex flex-col space-y-3 text-white">
-            <p>ChamberCheck Logo Light</p>
+            <Image
+              src="/img/cc-logo-2.jpg"
+              alt="main ChamberCheck logo"
+              width="175"
+              height="125"
+              style={{
+                objectFit: "cover",
+                borderRadius: "100px",
+              }}
+            ></Image>
           </div>
           {/* <!-- Social Links Container --> */}
           <div className="flex justify-center space-x-4">

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const Header = () => {
   return (
@@ -8,26 +9,31 @@ const Header = () => {
       <div className="flex items-center justify-between">
         {/* Logo */}
         <div className="pt-2">
-          <Link href="/">ChamberCheck Logo Dark</Link>
+          <Link href="/">
+            <Image
+              src="/img/cc-logo-2.jpg"
+              alt="main ChamberCheck logo"
+              width="325"
+              height="125"
+              style={{
+                objectFit: "cover",
+                borderRadius: "100px",
+              }}
+            ></Image>
+          </Link>
         </div>
         {/* Menu Items */}
-        <div className="hidden space-x-6 md:flex">
+        {/* <div className="hidden space-x-6 md:flex">
           <Link className="hover:text-darkGrayishBlue" href="/about">
             About
           </Link>
-          <Link className="hover:text-darkGrayishBlue" href="/sign-in">
-            Sign In
-          </Link>
-          <Link className="hover:text-darkGrayishBlue" href="/sign-up">
-            Sign Up
-          </Link>
-        </div>
+        </div> */}
         {/* Button */}
         <a
-          href="#"
+          href="/sign-in"
           className="hidden p-3 px-6 pt-2 text-white bg-darkBlue rounded-full baseline hover:bg-brightRedLight md:block"
         >
-          Sign Up
+          Sign In
         </a>
       </div>
     </nav>
