@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingPage from "./loading";
 import ReviewsBox from "./components/ReviewsBox";
 import MapBox from "./components/MapBox";
