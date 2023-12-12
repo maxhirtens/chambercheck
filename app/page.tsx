@@ -13,7 +13,7 @@ const HomePage = () => {
 
   return (
     <>
-      <span className="flex flex-col md:flex-row justify-between p-12">
+      <span className="flex flex-col lg:flex-row justify-between p-12">
         <MapBox />
         <ReviewsBox />
       </span>

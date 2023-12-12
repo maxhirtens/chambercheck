@@ -13,11 +13,14 @@ const Header = () => {
             <Image
               src="/img/cc-logo-2.jpg"
               alt="main ChamberCheck logo"
-              width="325"
-              height="125"
+              priority
+              width={325}
+              height={125}
               style={{
                 objectFit: "cover",
                 borderRadius: "100px",
+                width: "auto",
+                height: "auto",
               }}
             ></Image>
           </Link>

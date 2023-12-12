@@ -1,43 +1,38 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Footer = () => {
   return (
     <footer className="bg-darkGrayishBlue mt-auto">
       {/* <!-- Flex Container --> */}
-      <div className="container flex flex-col-reverse justify-between px-6 py-10 mx-auto space-y-8 md:flex-row md:space-y-0">
+      <div className="container flex flex-col-reverse justify-around px-6 py-10 mx-auto space-y-8 md:flex-row md:space-y-0">
         {/* <!-- Logo and social links container --> */}
         <div className="flex flex-col-reverse items-center justify-between space-y-12 md:flex-col md:space-y-0 md:items-start">
           <div className="mx-auto my-6 text-center text-white md:hidden">
             Copyright &copy; 2023, All Rights Reserved
           </div>
           {/* <!-- Logo --> */}
-          <div className="flex flex-col space-y-3 text-white">
-            <Image
-              src="/img/cc-logo-2.jpg"
-              alt="main ChamberCheck logo"
-              width="175"
-              height="125"
-              style={{
-                objectFit: "cover",
-                borderRadius: "100px",
-              }}
-            ></Image>
+          <div className="flex flex-col space-y-3 m-6 text-white">
+            <Link href="/">
+              <Image
+                src="/img/cc-logo-2.jpg"
+                alt="main ChamberCheck logo"
+                width={175}
+                height={125}
+                style={{
+                  objectFit: "cover",
+                  borderRadius: "100px",
+                  width: "auto",
+                  height: "auto",
+                }}
+              ></Image>
+            </Link>
           </div>
           {/* <!-- Social Links Container --> */}
-          <div className="flex justify-center space-x-4">
-            {/* <!-- Link 1 --> */}
-            <a href="#">
-              <Image
-                className="w-auto"
-                src="/img/icon-facebook.svg"
-                alt=""
-                width={30}
-                height={30}
-              />
-            </a>
+          <div className="flex justify-center ml-8 space-x-4">
             {/* <!-- Link 2 --> */}
-            <a href="#">
+            <Link href="#">
               <Image
                 className="w-auto"
                 src="/img/icon-youtube.svg"
@@ -45,9 +40,9 @@ const Footer = () => {
                 width={30}
                 height={30}
               />
-            </a>
+            </Link>
             {/* <!-- Link 4 --> */}
-            <a href="#">
+            <Link href="#">
               <Image
                 className="w-auto"
                 src="/img/icon-pinterest.svg"
@@ -55,9 +50,9 @@ const Footer = () => {
                 width={30}
                 height={30}
               />
-            </a>
+            </Link>
             {/* <!-- Link 5 --> */}
-            <a href="#">
+            <Link href="#">
               <Image
                 className="w-auto"
                 src="/img/icon-instagram.svg"
@@ -65,35 +60,35 @@ const Footer = () => {
                 width={30}
                 height={30}
               />
-            </a>
+            </Link>
           </div>
         </div>
         {/* <!-- List Container --> */}
         <div className="flex justify-around space-x-32">
           <div className="flex flex-col space-y-3 text-white">
-            <a href="#" className="hover:text-brightRed">
+            <Link href="#" className="hover:text-brightRed">
               Home
-            </a>
-            <a href="#" className="hover:text-brightRed">
+            </Link>
+            <Link href="#" className="hover:text-brightRed">
               Pricing
-            </a>
-            <a href="#" className="hover:text-brightRed">
+            </Link>
+            <Link href="#" className="hover:text-brightRed">
               Products
-            </a>
-            <a href="#" className="hover:text-brightRed">
+            </Link>
+            <Link href="#" className="hover:text-brightRed">
               About
-            </a>
+            </Link>
           </div>
           <div className="flex flex-col space-y-3 text-white">
-            <a href="#" className="hover:text-brightRed">
+            <Link href="#" className="hover:text-brightRed">
               Careers
-            </a>
-            <a href="#" className="hover:text-brightRed">
+            </Link>
+            <Link href="#" className="hover:text-brightRed">
               Community
-            </a>
-            <a href="#" className="hover:text-brightRed">
+            </Link>
+            <Link href="#" className="hover:text-brightRed">
               Privacy Policy
-            </a>
+            </Link>
           </div>
         </div>
 
