@@ -1,11 +1,11 @@
 export const metadata = {
-  title: 'About Chamber Check',
+  title: "About ChamberCheck",
 };
 
 const AboutPage = () => {
   return (
     <div>
-      <h1>About Chamber Check</h1>
+      <h1>About ChamberCheck</h1>
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit
         molestiae ipsam, et aut consequatur ipsum voluptates quasi, quos
