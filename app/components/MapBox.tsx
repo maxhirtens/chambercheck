@@ -18,7 +18,7 @@ const MapBox = () => {
   // get user location with permission from button click
   const getGeo = () => {
     setLoading(true);
-    console.log("loading");
+    console.log("loading geo");
     navigator.geolocation.getCurrentPosition((position) => {
       setLocation({
         lat: position.coords.latitude,
@@ -26,7 +26,7 @@ const MapBox = () => {
       });
       setGeoClicked(true);
       setLoading(false);
-      console.log("done loading");
+      console.log("done loading geo");
     });
   };
 

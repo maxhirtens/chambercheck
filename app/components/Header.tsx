@@ -26,15 +26,18 @@ const Header = () => {
           </Link>
         </div>
         {/* Menu Items */}
-        {/* <div className="hidden space-x-6 md:flex">
+        <div className="hidden space-x-6 md:flex text-cyan-800 text-lg">
           <Link className="hover:text-darkGrayishBlue" href="/about">
             About
           </Link>
-        </div> */}
+          <Link className="hover:text-darkGrayishBlue" href="/users">
+            Users
+          </Link>
+        </div>
         {/* Button */}
         <a
           href="/sign-in"
-          className="hidden p-3 px-6 pt-2 text-white bg-darkBlue rounded-full baseline hover:bg-brightRedLight md:block"
+          className="hidden p-3 px-6 pt-2 text-white bg-darkBlue rounded-full baseline hover:bg-darkGrayishBlue md:block"
         >
           Sign In
         </a>

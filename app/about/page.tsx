@@ -4,7 +4,7 @@ export const metadata = {
 
 const AboutPage = () => {
   return (
-    <div>
+    <div className="relative container mx-auto p-12">
       <h1>About ChamberCheck</h1>
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit
