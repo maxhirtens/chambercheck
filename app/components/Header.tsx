@@ -33,13 +33,16 @@ const Header = () => {
           <Link className="hover:text-darkGrayishBlue" href="/users">
             Users
           </Link>
+          <Link className="hover:text-darkGrayishBlue" href="/reviews">
+            Reviews
+          </Link>
         </div>
         {/* Button */}
         <a
-          href="/sign-in"
+          href="/reviews/new"
           className="hidden p-3 px-6 pt-2 text-white bg-darkBlue rounded-full baseline hover:bg-darkGrayishBlue md:block"
         >
-          Sign In
+          Submit a Review
         </a>
       </div>
     </nav>
