@@ -13,6 +13,7 @@ const UserList = async () => {
             <th>User ID</th>
             <th>Username</th>
             <th>User Email</th>
+            <th>Reviews</th>
             <th>Admin?</th>
           </tr>
         </thead>
@@ -25,6 +26,7 @@ const UserList = async () => {
               <td>{user.id}</td>
               <td>{user.userName}</td>
               <td>{user.email}</td>
+              <td></td>
               <td>{user.isAdmin.toString()}</td>
             </tr>
           ))}

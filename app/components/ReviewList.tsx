@@ -14,6 +14,7 @@ const ReviewList = async () => {
             <th>Location</th>
             <th>Content</th>
             <th>Date</th>
+            <th>Author</th>
             <th>Live?</th>
           </tr>
         </thead>
@@ -27,6 +28,7 @@ const ReviewList = async () => {
               <td>{review.title}</td>
               <td>{review.content}</td>
               <td>{review.createdAt.toLocaleString()}</td>
+              <td>{review.authorId}</td>
               <td>{review.published.toString()}</td>
             </tr>
           ))}

@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import Button from "./Button";
 import LoadingPage from "../loading";
 import Image from "next/image";
+import SearchBar from "./SearchBar";
 
 const MapBox = () => {
   const [loading, setLoading] = useState(false); // [loading, setLoading
@@ -36,9 +37,9 @@ const MapBox = () => {
         <div className="flex flex-col items-center space-y-12 p-12">
           <div>
             <h2 className="text-2xl font-bold text-center text-veryDarkBlue">
-              Leave a Review Near Me
+              Loading Restaurants Near You...
             </h2>
-            <div className="w-[375px] h-[550px] md:w-[500px] md:h-[600px] mt-12 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
+            <div className="w-[375px] h-[550px] md:w-[1000px] md:h-[600px] mt-12 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
               <LoadingPage />
             </div>
           </div>
@@ -54,23 +55,21 @@ const MapBox = () => {
           <div className="flex flex-col items-center space-y-12 p-12">
             <div>
               <h2 className="text-2xl font-bold text-center text-veryDarkBlue">
-                Leave a Review Near Me
+                Restaurant Restroom Reviews
               </h2>
 
-              <div className="flex items-center justify-center relative w-[375px] h-[550px] md:w-[500px] md:h-[600px] mt-12 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
+              <div className="flex items-center justify-center relative w-[450px] h-[450px] md:w-[800px] md:h-[600px] mt-6 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
                 <Image
                   priority
                   src="/img/blurred-map.jpg"
                   alt="local map"
-                  width={500}
-                  height={500}
+                  width={1000}
+                  height={600}
                   className="w-full brightness-50"
                 />
-                <div className="absolute mt-20">
-                  <Button
-                    text="Get Restroom Reviews Near Me!"
-                    onClick={getGeo}
-                  />
+                <div className="absolute mb-96 flex flex-row justify-evenly">
+                  <Button text="Search My Location" onClick={getGeo} />
+                  <SearchBar placeholder="Search Restaurants" />
                 </div>
               </div>
             </div>
@@ -90,9 +89,9 @@ const MapBox = () => {
           <div>
             <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
               <h2 className="text-2xl font-bold text-center text-veryDarkBlue">
-                Your Local Restroom Reviews
+                Restaurant Restroom Reviews Near You
               </h2>
-              <div className="w-[375px] h-[550px] md:w-[500px] md:h-[600px] mt-12 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
+              <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] mt-12 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
                 <Map center={location} zoom={17}>
                   <Marker position={location} />
                 </Map>

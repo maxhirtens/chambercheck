@@ -4,9 +4,9 @@ import Image from "next/image";
 const Header = () => {
   return (
     // Navbar
-    <nav className="relative container mx-auto p-12">
+    <nav className="relative container mx-auto">
       {/* Flex Container */}
-      <div className="flex items-center justify-between">
+      <div className="flex md:flex-row flex-col items-center justify-around">
         {/* Logo */}
         <div className="pt-2">
           <Link href="/">
@@ -26,7 +26,7 @@ const Header = () => {
           </Link>
         </div>
         {/* Menu Items */}
-        <div className="hidden space-x-6 md:flex text-cyan-800 text-lg">
+        <div className="space-x-6 my-6 text-gray-500 text-xl">
           <Link className="hover:text-darkGrayishBlue" href="/about">
             About
           </Link>
@@ -39,10 +39,10 @@ const Header = () => {
         </div>
         {/* Button */}
         <a
-          href="/reviews/new"
-          className="hidden p-3 px-6 pt-2 text-white bg-darkBlue rounded-full baseline hover:bg-darkGrayishBlue md:block"
+          href="/"
+          className="p-3 px-6 text-white bg-darkBlue rounded-full baseline text-xl hover:bg-darkGrayishBlue"
         >
-          Submit a Review
+          Sign In
         </a>
       </div>
     </nav>

@@ -13,10 +13,10 @@ const HomePage = () => {
 
   return (
     <>
-      <span className="relative container mx-auto p-12">
+      <div className="relative container mx-auto p-12">
         <MapBox />
         <ReviewsBox />
-      </span>
+      </div>
     </>
   );
 };

@@ -41,11 +41,18 @@ const Review: React.FC = () => {
             rows={8}
             value={content}
           />
-          <button disabled={!content || !title} type="submit">
+          <button
+            disabled={!content || !title}
+            type="submit"
+            className="p-3 px-6 mr-2 text-white bg-darkBlue rounded-full baseline text-xl hover:bg-blue-800"
+          >
             Create
           </button>
-          <a className="back" href="#">
-            or Cancel
+          <a
+            className="p-3 px-6 mr-2 text-white bg-red-400 rounded-full baseline text-xl hover:bg-red-500"
+            href="/"
+          >
+            Cancel
           </a>
         </form>
       </div>
@@ -64,7 +71,7 @@ const Review: React.FC = () => {
           width: 100%;
           padding: 0.5rem;
           margin: 0.5rem 0;
-          border-radius: 0.25rem;
+          border-radius: 0.5rem;
           border: 0.125rem solid rgba(0, 0, 0, 0.2);
         }
 
@@ -72,10 +79,6 @@ const Review: React.FC = () => {
           background: #ececec;
           border: 0;
           padding: 1rem 2rem;
-        }
-
-        .back {
-          margin-left: 1rem;
         }
       `}</style>
     </>
