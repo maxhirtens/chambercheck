@@ -36,7 +36,7 @@ const MapBox = () => {
         <div className="flex flex-col items-center space-y-12 p-12">
           <div>
             <h2 className="text-2xl font-bold text-center text-veryDarkBlue">
-              Your Local Restroom Reviews
+              Leave a Review Near Me
             </h2>
             <div className="w-[375px] h-[550px] md:w-[500px] md:h-[600px] mt-12 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
               <LoadingPage />
@@ -54,7 +54,7 @@ const MapBox = () => {
           <div className="flex flex-col items-center space-y-12 p-12">
             <div>
               <h2 className="text-2xl font-bold text-center text-veryDarkBlue">
-                Your Local Restroom Reviews
+                Leave a Review Near Me
               </h2>
 
               <div className="flex items-center justify-center relative w-[375px] h-[550px] md:w-[500px] md:h-[600px] mt-12 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
