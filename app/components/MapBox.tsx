@@ -34,12 +34,12 @@ const MapBox = () => {
   if (loading) {
     return (
       <div>
-        <div className="flex flex-col items-center space-y-12 p-12">
+        <div className="flex flex-col items-center space-y-12 p-12 drop-shadow-2xl">
           <div>
-            <h2 className="text-2xl font-bold text-center text-veryDarkBlue">
+            <h2 className="text-white font-bold text-3xl text-center">
               Loading Restaurants Near You...
             </h2>
-            <div className="w-[375px] h-[550px] md:w-[1000px] md:h-[600px] mt-12 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
+            <div className="w-[450] h-[450] md:w-[800] md:h-[600px] mt-12 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
               <LoadingPage />
             </div>
           </div>
@@ -52,10 +52,10 @@ const MapBox = () => {
     try {
       return (
         <div>
-          <div className="flex flex-col items-center space-y-12 p-12">
+          <div className="flex flex-col items-center space-y-12 p-6 drop-shadow-2xl">
             <div>
-              <h2 className="text-2xl font-bold text-center text-veryDarkBlue">
-                Restaurant Restroom Reviews
+              <h2 className="text-white font-bold text-4xl text-center">
+                Find the Best Bathrooms
               </h2>
 
               <div className="flex items-center justify-center relative w-[450px] h-[450px] md:w-[800px] md:h-[600px] mt-6 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
@@ -85,10 +85,10 @@ const MapBox = () => {
   try {
     return (
       <div>
-        <div className="flex flex-col items-center space-y-12 p-12">
+        <div className="flex flex-col items-center space-y-12 p-12 drop-shadow-2xl">
           <div>
             <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
-              <h2 className="text-2xl font-bold text-center text-veryDarkBlue">
+              <h2 className="text-white font-bold text-3xl text-center">
                 Restaurant Restroom Reviews Near You
               </h2>
               <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] mt-12 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">

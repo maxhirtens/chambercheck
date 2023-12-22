@@ -4,8 +4,8 @@ import ReviewCard from "./ReviewCard";
 const ReviewsBox = () => {
   return (
     <div>
-      <div className="flex flex-col items-center space-y-12 p-12">
-        <h2 className="text-2xl font-bold text-center text-veryDarkBlue">
+      <div className="flex flex-col items-center space-y-12 p-12 drop-shadow-2xl">
+        <h2 className="text-white font-bold text-3xl text-center">
           Latest Reviews
         </h2>
         <ReviewCard
