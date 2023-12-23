@@ -48,11 +48,11 @@ const Header = () => {
         </div>
       </nav>
       <div className="mt-8 mx-12">
-        <h1 className="mb-4 text-2xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
+        <h1 className="text-2xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
           <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-700">
             Restaurant Restroom Reviews
           </span>
-          <span className="float-right">...Really</span>
+          <span className="float-right invisible xl:visible">...Really</span>
         </h1>
       </div>
     </div>

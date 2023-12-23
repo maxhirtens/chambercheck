@@ -1,20 +1,40 @@
 "use client";
 
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
+import useLocalStorage from "use-local-storage";
 import Button from "./Button";
 import LoadingPage from "../loading";
 import Image from "next/image";
 import SearchBar from "./SearchBar";
 
 const MapBox = () => {
-  const [loading, setLoading] = useState(false); // [loading, setLoading
+  const [loading, setLoading] = useState(false);
   const [geoClicked, setGeoClicked] = useState(false);
-  const [location, setLocation] = useState<{ lat: number; lng: number }>({
-    lat: 61.2176,
-    lng: -149.8997,
-  });
+
+  // state for location, non-persisting
+  // const [location, setLocation] = useState<{ lat: number; lng: number }>({
+  //   lat: 61.2176,
+  //   lng: -149.8997,
+  // });
+
+  // state for location, persisting with localStorage
+  const [location, setLocation] = useLocalStorage<{
+    lat: number;
+    lng: number;
+  }>("coords", { lat: 0, lng: 0 });
+
+  // useEffect to get client-side lat,lng from localStorage
+  useEffect(() => {
+    let value;
+    // Get the value from local storage if it exists
+    value = localStorage.getItem("coords") || "";
+
+    let parsedValue = JSON.parse(value);
+    let { lat, lng } = parsedValue;
+    setLocation({ lat, lng });
+  }, [setLocation]);
 
   // get user location with permission from button click
   const getGeo = () => {
@@ -48,7 +68,9 @@ const MapBox = () => {
     );
   }
 
-  if (!geoClicked) {
+  console.log(location.lat);
+
+  if (location.lat === 0) {
     try {
       return (
         <div>
