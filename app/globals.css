@@ -22,20 +22,13 @@ body {
   --webkit-background-size: cover;
 }
 
-.loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40vh;
-}
-
 .spinner {
   border: 4px solid rgba(0, 0, 0, 0.1);
   border-left-color: blue;
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  animation: spin 1s linear infinite;
+  animation: spin 2s linear infinite;
 }
 
 @keyframes spin {

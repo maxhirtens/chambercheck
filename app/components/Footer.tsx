@@ -98,6 +98,7 @@ const Footer = () => {
             <div className="flex space-x-3">
               <input
                 type="text"
+                id="mailing-list"
                 className="flex-1 px-4 rounded-full focus:outline-none"
                 placeholder="Join Our Mailing List"
               />

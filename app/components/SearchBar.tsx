@@ -4,16 +4,18 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export default function SearchBar({ placeholder }: { placeholder: string }) {
   function handleSearch(term: string) {
+    // add search functionality here
     console.log(term);
   }
 
   return (
-    <div className="relative flex flex-1 flex-shrink-0">
+    <div className="flex relative mx-8">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
       <input
         className="rounded-md border border-gray-200 pl-10 text-sm outline-2 placeholder:text-gray-500"
+        id="search"
         placeholder={placeholder}
         onChange={(e) => {
           handleSearch(e.target.value);
