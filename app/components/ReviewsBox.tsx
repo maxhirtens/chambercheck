@@ -1,13 +1,12 @@
 import React from "react";
 import ReviewCard from "./ReviewCard";
+import Subtitle from "./Subtitle";
 
 const ReviewsBox = () => {
   return (
     <div>
       <div className="flex flex-col items-center space-y-12 p-12 drop-shadow-2xl">
-        <h2 className="text-white font-bold text-3xl text-center">
-          Latest Reviews
-        </h2>
+        <Subtitle text="Latest Reviews" />
         <ReviewCard
           restaurant="Molly's Diner"
           city="San Diego, CA"

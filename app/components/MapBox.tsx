@@ -59,7 +59,7 @@ const MapBox = () => {
   if (loading) {
     return (
       <div className="container">
-        <Subtitle />
+        <Subtitle text="Restaurant Restroom Reviews Near You" />
         <div className="flex flex-col items-center space-y-12 p-12 drop-shadow-2xl">
           <div>
             <div className="mt-12 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
@@ -75,7 +75,7 @@ const MapBox = () => {
     try {
       return (
         <div className="container">
-          <Subtitle />
+          <Subtitle text="Restaurant Restroom Reviews Near You" />
           <div className="flex flex-row mt-6 justify-center">
             <Button text="Search Near Me" onClick={getGeo} />
             <SearchBar placeholder="Search Restaurants" />
@@ -105,7 +105,7 @@ const MapBox = () => {
   try {
     return (
       <div className="container">
-        <Subtitle />
+        <Subtitle text="Restaurant Restroom Reviews Near You" />
         <div className="flex flex-row mt-12 justify-center">
           <Button text="Re-Center Map" onClick={recenterMap} />
           <SearchBar placeholder="Search Restaurants" />
