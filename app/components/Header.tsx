@@ -1,5 +1,25 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
+import { signIn, signOut, useSession } from "next-auth/react";
+import Button from "./Button";
+
+function AuthButton() {
+  const { data: session } = useSession();
+  if (session) {
+    return (
+      <>
+        {session?.user?.name} <br />
+        <Button onClick={() => signOut()} text="Sign Out" />
+      </>
+    );
+  }
+  return (
+    <>
+      <Button onClick={() => signIn()} text="Sign In" />
+    </>
+  );
+}
 
 const Header = () => {
   return (
@@ -39,12 +59,7 @@ const Header = () => {
             </Link>
           </div>
           {/* Button */}
-          <a
-            href="/"
-            className="p-3 px-6 text-white bg-emerald-600 rounded-full font-bold baseline text-xl hover:bg-sky-700"
-          >
-            Sign In
-          </a>
+          <AuthButton />
         </div>
       </nav>
     </div>

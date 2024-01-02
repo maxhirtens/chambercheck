@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Subtitle from "./Subtitle";
 
 const Review: React.FC = () => {
   const [title, setTitle] = useState("");
@@ -26,9 +27,7 @@ const Review: React.FC = () => {
     <>
       <div>
         <form onSubmit={submitData}>
-          <h1 className="text-white font-bold text-4xl md:text-6xl">
-            New Review
-          </h1>
+          <Subtitle text="New Review" />
           <input
             autoFocus
             onChange={(e) => setTitle(e.target.value)}
