@@ -6,9 +6,9 @@ export const metadata = {
 
 const AboutPage = () => {
   return (
-    <div className="relative container mx-auto p-12">
+    <div className="container mx-auto p-12 max-w-96">
       <Subtitle text="What is ChamberCheck?" />
-      <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-800">
+      <p className="mt-12 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-800">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit
         molestiae ipsam, et aut consequatur ipsum voluptates quasi, quos
         recusandae doloribus provident consequuntur amet nobis est voluptate

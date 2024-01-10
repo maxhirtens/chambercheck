@@ -4,14 +4,14 @@ import { useRouter } from "next/navigation";
 import Subtitle from "./Subtitle";
 
 const Review: React.FC = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [rating, setRating] = useState("");
+  const [reviewText, setReviewText] = useState("");
   const router = useRouter();
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
-      const body = { title, content };
+      const body = { rating, reviewText };
       await fetch("/api/reviews", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,20 +30,20 @@ const Review: React.FC = () => {
           <Subtitle text="New Review" />
           <input
             autoFocus
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Title"
+            onChange={(e) => setRating(e.target.value)}
+            placeholder="Rating"
             type="text"
-            value={title}
+            value={rating}
           />
           <textarea
             cols={50}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Content"
+            onChange={(e) => setReviewText(e.target.value)}
+            placeholder="Review Text"
             rows={8}
-            value={content}
+            value={reviewText}
           />
           <button
-            disabled={!content || !title}
+            disabled={!rating || !reviewText}
             type="submit"
             className="p-3 px-6 mr-2 text-white bg-darkBlue rounded-full baseline text-xl hover:bg-blue-800"
           >
@@ -57,31 +57,6 @@ const Review: React.FC = () => {
           </a>
         </form>
       </div>
-
-      <style jsx>{`
-        .page {
-          background: var(--geist-background);
-          padding: 3rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        input[type="text"],
-        textarea {
-          width: 100%;
-          padding: 0.5rem;
-          margin: 0.5rem 0;
-          border-radius: 0.5rem;
-          border: 0.125rem solid rgba(0, 0, 0, 0.2);
-        }
-
-        input[type="submit"] {
-          background: #ececec;
-          border: 0;
-          padding: 1rem 2rem;
-        }
-      `}</style>
     </>
   );
 };

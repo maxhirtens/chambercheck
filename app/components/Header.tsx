@@ -3,15 +3,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Button from "./Button";
+import UserCircleIcon from "./UserCircleIcon";
 
 function AuthButton() {
   const { data: session } = useSession();
+  const userName = session?.user?.name;
   if (session) {
     return (
-      <>
-        {session?.user?.name} <br />
-        <Button onClick={() => signOut()} text="Sign Out" />
-      </>
+      <div className="flex md:items-center">
+        <UserCircleIcon />
+        <Button onClick={() => signOut({ callbackUrl: "/" })} text="Sign Out" />
+      </div>
     );
   }
   return (
