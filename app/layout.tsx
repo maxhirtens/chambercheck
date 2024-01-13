@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ChamberCheck",
-  description: "Rate Your Local Restrooms!",
+  description: "Rate Your Local Restaurant Restroom!",
 };
 
 export default async function RootLayout({

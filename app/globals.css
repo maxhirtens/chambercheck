@@ -56,3 +56,11 @@ body {
 .custom-map-control-button:hover {
   background: rgb(235, 235, 235);
 }
+
+/* Star Rating */
+.on {
+  color: yellow;
+}
+.off {
+  color: #ccc;
+}
