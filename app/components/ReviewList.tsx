@@ -16,9 +16,9 @@ const ReviewList = async () => {
               <th>City</th>
               <th>Rating</th>
               <th>Content</th>
-              <th>Accessible?</th>
-              <th>Family?</th>
-              <th>All-Gender?</th>
+              <th>Accessible</th>
+              <th>Gender Neutral</th>
+              <th>Changing Table</th>
               <th>Date</th>
               <th>Author</th>
               <th>Live?</th>
@@ -36,8 +36,8 @@ const ReviewList = async () => {
                 <td>{review.rating}</td>
                 <td>{review.content}</td>
                 <td>{review.accessible?.toString()}</td>
-                <td>{review.family?.toString()}</td>
-                <td>{review.allGender?.toString()}</td>
+                <td>{review.genderNeutral?.toString()}</td>
+                <td>{review.changingTable?.toString()}</td>
                 <td>{review.createdAt.toLocaleString()}</td>
                 <td>{review.authorId}</td>
                 <td>{review.published.toString()}</td>

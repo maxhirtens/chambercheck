@@ -1,19 +1,44 @@
-import { getSession } from "next-auth/react";
+import { NextResponse, type NextRequest } from "next/server";
 import prisma from "@/app/lib/prisma";
 
-// POST /api/post
-// Required fields in body: rating, content
-// Optional fields in body:
-export default async function handle(req, res) {
-  const { rating, content } = req.body;
+export async function POST(request: NextRequest) {
+  const {
+    authorEmail,
+    locationName,
+    locationCity,
+    rating,
+    content,
+    accessible,
+    genderNeutral,
+    changingTable,
+  } = await request.json();
 
-  const session = await getSession({ req });
-  const result = await prisma.review.create({
-    data: {
-      rating: rating,
-      content: content,
-      author: { connect: { name: session?.user?.name } },
+  const authorResult = await prisma.user.findUniqueOrThrow({
+    where: {
+      email: authorEmail,
     },
   });
-  res.json(result);
+
+  console.log(authorResult);
+
+  const authorId: string = authorResult.id;
+
+  const result = await prisma.review.create({
+    data: {
+      authorId: authorId,
+      locationName,
+      locationCity,
+      rating,
+      content,
+      accessible,
+      genderNeutral,
+      changingTable,
+    },
+  });
+
+  console.log(result);
+
+  return NextResponse.json({
+    message: "Review submitted",
+  });
 }

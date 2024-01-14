@@ -1,29 +1,29 @@
 import ReviewCard from "./ReviewCard";
 import Subtitle from "./Subtitle";
+import prisma from "../lib/prisma";
 
-const ReviewsBox = () => {
+const ReviewsBox = async () => {
+  const reviews = await prisma.review.findMany({
+    take: 3,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
   return (
     <div>
       <div className="flex flex-col items-center space-y-12 p-12 drop-shadow-2xl">
         <Subtitle text="Latest Reviews" />
-        <ReviewCard
-          restaurant="Molly's Diner"
-          city="San Diego, CA"
-          review="The bathroom was so clean! No line and nice decor."
-          userImage="/img/avatar-ali.png"
-        />
-        <ReviewCard
-          restaurant="Old Town Cafe"
-          city="San Francisco, CA"
-          review="No toilet paper. Unbelievable."
-          userImage="/img/avatar-richard.png"
-        />
-        <ReviewCard
-          restaurant="Falafel King"
-          city="Chicago, IL"
-          review="Super appreciate the baby-changing station."
-          userImage="/img/avatar-anisha.png"
-        />
+        {reviews.map((review: any) => (
+          <ReviewCard
+            key={review.id}
+            authorId={review.authorId}
+            restaurant={review.locationName}
+            city={review.locationCity}
+            review={review.content}
+            userImage="/img/avatar-richard.png"
+          />
+        ))}
       </div>
     </div>
   );
