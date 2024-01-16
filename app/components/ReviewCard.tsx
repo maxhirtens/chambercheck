@@ -32,10 +32,16 @@ const ReviewCard = async (props: {
             {props.restaurant}
           </a>
           <div className="uppercase tracking-wide text-sm text-slate-500 font-semibold">
-            By: {authorName}
+            Review By: {authorName}
           </div>
           <div className="flex items-center mt-4">
-            <Image src={authorImage} alt="" width={40} height={40} />
+            <Image
+              src={authorImage!}
+              alt=""
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
             <p className="mt-2 px-6 text-slate-500 text-center md:text-left">
               {props.review}
             </p>

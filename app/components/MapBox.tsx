@@ -58,12 +58,18 @@ const MapBox = () => {
 
   if (loading) {
     return (
-      <div className="container">
+      <div className="container ">
         <Subtitle text="Restaurant Restroom Reviews Near You" />
         <div className="flex flex-col items-center space-y-12 p-12 drop-shadow-2xl">
           <div>
-            <div className="mt-12 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
-              <LoadingPage />
+            <div className="flex flex-row mt-6 justify-center">
+              <SearchBar placeholder="Search Restaurants" />
+              <Button text="Locate Me" onClick={getGeo} />
+            </div>
+            <div className="flex flex-col items-center drop-shadow-2xl">
+              <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] mt-6 border-4 border-white-500 rounded-xl shadow-md">
+                <LoadingPage />
+              </div>
             </div>
           </div>
         </div>
@@ -77,8 +83,8 @@ const MapBox = () => {
         <div className="container">
           <Subtitle text="Restaurant Restroom Reviews Near You" />
           <div className="flex flex-row mt-6 justify-center">
-            <Button text="Search Near Me" onClick={getGeo} />
             <SearchBar placeholder="Search Restaurants" />
+            <Button text="Locate Me" onClick={getGeo} />
           </div>
           <div className="flex flex-col items-center drop-shadow-2xl">
             <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] mt-6 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
@@ -104,11 +110,11 @@ const MapBox = () => {
 
   try {
     return (
-      <div className="container">
+      <div id="search" className="container">
         <Subtitle text="Restaurant Restroom Reviews Near You" />
         <div className="flex flex-row mt-12 justify-center">
-          <Button text="Re-Center Map" onClick={recenterMap} />
           <SearchBar placeholder="Search Restaurants" />
+          <Button text="Locate Me" onClick={recenterMap} />
         </div>
         <div className="flex flex-col items-center drop-shadow-2xl">
           <div>

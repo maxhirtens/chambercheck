@@ -23,7 +23,7 @@ model Review {
   genderNeutral Boolean? @default(false)
   published     Boolean  @default(false)
   viewCount     Int      @default(0)
-  author        User     @relation(fields: [authorId], references: [id])
+  author        User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId      String
 }
 

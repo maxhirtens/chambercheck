@@ -14,7 +14,6 @@ const UserList = async () => {
               <th>User ID</th>
               <th>Name</th>
               <th>User Email</th>
-              <th>Reviews</th>
             </tr>
           </thead>
           <tbody>
@@ -26,7 +25,6 @@ const UserList = async () => {
                 <td>{user.id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td></td>
               </tr>
             ))}
           </tbody>

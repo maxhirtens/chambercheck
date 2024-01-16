@@ -60,6 +60,7 @@ const Review: React.FC<{
         body: JSON.stringify(body),
       });
       router.push("/");
+      router.refresh();
     } catch (error) {
       console.error(error);
     }

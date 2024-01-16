@@ -1,26 +1,24 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Button from "./Button";
-import UserCircleIcon from "./UserCircleIcon";
+
+import AvatarDropDown from "./AvatarDropDown";
 
 function AuthButton() {
   const { data: session } = useSession();
+  const userImage = session?.user?.image;
   const userName = session?.user?.name;
+
   if (session) {
+    return <AvatarDropDown userName={userName!} userImage={userImage!} />;
+  } else
     return (
-      <div className="flex md:items-center">
-        <UserCircleIcon />
-        <Button onClick={() => signOut({ callbackUrl: "/" })} text="Sign Out" />
-      </div>
+      <>
+        <Button onClick={() => signIn()} text="Sign In" />
+      </>
     );
-  }
-  return (
-    <>
-      <Button onClick={() => signIn()} text="Sign In" />
-    </>
-  );
 }
 
 const Header = () => {
@@ -37,11 +35,11 @@ const Header = () => {
                 src="/img/cc-logo-2.jpg"
                 alt="main ChamberCheck logo"
                 priority
-                width={325}
-                height={125}
+                width={250}
+                height={100}
                 style={{
                   objectFit: "cover",
-                  borderRadius: "100px",
+                  borderRadius: "50px",
                   width: "auto",
                   height: "auto",
                 }}
@@ -53,8 +51,8 @@ const Header = () => {
             <Link className="hover:text-emerald-600" href="/about">
               How it Works
             </Link>
-            <Link className="hover:text-emerald-600" href="/reviews/search">
-              Search Reviews
+            <Link className="hover:text-emerald-600" href="#search">
+              Search Restaurants
             </Link>
             <Link className="hover:text-emerald-600" href="/reviews/new">
               Leave a Review
