@@ -54,9 +54,6 @@ const Header = () => {
             <Link className="hover:text-emerald-600" href="#search">
               Search Restaurants
             </Link>
-            <Link className="hover:text-emerald-600" href="/reviews/new">
-              Leave a Review
-            </Link>
           </div>
           {/* Button */}
           <AuthButton />

@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -17,7 +14,7 @@ model Review {
   locationName  String
   locationCity  String
   rating        Int
-  content       String?
+  content       String?  @db.VarChar(240)
   accessible    Boolean? @default(false)
   changingTable Boolean? @default(false)
   genderNeutral Boolean? @default(false)

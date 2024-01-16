@@ -84,7 +84,7 @@ const Review: React.FC<{
             value={locationCity ?? "City"}
           />
           <div>Review by: {authorName}</div>
-          {/*  help from https://dev.to/michaelburrows/create-a-custom-react-star-rating-component-5o6 */}
+          {/*  Star Ratings -- help from https://dev.to/michaelburrows/create-a-custom-react-star-rating-component-5o6 */}
           <div className="cursor-pointer text-center">
             {[...Array(5)].map((star, index) => {
               index += 1;
@@ -102,7 +102,7 @@ const Review: React.FC<{
                   }}
                 >
                   <span className="star">
-                    <StarIcon />
+                    <StarIcon dimensions="10" />
                   </span>
                 </button>
               );
@@ -111,13 +111,18 @@ const Review: React.FC<{
           </div>
           <textarea
             cols={50}
-            maxLength={249}
+            maxLength={240}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Type a brief review here!"
             rows={8}
             required
             value={content}
           />
+          {/* Characters Remaining Div */}
+          <div>
+            <span className="text-indigo-800">{240 - content.length}</span>{" "}
+            Characters Remaining
+          </div>
           <span>
             <FormGroup>
               <FormControlLabel

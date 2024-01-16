@@ -1,6 +1,6 @@
 import ReviewCard from "./ReviewCard";
 import Subtitle from "./Subtitle";
-import prisma from "../lib/prisma";
+import prisma from "@/app/lib/prisma";
 
 const ReviewsBox = async () => {
   const reviews = await prisma.review.findMany({
@@ -21,6 +21,7 @@ const ReviewsBox = async () => {
             restaurant={review.locationName}
             city={review.locationCity}
             review={review.content}
+            rating={review.rating}
             userImage="/img/avatar-richard.png"
           />
         ))}
