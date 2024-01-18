@@ -1,6 +1,4 @@
 "use client";
-
-import React from "react";
 import { useState, useEffect } from "react";
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import Button from "./Button";
@@ -58,7 +56,7 @@ const MapBox = () => {
 
   if (loading) {
     return (
-      <div className="container ">
+      <div className="container">
         <Subtitle text="Restaurant Restroom Reviews Near You" />
         <div className="flex flex-col items-center space-y-12 p-12 drop-shadow-2xl">
           <div>

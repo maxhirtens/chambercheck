@@ -1,42 +1,41 @@
-"use client";
 import prisma from "@/app/lib/prisma";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import ReviewCard from "@/app/components/ReviewCard";
+import UserCard from "@/app/components/UserCard";
+import Subtitle from "@/app/components/Subtitle";
 
-type Params = {
-  id: string;
-};
+const UserProfile = async () => {
+  // get logged in user details.
+  const session = await getServerSession(authOptions);
+  // get their reviews from db.
+  const reviews = await prisma.review.findMany({
+    where: { author: { id: session!.user!.id } },
+  });
 
-const UserProfile = () => {
-  const { data: session } = useSession();
   return (
-    <div className="container flex flex-col items-center justify-center m-12">
-      <h1>{session!.user!.name}</h1>
-      <h2>{session!.user!.email}</h2>
-      <Image
-        src={session!.user!.image!}
-        alt="user avatar"
-        width={50}
-        height={50}
+    <div className="flex flex-col items-center space-y-12 p-12 drop-shadow-2xl">
+      <Subtitle text="Your Info" />
+      <UserCard
+        username={session!.user.name}
+        email={session!.user.email}
+        avatar={session!.user.image}
       />
+      <Subtitle text="Your Reviews" />
+      {reviews.map((review: any) => (
+        <ReviewCard
+          key={review.id}
+          authorId={review.authorId}
+          restaurant={review.locationName}
+          city={review.locationCity}
+          review={review.content}
+          rating={review.rating}
+          userImage="/img/avatar-richard.png"
+        />
+      ))}
     </div>
   );
 };
 
 export default UserProfile;
-
-// export default async function UserProfile(props: { params: Params }) {
-//   const { id } = props.params;
-//   const user = await prisma.user.findUnique({
-//     where: {
-//       id: id,
-//     },
-//   });
-//   return (
-//     <div className="container flex flex-col items-center justify-center m-12">
-//       <h1>{user!.name}</h1>
-//       <h2>{user!.email}</h2>
-//       <Image src={user!.image!} alt="user avatar" width={50} height={50} />
-//     </div>
-//   );
-// }

@@ -3,11 +3,9 @@ import { Inter } from "next/font/google";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./globals.css";
-
 import { getServerSession } from "next-auth";
 import SessionProvider from "./components/SessionProvider";
 import { authOptions } from "./api/auth/[...nextauth]/route";
-import prisma from "./lib/prisma";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

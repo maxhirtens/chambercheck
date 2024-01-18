@@ -1,9 +1,10 @@
 import React from "react";
-import prisma from "@/app/lib/prisma";
 import Subtitle from "./Subtitle";
+import prisma from "@/app/lib/prisma";
 
 const ReviewList = async () => {
   const reviews = await prisma.review.findMany();
+
   return (
     <div className="relative container mx-auto p-12">
       <Subtitle text="ChamberCheck Reviews" />

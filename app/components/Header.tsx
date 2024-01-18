@@ -57,7 +57,7 @@ const Header = () => {
             <Link className="hover:text-emerald-600" href="/about">
               How it Works
             </Link>
-            <Link className="hover:text-emerald-600" href="#search">
+            <Link className="hover:text-emerald-600" href="/#search">
               Search Restaurants
             </Link>
           </div>

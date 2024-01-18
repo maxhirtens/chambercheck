@@ -8,8 +8,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import RestaurantCard from "./RestaurantCard";
 
-// pass in locationName and locationCity as props to review.
-
 const Review: React.FC<{
   authorName: string;
   authorEmail: string;
@@ -22,6 +20,9 @@ const Review: React.FC<{
   const [accessible, setAccessible] = useState(false);
   const [genderNeutral, setGenderNeutral] = useState(false);
   const [changingTable, setChangingTable] = useState(false);
+  const [clothTowels, setclothTowels] = useState(false);
+  const [femProducts, setfemProducts] = useState(false);
+  const [handDryer, sethandDryer] = useState(false);
   const router = useRouter();
 
   const starText = () => {
@@ -54,6 +55,9 @@ const Review: React.FC<{
         accessible,
         genderNeutral,
         changingTable,
+        clothTowels,
+        femProducts,
+        handDryer,
       };
       await fetch("/api/review", {
         method: "POST",
@@ -106,6 +110,7 @@ const Review: React.FC<{
             rows={8}
             required
             value={content}
+            className="rounded-xl p-5"
           />
           {/* Characters Remaining Div */}
           <div className="ml-auto">
@@ -136,19 +141,19 @@ const Review: React.FC<{
               <FormControlLabel
                 control={<Checkbox />}
                 label="Cloth Hand Towels"
-                onChange={() => setAccessible(!accessible)}
+                onChange={() => setAccessible(!clothTowels)}
               />
 
               <FormControlLabel
                 control={<Checkbox />}
                 label="Feminine Hygiene Products"
-                onChange={() => setGenderNeutral(!genderNeutral)}
+                onChange={() => setGenderNeutral(!femProducts)}
               />
 
               <FormControlLabel
                 control={<Checkbox />}
                 label="Hot Air Hand Dryer"
-                onChange={() => setChangingTable(!changingTable)}
+                onChange={() => setChangingTable(!handDryer)}
               />
             </FormGroup>
           </span>
@@ -163,6 +168,9 @@ const Review: React.FC<{
             <li>Accessible: {accessible.toString()}</li>
             <li>Gender Neutral: {genderNeutral.toString()}</li>
             <li>Changing Table: {changingTable.toString()}</li>
+            <li>Cloth Towels: {clothTowels.toString()}</li>
+            <li>Fem Products: {femProducts.toString()}</li>
+            <li>Hand Dryer: {handDryer.toString()}</li>
           </ul>
           <span>
             <button

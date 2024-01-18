@@ -11,7 +11,7 @@ const Footer = () => {
           {/* <!-- Logo and social links container --> */}
           <div className="flex flex-col-reverse items-center justify-between space-y-12 md:flex-col md:space-y-0 md:items-start">
             <div className="mx-auto my-6 text-center text-white md:hidden">
-              Copyright &copy; 2024, All Rights Reserved
+              Copyright &copy; 2024, All Rights Reserved.
             </div>
             {/* <!-- Logo --> */}
             <div className="flex flex-col space-y-3 m-6 text-white">
@@ -109,7 +109,7 @@ const Footer = () => {
               </div>
             </form>
             <div className="hidden text-white md:block">
-              Copyright &copy; 2024, All Rights Reserved
+              Copyright &copy; 2024, All Rights Reserved.
             </div>
           </div>
         </div>
