@@ -6,6 +6,7 @@ import { StarIcon } from "./StarIcon";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import RestaurantCard from "./RestaurantCard";
 
 // pass in locationName and locationCity as props to review.
 
@@ -36,7 +37,7 @@ const Review: React.FC<{
       case 5:
         return "Excellent";
       default:
-        return "Set a Rating";
+        return "Your Rating";
     }
   };
 
@@ -68,24 +69,12 @@ const Review: React.FC<{
 
   return (
     <>
-      <div className="container mx-auto p-12 max-w-[800px]">
+      <div className="container mx-auto p-8 max-w-[800px]">
         <form className="flex flex-col space-y-6" onSubmit={submitData}>
           <Subtitle text="New Review" />
-          <input
-            disabled
-            placeholder="Restaurant Name"
-            type="text"
-            value={locationName ?? "Restaurant Name"}
-          />
-          <input
-            disabled
-            placeholder="City"
-            type="text"
-            value={locationCity ?? "City"}
-          />
-          <div>Review by: {authorName}</div>
+          <RestaurantCard restaurant={locationName} city={locationCity} />
           {/*  Star Ratings -- help from https://dev.to/michaelburrows/create-a-custom-react-star-rating-component-5o6 */}
-          <div className="cursor-pointer text-center">
+          <div className="cursor-pointer text-center drop-shadow-md">
             {[...Array(5)].map((star, index) => {
               index += 1;
               return (
@@ -102,7 +91,7 @@ const Review: React.FC<{
                   }}
                 >
                   <span className="star">
-                    <StarIcon dimensions="10" />
+                    <StarIcon />
                   </span>
                 </button>
               );
@@ -119,15 +108,15 @@ const Review: React.FC<{
             value={content}
           />
           {/* Characters Remaining Div */}
-          <div>
+          <div className="ml-auto">
             <span className="text-indigo-800">{240 - content.length}</span>{" "}
             Characters Remaining
           </div>
-          <span>
+          <span className="flex flex-col md:flex-row justify-evenly">
             <FormGroup>
               <FormControlLabel
                 control={<Checkbox />}
-                label="Accessible"
+                label="Accessible for Wheelchair Users"
                 onChange={() => setAccessible(!accessible)}
               />
 
@@ -143,19 +132,38 @@ const Review: React.FC<{
                 onChange={() => setChangingTable(!changingTable)}
               />
             </FormGroup>
-            <ul>
-              State Tests
-              <li>Location Name: {locationName}</li>
-              <li>Location City: {locationCity}</li>
-              <li>Author: {authorName}</li>
-              <li>Author Email: {authorEmail}</li>
-              <li>Rating: {rating}</li>
-              <li>Content: {content}</li>
-              <li>Accessible: {accessible.toString()}</li>
-              <li>Gender Neutral: {genderNeutral.toString()}</li>
-              <li>Changing Table: {changingTable.toString()}</li>
-            </ul>
+            <FormGroup>
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Cloth Hand Towels"
+                onChange={() => setAccessible(!accessible)}
+              />
+
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Feminine Hygiene Products"
+                onChange={() => setGenderNeutral(!genderNeutral)}
+              />
+
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Hot Air Hand Dryer"
+                onChange={() => setChangingTable(!changingTable)}
+              />
+            </FormGroup>
           </span>
+          <ul>
+            State Tests
+            <li>Location Name: {locationName}</li>
+            <li>Location City: {locationCity}</li>
+            <li>Author: {authorName}</li>
+            <li>Author Email: {authorEmail}</li>
+            <li>Rating: {rating}</li>
+            <li>Content: {content}</li>
+            <li>Accessible: {accessible.toString()}</li>
+            <li>Gender Neutral: {genderNeutral.toString()}</li>
+            <li>Changing Table: {changingTable.toString()}</li>
+          </ul>
           <span>
             <button
               disabled={!rating || !content}

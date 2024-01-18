@@ -7,7 +7,7 @@ import "./globals.css";
 import { getServerSession } from "next-auth";
 import SessionProvider from "./components/SessionProvider";
 import { authOptions } from "./api/auth/[...nextauth]/route";
-
+import prisma from "./lib/prisma";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col min-h-screen relative md:pb-36 pb-[500px]">
         <main>
           <SessionProvider session={session}>
             <Header />

@@ -1,10 +1,10 @@
-export const StarIcon = (props: { dimensions: string }) => {
+export const StarIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
       viewBox="0 0 24 24"
-      className={`h-${props.dimensions} w-${props.dimensions}`}
+      className="h-9 w-9"
     >
       <path
         strokeLinecap="round"

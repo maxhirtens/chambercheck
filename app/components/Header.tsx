@@ -3,16 +3,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import Button from "./Button";
-
 import AvatarDropDown from "./AvatarDropDown";
 
 function AuthButton() {
   const { data: session } = useSession();
   const userImage = session?.user?.image;
   const userName = session?.user?.name;
+  const userId = session?.user?.id;
 
   if (session) {
-    return <AvatarDropDown userName={userName!} userImage={userImage!} />;
+    return (
+      <AvatarDropDown
+        userName={userName!}
+        userImage={userImage!}
+        userId={userId!}
+      />
+    );
   } else
     return (
       <>

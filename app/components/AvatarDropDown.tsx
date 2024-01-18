@@ -1,6 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -11,9 +10,11 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
 type AvatarDropDownProps = {
   userName: string;
+  userId: string;
   userImage: string;
 };
 
@@ -92,7 +93,9 @@ export default function AvatarDropDownProps(props: AvatarDropDownProps) {
             height={25}
             className="rounded-full mr-3"
           />{" "}
-          Profile
+          <Link href="/users/[id]" as={`/users/${props.userId}`}>
+            Profile
+          </Link>
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>

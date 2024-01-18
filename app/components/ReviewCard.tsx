@@ -37,7 +37,7 @@ const ReviewCard = async (props: {
           <div className="uppercase tracking-wide text-sm text-slate-500 font-semibold">
             Review By: {authorName}
           </div>
-          <div className="drop-shadow-md flex flex-row items-center">
+          <div className="drop-shadow-md">
             {/* Star Rating */}
             {[...Array(5)].map((star, index) => {
               index += 1;
@@ -48,8 +48,8 @@ const ReviewCard = async (props: {
                   key={index}
                   className={index <= ratingInt ? "on" : "off"}
                 >
-                  <span className="star">
-                    <StarIcon dimensions="8" />
+                  <span className="star ml-10">
+                    <StarIcon />
                   </span>
                 </button>
               );
