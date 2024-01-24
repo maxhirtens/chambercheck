@@ -64,3 +64,14 @@ body {
 .off {
   color: #ccc;
 }
+
+/* scrollbar options */
+/* from https://www.reddit.com/r/css/comments/13ccxu1/cannot_hide_scrollbar_track_in_chrome_no_change/ */
+::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+  border-radius: 9px;
+}
+
+::-webkit-scrollbar {
+  background-color: inherit;
+}

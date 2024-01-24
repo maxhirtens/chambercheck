@@ -78,11 +78,11 @@ const Footer = () => {
               </Link>
             </div>
             <div className="flex flex-col space-y-3 text-white">
-              <Link href="#" className="hover:text-emerald-600">
-                Careers
+              <Link href="/#reviews" className="hover:text-emerald-600">
+                Search Reviews
               </Link>
               <Link href="#" className="hover:text-emerald-600">
-                Community
+                About
               </Link>
               <Link href="#" className="hover:text-emerald-600">
                 Privacy Policy

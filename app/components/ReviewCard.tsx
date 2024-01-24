@@ -8,7 +8,6 @@ const ReviewCard = async (props: {
   city: string;
   review: string;
   rating: string;
-  userImage: string;
   authorId: string;
 }) => {
   const authorResult = await prisma.user.findFirstOrThrow({
@@ -21,7 +20,7 @@ const ReviewCard = async (props: {
   const ratingInt = parseInt(props.rating);
 
   return (
-    <div className="max-w-md mx-auto bg-slate-100 rounded-xl shadow-md overflow-hidden md:max-w-2xl w-1/3">
+    <div className="min-w-md mx-auto bg-slate-100 rounded-xl shadow-md overflow-hidden">
       <div className="md:flex">
         <div className="md:shrink-0"></div>
         <div className="p-8">

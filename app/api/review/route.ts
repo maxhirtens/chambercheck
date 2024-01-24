@@ -1,12 +1,13 @@
 import { NextResponse, type NextRequest } from "next/server";
 import prisma from "@/app/lib/prisma";
 
-export async function GET(request: Request) {
+// GET all user reviews
+export async function GET(request: NextRequest) {
   const reviews = await prisma.review.findMany();
-
   return Response.json({ reviews });
 }
 
+// POST new user review
 export async function POST(request: NextRequest) {
   const {
     authorEmail,

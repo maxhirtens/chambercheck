@@ -45,7 +45,7 @@ export default function AvatarDropDownProps(props: AvatarDropDownProps) {
             className="mx-2 bg-blue-800 text-white whitespace-nowrap p-2 shadow-inner rounded-lg hover:bg-blue-500 px-4"
           >
             <UserCircleIcon />
-            <div>{props.userName}</div>
+            <div className="ml-4 hidden md:block">{props.userName}</div>
           </IconButton>
         </Tooltip>
       </Box>

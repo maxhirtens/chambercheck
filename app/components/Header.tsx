@@ -33,7 +33,7 @@ const Header = () => {
       {/* // Navbar */}
       <nav>
         {/* Flex Container */}
-        <div className="flex xl:flex-row flex-col items-center justify-around">
+        <div className="flex flex-row items-center justify-around">
           {/* Logo */}
           <div className="pt-2">
             <Link href="/">
@@ -52,17 +52,10 @@ const Header = () => {
               ></Image>
             </Link>
           </div>
-          {/* Menu Items */}
-          <div className="drop-shadow-2xl space-x-6 my-6 text-white font-bold text-xl md:text-3xl">
-            {/* <Link className="hover:text-emerald-600" href="/about">
-              How it Works
-            </Link>
-            <Link className="hover:text-emerald-600" href="/#search">
-              Search Restaurants
-            </Link> */}
-          </div>
           {/* Button */}
-          <AuthButton />
+          <div className="mt-2">
+            <AuthButton />
+          </div>
         </div>
       </nav>
     </div>
