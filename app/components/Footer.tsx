@@ -70,22 +70,20 @@ const Footer = () => {
               <Link href="/" className="hover:text-emerald-600">
                 Home
               </Link>
-              <Link className="hover:text-emerald-600" href="/about">
-                How it Works
-              </Link>
+
               <Link className="hover:text-emerald-600" href="/#search">
                 Search Restaurants
               </Link>
-            </div>
-            <div className="flex flex-col space-y-3 text-white">
               <Link href="/#reviews" className="hover:text-emerald-600">
                 Search Reviews
               </Link>
+            </div>
+            <div className="flex flex-col space-y-3 text-white">
               <Link href="#" className="hover:text-emerald-600">
                 About
               </Link>
-              <Link href="#" className="hover:text-emerald-600">
-                Privacy Policy
+              <Link className="hover:text-emerald-600" href="/about">
+                How it Works
               </Link>
             </div>
           </div>
@@ -93,7 +91,7 @@ const Footer = () => {
           {/* <!-- Input Container --> */}
           <div className="flex flex-col justify-between">
             <form>
-              <div className="flex space-x-3">
+              <div className="flex space-x-6">
                 <input
                   type="text"
                   id="mailing-list"

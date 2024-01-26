@@ -1,11 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
-import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import Button from "./Button";
 import LoadingPage from "../loading";
 import Image from "next/image";
 import SearchBar from "./SearchBar";
 import Subtitle from "./Subtitle";
+import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import { MarkerWithInfowindow } from "./MarkerWithInfoWindow";
 
 const MapBox = () => {
   const [loading, setLoading] = useState(false);
@@ -64,9 +65,18 @@ const MapBox = () => {
       );
     } else {
       return (
-        <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
-          <Map center={location} zoom={17}>
-            <Marker position={location} />
+        <APIProvider
+          libraries={["marker"]}
+          apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+        >
+          <Map
+            mapId={"1aceaad6651fe7f1"}
+            center={location}
+            zoom={17}
+            disableDefaultUI={true}
+          >
+            {/* <Marker position={location} /> */}
+            <MarkerWithInfowindow position={location} />
           </Map>
         </APIProvider>
       );
@@ -81,13 +91,14 @@ const MapBox = () => {
           <SearchBar placeholder="Search Restaurants" />
           <Button text="Search" />
         </div>
+
         <div className="flex flex-col items-center">
           <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] mt-6 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
             {generateMapContent()}
           </div>
-          <div className="mt-6">
-            <Button text="Locate Me" onClick={getGeo} />
-          </div>
+        </div>
+        <div className="flex mt-6 relative justify-center">
+          <Button text="Locate Me" onClick={getGeo} />
         </div>
       </div>
     );
