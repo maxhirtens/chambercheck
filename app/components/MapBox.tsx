@@ -8,6 +8,19 @@ import Subtitle from "./Subtitle";
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import { MarkerWithInfowindow } from "./MarkerWithInfoWindow";
 
+interface RestaurantsState {
+  name: string;
+  geometry: {
+    location: {
+      lat: number;
+      lng: number;
+    };
+  };
+  place_id: string;
+}
+
+type RestaurantsType = Array<RestaurantsState>;
+
 const MapBox = () => {
   // loading state for MapBox.
   const [loading, setLoading] = useState(false);
@@ -19,20 +32,18 @@ const MapBox = () => {
   });
 
   // restaurants state, non-persisting.
-  const [restaurants, setRestaurants] = useState<string[]>([]);
+  const [restaurants, setRestaurants] = useState<RestaurantsType>([]);
 
   // useEffect to get client-side lat,lng from localStorage
   useEffect(() => {
-    // can i turn this into a custom hook?
-    let value;
     // Get the value from local storage if it exists
-    value =
+    let value =
       localStorage.getItem("cc_coords") || JSON.stringify({ lat: 0, lng: 0 });
     let parsedValue = JSON.parse(value);
     let { lat, lng } = parsedValue;
     setLocation({ lat, lng });
     fetch(`http://localhost:3000/api/google-places/?lat=${lat}&lng=${lng}`)
-      .then((res) => res.json())
+      .then((data) => data.json())
       .then((data) => {
         setRestaurants(data.product.results);
       });
@@ -92,6 +103,7 @@ const MapBox = () => {
                 key={idx}
                 name={restaurant.name}
                 position={restaurant.geometry.location}
+                placeId={restaurant.place_id}
               />
             ))}
           </Map>
@@ -105,7 +117,7 @@ const MapBox = () => {
       <div id="search" className="container drop-shadow-2xl">
         <Subtitle text="Restaurant Restroom Reviews Near You" />
         <div className="flex flex-row mt-12 justify-center">
-          <SearchBar placeholder="Search Location" />
+          <SearchBar placeholder="Search Restaurant" />
           <Button text="Search" />
         </div>
 

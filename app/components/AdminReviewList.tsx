@@ -2,7 +2,7 @@ import React from "react";
 import Subtitle from "./Subtitle";
 import prisma from "@/app/lib/prisma";
 
-const ReviewList = async () => {
+const AdminReviewList = async () => {
   const reviews = await prisma.review.findMany();
 
   return (
@@ -51,4 +51,4 @@ const ReviewList = async () => {
   );
 };
 
-export default ReviewList;
+export default AdminReviewList;

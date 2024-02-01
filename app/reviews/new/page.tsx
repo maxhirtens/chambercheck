@@ -1,22 +1,39 @@
-import React from "react";
+"use client";
+import { useState, useEffect } from "react";
 import ReviewForm from "@/app/components/ReviewForm";
+import { useSearchParams } from "next/navigation";
 import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { useSession } from "next-auth/react";
 
 // protected route for logged in users
-export default async function ReviewPage() {
-  const session = await getServerSession(authOptions);
+export default function ReviewPage() {
+  const [restoData, setRestoData] = useState({});
 
-  if (!session || !session.user) {
+  // const session = await getServerSession(authOptions);
+  const session = useSession();
+
+  if (!session) {
     redirect("/api/auth/signin");
   }
 
-  const authorName = session?.user?.name ?? "Anonymous";
-  const authorEmail = session?.user?.email ?? "anon@anon.com";
-  // change these to be dynamic from user clicking on a location
-  const locationName: string = "The Stinking Rose";
-  const locationCity: string = "San Francisco, CA";
+  const searchParams = useSearchParams();
+  const placeId: string = searchParams.get("id") ?? "No Info Available";
+
+  useEffect(() => {
+    fetch(
+      `https://places.googleapis.com/v1/places/${placeId}?fields=addressComponents,displayName&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setRestoData(data);
+      });
+  }, []);
+
+  const authorName = session?.data?.user?.name ?? "Anonymous";
+  const authorEmail = session?.data?.user?.email ?? "anon@anon.com";
+  const locationName = restoData?.displayName?.text ?? "Unknown";
+  const locationCity = restoData?.addressComponents?.[3]?.longText ?? "Unknown";
 
   return (
     <div className="relative container mx-auto p-12">

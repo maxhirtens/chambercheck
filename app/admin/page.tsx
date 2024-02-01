@@ -1,5 +1,5 @@
-import ReviewList from "@/app/components/ReviewList";
-import UserList from "@/app/components/UserList";
+import AdminReviewList from "@/app/components/AdminReviewList";
+import AdminUserList from "@/app/components/AdminUserList";
 
 export const metadata = {
   title: "ChamberCheck Admin Page",
@@ -8,8 +8,8 @@ export const metadata = {
 const Admin = () => {
   return (
     <div>
-      <UserList />
-      <ReviewList />
+      <AdminUserList />
+      <AdminReviewList />
     </div>
   );
 };

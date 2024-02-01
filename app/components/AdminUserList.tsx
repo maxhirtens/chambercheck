@@ -2,7 +2,7 @@ import React from "react";
 import prisma from "@/app/lib/prisma";
 import Subtitle from "./Subtitle";
 
-const UserList = async () => {
+const AdminUserList = async () => {
   const users = await prisma.user.findMany();
   return (
     <div className="relative container mx-auto p-12">
@@ -34,4 +34,4 @@ const UserList = async () => {
   );
 };
 
-export default UserList;
+export default AdminUserList;

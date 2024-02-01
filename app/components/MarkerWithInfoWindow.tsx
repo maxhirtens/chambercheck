@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 import {
   AdvancedMarker,
   InfoWindow,
@@ -9,9 +10,11 @@ import { MapPinIcon } from "@heroicons/react/16/solid";
 export const MarkerWithInfowindow = ({
   position,
   name,
+  placeId,
 }: {
   position: { lat: number; lng: number };
   name: string;
+  placeId: string;
 }) => {
   const [infowindowOpen, setInfowindowOpen] = useState(false);
   const [markerRef, marker] = useAdvancedMarkerRef();
@@ -33,13 +36,23 @@ export const MarkerWithInfowindow = ({
           anchor={marker}
           maxWidth={200}
           onCloseClick={() => setInfowindowOpen(false)}
-          onMouseExit={() => setInfowindowOpen(true)}
         >
           {name}
           <br />
           0 Reviews Available So Far
           <br />
-          Click HERE to leave a review!
+          Click{" "}
+          <Link
+            href={{
+              pathname: "/reviews/new",
+              query: {
+                id: placeId,
+              },
+            }}
+          >
+            HERE
+          </Link>{" "}
+          to leave a review!
         </InfoWindow>
       )}
     </>
