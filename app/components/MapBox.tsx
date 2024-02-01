@@ -1,24 +1,29 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Button from "./Button";
 import LoadingPage from "../loading";
 import Image from "next/image";
 import SearchBar from "./SearchBar";
 import Subtitle from "./Subtitle";
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import { MarkerWithInfowindow } from "./MarkerWithInfoWindow";
 
 const MapBox = () => {
+  // loading state for MapBox.
   const [loading, setLoading] = useState(false);
 
-  // state for location, non-persisting
+  // state for location, non-persisting.
   const [location, setLocation] = useState<{ lat: number; lng: number }>({
     lat: 0,
     lng: 0,
   });
 
+  // restaurants state, non-persisting.
+  const [restaurants, setRestaurants] = useState<string[]>([]);
+
   // useEffect to get client-side lat,lng from localStorage
   useEffect(() => {
+    // can i turn this into a custom hook?
     let value;
     // Get the value from local storage if it exists
     value =
@@ -26,6 +31,11 @@ const MapBox = () => {
     let parsedValue = JSON.parse(value);
     let { lat, lng } = parsedValue;
     setLocation({ lat, lng });
+    fetch(`http://localhost:3000/api/google-places/?lat=${lat}&lng=${lng}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setRestaurants(data.product.results);
+      });
   }, []);
 
   // get user location with permission from button click
@@ -66,17 +76,24 @@ const MapBox = () => {
     } else {
       return (
         <APIProvider
-          libraries={["marker"]}
+          libraries={["marker", "places"]}
           apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
         >
           <Map
             mapId={"1aceaad6651fe7f1"}
+            gestureHandling={"greedy"}
             center={location}
-            zoom={17}
+            zoom={16}
             disableDefaultUI={true}
           >
-            {/* <Marker position={location} /> */}
-            <MarkerWithInfowindow position={location} />
+            <Marker position={location} />;
+            {restaurants.map((restaurant, idx) => (
+              <MarkerWithInfowindow
+                key={idx}
+                name={restaurant.name}
+                position={restaurant.geometry.location}
+              />
+            ))}
           </Map>
         </APIProvider>
       );
@@ -88,7 +105,7 @@ const MapBox = () => {
       <div id="search" className="container drop-shadow-2xl">
         <Subtitle text="Restaurant Restroom Reviews Near You" />
         <div className="flex flex-row mt-12 justify-center">
-          <SearchBar placeholder="Search Restaurants" />
+          <SearchBar placeholder="Search Location" />
           <Button text="Search" />
         </div>
 
@@ -98,8 +115,9 @@ const MapBox = () => {
           </div>
         </div>
         <div className="flex mt-6 relative justify-center">
-          <Button text="Locate Me" onClick={getGeo} />
+          <Button text="Search Restaurants Near Me" onClick={getGeo} />
         </div>
+        <div></div>
       </div>
     );
   } catch (err) {

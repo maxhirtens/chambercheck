@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
-  APIProvider,
-  Map,
-  Marker,
   AdvancedMarker,
   InfoWindow,
   useAdvancedMarkerRef,
 } from "@vis.gl/react-google-maps";
+import { MapPinIcon } from "@heroicons/react/16/solid";
 
 export const MarkerWithInfowindow = ({
   position,
+  name,
 }: {
   position: { lat: number; lng: number };
+  name: string;
 }) => {
-  const [infowindowOpen, setInfowindowOpen] = useState(true);
+  const [infowindowOpen, setInfowindowOpen] = useState(false);
   const [markerRef, marker] = useAdvancedMarkerRef();
 
   return (
@@ -22,17 +22,24 @@ export const MarkerWithInfowindow = ({
         ref={markerRef}
         onClick={() => setInfowindowOpen(true)}
         position={position}
-        title={"AdvancedMarker that opens an Infowindow when clicked."}
-      />
+        title={name}
+      >
+        <div>
+          <MapPinIcon className="w-8 h-8 rounded-xl text-emerald-600" />
+        </div>
+      </AdvancedMarker>
       {infowindowOpen && (
         <InfoWindow
           anchor={marker}
           maxWidth={200}
           onCloseClick={() => setInfowindowOpen(false)}
+          onMouseExit={() => setInfowindowOpen(true)}
         >
-          This is an example for the{" "}
-          <code style={{ whiteSpace: "nowrap" }}>&lt;AdvancedMarker /&gt;</code>{" "}
-          combined with an Infowindow.
+          {name}
+          <br />
+          0 Reviews Available So Far
+          <br />
+          Click HERE to leave a review!
         </InfoWindow>
       )}
     </>

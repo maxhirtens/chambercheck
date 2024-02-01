@@ -7,23 +7,12 @@ const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const category = searchParams.get("category");
-  const radius = searchParams.get("radius");
+  const category = "restaurant";
+  const radius = "500";
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
-  console.log(
-    BASE_URL +
-      "/textsearch/json?query=" +
-      category +
-      "&location=" +
-      lat +
-      "," +
-      lng +
-      "&radius=" +
-      radius +
-      "&key=" +
-      GOOGLE_API_KEY
-  );
+
+  console.log("lat: " + lat + " lng: " + lng);
   const res = await fetch(
     BASE_URL +
       "/textsearch/json?query=" +
