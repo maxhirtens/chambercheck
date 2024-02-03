@@ -12,8 +12,8 @@ const Review: React.FC<{
   authorName: string;
   authorEmail: string;
   locationName: string;
-  locationCity: string;
-}> = ({ authorName, authorEmail, locationName, locationCity }) => {
+  locationAddress: string;
+}> = ({ authorName, authorEmail, locationName, locationAddress }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [content, setContent] = useState("");
@@ -49,7 +49,7 @@ const Review: React.FC<{
         authorName,
         authorEmail,
         locationName,
-        locationCity,
+        locationAddress,
         rating,
         content,
         accessible,
@@ -76,7 +76,7 @@ const Review: React.FC<{
       <div className="container mx-auto p-8 max-w-[800px]">
         <form className="flex flex-col space-y-6" onSubmit={submitData}>
           <Subtitle text="New Review" />
-          <RestaurantCard restaurant={locationName} city={locationCity} />
+          <RestaurantCard restaurant={locationName} address={locationAddress} />
           {/*  Star Ratings -- help from https://dev.to/michaelburrows/create-a-custom-react-star-rating-component-5o6 */}
           <div className="cursor-pointer text-center drop-shadow-md">
             {[...Array(5)].map((star, index) => {
@@ -157,22 +157,7 @@ const Review: React.FC<{
               />
             </FormGroup>
           </span>
-          <ul>
-            State Tests
-            <li>Location Name: {locationName}</li>
-            <li>Location City: {locationCity}</li>
-            <li>Author: {authorName}</li>
-            <li>Author Email: {authorEmail}</li>
-            <li>Rating: {rating}</li>
-            <li>Content: {content}</li>
-            <li>Accessible: {accessible.toString()}</li>
-            <li>Gender Neutral: {genderNeutral.toString()}</li>
-            <li>Changing Table: {changingTable.toString()}</li>
-            <li>Cloth Towels: {clothTowels.toString()}</li>
-            <li>Fem Products: {femProducts.toString()}</li>
-            <li>Hand Dryer: {handDryer.toString()}</li>
-          </ul>
-          <span>
+          <div className="">
             <button
               disabled={!rating || !content}
               type="submit"
@@ -180,14 +165,13 @@ const Review: React.FC<{
             >
               Submit
             </button>
-
             <a
               className="button p-4 px-10 mr-2 w-36 text-white bg-red-400 rounded-full baseline text-xl hover:bg-red-500"
               href="/"
             >
               Cancel
             </a>
-          </span>
+          </div>
         </form>
       </div>
     </>

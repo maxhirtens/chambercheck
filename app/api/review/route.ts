@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   const {
     authorEmail,
     locationName,
-    locationCity,
+    locationAddress,
     rating,
     content,
     accessible,
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     data: {
       authorId: authorId,
       locationName,
-      locationCity,
+      locationAddress,
       rating,
       content,
       accessible,

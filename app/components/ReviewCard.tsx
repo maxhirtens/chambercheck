@@ -1,11 +1,11 @@
-import React from "react";
 import Image from "next/image";
 import prisma from "@/app/lib/prisma";
 import { StarIcon } from "./StarIcon";
 
 const ReviewCard = async (props: {
   restaurant: string;
-  city: string;
+  address: string;
+  avgRating: number;
   review: string;
   rating: string;
   authorId: string;
@@ -25,13 +25,13 @@ const ReviewCard = async (props: {
         <div className="md:shrink-0"></div>
         <div className="p-8">
           <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-            {props.city}
+            {props.address}
           </div>
           <a
             href="#"
             className="block mt-1 text-lg leading-tight font-medium text-black hover:underline"
           >
-            {props.restaurant}
+            {props.restaurant} -- Average Rating: {props.avgRating}
           </a>
           <div className="uppercase tracking-wide text-sm text-slate-500 font-semibold">
             Review By: {authorName}

@@ -117,7 +117,7 @@ const MapBox = () => {
       <div id="search" className="container drop-shadow-2xl">
         <Subtitle text="Restaurant Restroom Reviews Near You" />
         <div className="flex flex-row mt-12 justify-center">
-          <SearchBar placeholder="Search Restaurant" />
+          <SearchBar placeholder="Search Location" />
           <Button text="Search" />
         </div>
 
@@ -127,7 +127,7 @@ const MapBox = () => {
           </div>
         </div>
         <div className="flex mt-6 relative justify-center">
-          <Button text="Search Restaurants Near Me" onClick={getGeo} />
+          <Button text="Search Near My Location" onClick={getGeo} />
         </div>
         <div></div>
       </div>
