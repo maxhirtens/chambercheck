@@ -7,6 +7,7 @@ import Subtitle from "@/app/components/Subtitle";
 
 const UserProfile = async () => {
   // get logged in user details.
+  // replace with useSession hook.
   const session = await getServerSession(authOptions);
   // get their reviews from db.
   const reviews = await prisma.review.findMany({
@@ -29,8 +30,9 @@ const UserProfile = async () => {
         <ReviewCard
           key={review.id}
           authorId={review.authorId}
+          placeId={review.placeId}
           restaurant={review.locationName}
-          city={review.locationCity}
+          address={review.locationAddress}
           review={review.content}
           rating={review.rating}
         />

@@ -66,7 +66,7 @@ const Review: React.FC<{
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      router.push("/#reviews");
+      router.push("/");
       router.refresh();
     } catch (error) {
       console.error(error);

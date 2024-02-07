@@ -16,7 +16,7 @@ export default function ReviewPage() {
   // const session = await getServerSession(authOptions);
   const session = useSession();
 
-  if (!session) {
+  if (!session?.data?.user?.name) {
     redirect("/api/auth/signin");
   }
 

@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar";
 import Subtitle from "./Subtitle";
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import { MarkerWithInfowindow } from "./MarkerWithInfoWindow";
+import { clear } from "console";
 
 interface RestaurantsState {
   name: string;
@@ -34,6 +35,9 @@ const MapBox = () => {
   // restaurants from Google places API, non-persisting.
   const [restaurants, setRestaurants] = useState<RestaurantsType>([]);
 
+  // reviews from ChamberCheck API, non-persisting.
+  const [reviews, setReviews] = useState<any>([]);
+
   // useEffect to get client-side lat,lng from localStorage
   useEffect(() => {
     // Get the value from local storage if it exists
@@ -44,9 +48,18 @@ const MapBox = () => {
     setLocation({ lat, lng });
   }, []);
 
-  // useEffect to get restaurants from Google Places API
-  useEffect(() => {
+  // get nearby restaurants and reviews when button clicked
+  const getRestaurantsAndReviews = () => {
     if (location.lat !== 0) {
+      // save location to local storage
+      localStorage.setItem(
+        "cc_coords",
+        JSON.stringify({
+          lat: location.lat,
+          lng: location.lng,
+        })
+      );
+      // get nearby restaurants
       fetch(
         `http://localhost:3000/api/google-places/?lat=${location.lat}&lng=${location.lng}`
       )
@@ -54,22 +67,17 @@ const MapBox = () => {
         .then((data) => {
           setRestaurants(data.product.results);
         });
-    }
-  }, [location]);
-
-  // useEffect to get any nearby restaurant data from ChamberCheck
-  useEffect(() => {
-    if (location.lat !== 0) {
-      fetch("/api/place-id", {
+      // get nearby reviews
+      fetch("/api/review", {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       })
         .then((data) => data.json())
         .then((data) => {
-          console.log(data.reviews.map((review: any) => review.placeId));
+          setReviews(data.reviews.map((review: any) => review.placeId));
         });
     }
-  }, [location]);
+  };
 
   // get user location with permission from button click
   const getGeo = () => {
@@ -118,6 +126,9 @@ const MapBox = () => {
             center={location}
             zoom={16}
             disableDefaultUI={true}
+            onCenterChanged={(res) => {
+              setLocation(res.detail.center);
+            }}
           >
             <Marker position={location} />;
             {restaurants.map((restaurant, idx) => (
@@ -126,6 +137,12 @@ const MapBox = () => {
                 name={restaurant.name}
                 position={restaurant.geometry.location}
                 placeId={restaurant.place_id}
+                color={
+                  reviews.includes(restaurant.place_id)
+                    ? "text-emerald-600"
+                    : "text-black-500"
+                }
+                hasReviews={reviews.includes(restaurant.place_id)}
               />
             ))}
           </Map>
@@ -142,14 +159,17 @@ const MapBox = () => {
           <SearchBar placeholder="Search Location" />
           <Button text="Search" />
         </div>
-
         <div className="flex flex-col items-center">
           <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] mt-6 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
             {generateMapContent()}
           </div>
         </div>
         <div className="flex mt-6 relative justify-center">
-          <Button text="Search Near My Location" onClick={getGeo} />
+          <Button text="Find My Location" onClick={getGeo} />
+          <Button
+            text="Search Restaurants"
+            onClick={getRestaurantsAndReviews}
+          />
         </div>
         <div></div>
       </div>
