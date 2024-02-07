@@ -13,7 +13,8 @@ const Review: React.FC<{
   authorEmail: string;
   locationName: string;
   locationAddress: string;
-}> = ({ authorName, authorEmail, locationName, locationAddress }) => {
+  placeId: string;
+}> = ({ authorName, authorEmail, locationName, locationAddress, placeId }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [content, setContent] = useState("");
@@ -50,6 +51,7 @@ const Review: React.FC<{
         authorEmail,
         locationName,
         locationAddress,
+        placeId,
         rating,
         content,
         accessible,

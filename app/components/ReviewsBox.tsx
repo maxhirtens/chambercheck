@@ -1,8 +1,20 @@
 import ReviewCard from "./ReviewCard";
 import Subtitle from "./Subtitle";
 import prisma from "@/app/lib/prisma";
-import SearchBar from "./SearchBar";
-import Button from "./Button";
+
+// const findAverageRating = async (name: string) => {
+//   // find all reviews for single location.
+//   const res = await prisma.review.findMany({
+//     where: {
+//       locationName: name,
+//     },
+//   });
+//   // reduce ratings to average
+//   const average: number =
+//     res.reduce((acc: number, res: any) => acc + res.rating, 0) / res.length;
+
+//   return average > 0 ? average.toFixed(1) : 0;
+// };
 
 const ReviewsBox = async () => {
   const reviews = await prisma.review.findMany({
@@ -11,19 +23,6 @@ const ReviewsBox = async () => {
       createdAt: "desc",
     },
   });
-
-  const findAverageRating = async (name: string) => {
-    // find all reviews for single location.
-    const res = await prisma.review.findMany({
-      where: {
-        locationName: name,
-      },
-    });
-    // reduce ratings to average
-    const avgRating =
-      res.reduce((acc: number, res: any) => acc + res.rating, 0) / res.length;
-    return avgRating.toFixed(2);
-  };
 
   return (
     <div
@@ -38,7 +37,7 @@ const ReviewsBox = async () => {
               authorId={review.authorId}
               restaurant={review.locationName}
               address={review.locationAddress}
-              avgRating={findAverageRating(review.locationName)}
+              placeId={review.placeId}
               review={review.content}
               rating={review.rating}
             />

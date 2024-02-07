@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, use } from "react";
 import Button from "./Button";
 import LoadingPage from "../loading";
 import Image from "next/image";
@@ -31,7 +31,7 @@ const MapBox = () => {
     lng: 0,
   });
 
-  // restaurants state, non-persisting.
+  // restaurants from Google places API, non-persisting.
   const [restaurants, setRestaurants] = useState<RestaurantsType>([]);
 
   // useEffect to get client-side lat,lng from localStorage
@@ -42,12 +42,34 @@ const MapBox = () => {
     let parsedValue = JSON.parse(value);
     let { lat, lng } = parsedValue;
     setLocation({ lat, lng });
-    fetch(`http://localhost:3000/api/google-places/?lat=${lat}&lng=${lng}`)
-      .then((data) => data.json())
-      .then((data) => {
-        setRestaurants(data.product.results);
-      });
   }, []);
+
+  // useEffect to get restaurants from Google Places API
+  useEffect(() => {
+    if (location.lat !== 0) {
+      fetch(
+        `http://localhost:3000/api/google-places/?lat=${location.lat}&lng=${location.lng}`
+      )
+        .then((data) => data.json())
+        .then((data) => {
+          setRestaurants(data.product.results);
+        });
+    }
+  }, [location]);
+
+  // useEffect to get any nearby restaurant data from ChamberCheck
+  useEffect(() => {
+    if (location.lat !== 0) {
+      fetch("/api/place-id", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((data) => data.json())
+        .then((data) => {
+          console.log(data.reviews.map((review: any) => review.placeId));
+        });
+    }
+  }, [location]);
 
   // get user location with permission from button click
   const getGeo = () => {

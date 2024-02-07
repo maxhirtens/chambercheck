@@ -5,7 +5,8 @@ import { StarIcon } from "./StarIcon";
 const ReviewCard = async (props: {
   restaurant: string;
   address: string;
-  avgRating: number;
+  placeId: string;
+  // avgRating: string;
   review: string;
   rating: string;
   authorId: string;
@@ -31,7 +32,7 @@ const ReviewCard = async (props: {
             href="#"
             className="block mt-1 text-lg leading-tight font-medium text-black hover:underline"
           >
-            {props.restaurant} -- Average Rating: {props.avgRating}
+            {props.restaurant} -- (placeId: {props.placeId})
           </a>
           <div className="uppercase tracking-wide text-sm text-slate-500 font-semibold">
             Review By: {authorName}

@@ -13,6 +13,7 @@ model Review {
   updatedAt       DateTime @updatedAt
   locationName    String
   locationAddress String
+  placeId         String
   rating          Int
   content         String?  @db.VarChar(240)
   accessible      Boolean? @default(false)

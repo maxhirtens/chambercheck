@@ -10,6 +10,7 @@ export default function ReviewPage() {
   const [restoData, setRestoData] = useState({
     displayName: { text: "Unknown" },
     formattedAddress: "Unknown",
+    placeId: "Unknown",
   });
 
   // const session = await getServerSession(authOptions);
@@ -45,6 +46,7 @@ export default function ReviewPage() {
         authorEmail={authorEmail}
         locationName={locationName}
         locationAddress={locationAddress}
+        placeId={placeId}
       />
     </div>
   );

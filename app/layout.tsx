@@ -6,7 +6,6 @@ import "./globals.css";
 import { getServerSession } from "next-auth";
 import SessionProvider from "./components/SessionProvider";
 import { authOptions } from "./api/auth/[...nextauth]/route";
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ChamberCheck",
