@@ -1,13 +1,19 @@
 "use client";
-import { useState, useEffect, Suspense, use } from "react";
+import { useState, useEffect } from "react";
 import Button from "./Button";
 import LoadingPage from "../loading";
 import Image from "next/image";
 import SearchBar from "./SearchBar";
 import Subtitle from "./Subtitle";
-import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
+import {
+  APIProvider,
+  Map,
+  Marker,
+  ControlPosition,
+} from "@vis.gl/react-google-maps";
 import { MarkerWithInfowindow } from "./MarkerWithInfoWindow";
-import { clear } from "console";
+import MapHandler from "../lib/map-handler";
+import CustomMapControl from "../lib/map-control";
 
 interface RestaurantsState {
   name: string;
@@ -37,6 +43,10 @@ const MapBox = () => {
 
   // reviews from ChamberCheck API, non-persisting.
   const [reviews, setReviews] = useState<any>([]);
+
+  // place state for Google auto-complete
+  const [selectedPlace, setSelectedPlace] =
+    useState<google.maps.places.PlaceResult | null>(null);
 
   // useEffect to get client-side lat,lng from localStorage
   useEffect(() => {
@@ -146,6 +156,12 @@ const MapBox = () => {
               />
             ))}
           </Map>
+          <CustomMapControl
+            controlPosition={ControlPosition.TOP}
+            onPlaceSelect={setSelectedPlace}
+          />
+
+          <MapHandler place={selectedPlace} />
         </APIProvider>
       );
     }
@@ -155,10 +171,6 @@ const MapBox = () => {
     return (
       <div id="search" className="container drop-shadow-2xl">
         <Subtitle text="Restaurant Restroom Reviews Near You" />
-        <div className="flex flex-row mt-12 justify-center">
-          <SearchBar placeholder="Search Location" />
-          <Button text="Search" />
-        </div>
         <div className="flex flex-col items-center">
           <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] mt-6 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
             {generateMapContent()}
