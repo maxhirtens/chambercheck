@@ -13,7 +13,6 @@ export default function ReviewPage() {
     placeId: "Unknown",
   });
 
-  // const session = await getServerSession(authOptions);
   const session = useSession();
 
   if (!session?.data?.user?.name) {

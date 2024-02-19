@@ -22,7 +22,6 @@ const Review: React.FC<{
   const [genderNeutral, setGenderNeutral] = useState(false);
   const [changingTable, setChangingTable] = useState(false);
   const [clothTowels, setClothTowels] = useState(false);
-  const [femProducts, setFemProducts] = useState(false);
   const [handDryer, setHandDryer] = useState(false);
   const router = useRouter();
 
@@ -58,7 +57,6 @@ const Review: React.FC<{
         genderNeutral,
         changingTable,
         clothTowels,
-        femProducts,
         handDryer,
       };
       await fetch("/api/review", {
@@ -145,13 +143,6 @@ const Review: React.FC<{
                 label="Cloth Hand Towels"
                 onChange={() => setClothTowels(!clothTowels)}
               />
-
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Feminine Hygiene Products"
-                onChange={() => setFemProducts(!femProducts)}
-              />
-
               <FormControlLabel
                 control={<Checkbox />}
                 label="Hot Air Hand Dryer"
@@ -159,7 +150,7 @@ const Review: React.FC<{
               />
             </FormGroup>
           </span>
-          <div className="">
+          <div>
             <button
               disabled={!rating || !content}
               type="submit"

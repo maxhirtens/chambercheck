@@ -20,7 +20,6 @@ export async function POST(request: NextRequest) {
     genderNeutral,
     changingTable,
     clothTowels,
-    femProducts,
     handDryer,
   } = await request.json();
 
@@ -44,7 +43,6 @@ export async function POST(request: NextRequest) {
       genderNeutral,
       changingTable,
       clothTowels,
-      femProducts,
       handDryer,
     },
   });
@@ -53,4 +51,17 @@ export async function POST(request: NextRequest) {
     message: "Review submitted",
     result: result,
   });
+}
+
+// Delete user review.
+export async function DELETE(request: NextRequest) {
+  const { id } = await request.json();
+  console.log("deleting:", id);
+  await prisma.review.delete({
+    where: {
+      id: id,
+    },
+  });
+
+  return new Response("Review deleted");
 }

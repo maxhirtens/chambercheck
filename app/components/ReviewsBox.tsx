@@ -2,20 +2,6 @@ import ReviewCard from "./ReviewCard";
 import Subtitle from "./Subtitle";
 import prisma from "@/app/lib/prisma";
 
-// const findAverageRating = async (name: string) => {
-//   // find all reviews for single location.
-//   const res = await prisma.review.findMany({
-//     where: {
-//       locationName: name,
-//     },
-//   });
-//   // reduce ratings to average
-//   const average: number =
-//     res.reduce((acc: number, res: any) => acc + res.rating, 0) / res.length;
-
-//   return average > 0 ? average.toFixed(1) : 0;
-// };
-
 const ReviewsBox = async () => {
   const reviews = await prisma.review.findMany({
     take: 10,
@@ -29,7 +15,7 @@ const ReviewsBox = async () => {
       id="reviews"
       className="flex flex-col h-screen items-center space-y-12 p-12 drop-shadow-2xl"
     >
-      <Subtitle text="Latest Reviews" />
+      <Subtitle text="Recent Reviews" />
       <div className="min-w-1/2 max-h-screen overflow-y-auto">
         {reviews.map((review: any) => (
           <div key={review.id} className="mb-6 pr-6">
@@ -40,6 +26,12 @@ const ReviewsBox = async () => {
               placeId={review.placeId}
               review={review.content}
               rating={review.rating}
+              date={review.createdAt.toLocaleString()}
+              accessible={review.accessible}
+              genderNeutral={review.genderNeutral}
+              babyChanging={review.changingTable}
+              clothTowels={review.clothTowels}
+              handDryer={review.handDryer}
             />
           </div>
         ))}

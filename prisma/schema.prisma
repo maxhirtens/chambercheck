@@ -20,7 +20,6 @@ model Review {
   changingTable   Boolean? @default(false)
   genderNeutral   Boolean? @default(false)
   clothTowels     Boolean? @default(false)
-  femProducts     Boolean? @default(false)
   handDryer       Boolean? @default(false)
   published       Boolean  @default(false)
   viewCount       Int      @default(0)

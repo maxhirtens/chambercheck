@@ -4,6 +4,9 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ReviewCard from "@/app/components/ReviewCard";
 import UserCard from "@/app/components/UserCard";
 import Subtitle from "@/app/components/Subtitle";
+import { Edit, Delete } from "@mui/icons-material";
+import Link from "next/link";
+import DeleteButton from "@/app/components/DeleteButton";
 
 const UserProfile = async () => {
   // get logged in user details.
@@ -13,7 +16,7 @@ const UserProfile = async () => {
   const reviews = await prisma.review.findMany({
     where: { author: { id: session!.user!.id } },
     orderBy: {
-      createdAt: "asc",
+      createdAt: "desc",
     },
   });
 
@@ -27,15 +30,34 @@ const UserProfile = async () => {
       />
       <Subtitle text="Your Reviews" />
       {reviews.map((review: any) => (
-        <ReviewCard
-          key={review.id}
-          authorId={review.authorId}
-          placeId={review.placeId}
-          restaurant={review.locationName}
-          address={review.locationAddress}
-          review={review.content}
-          rating={review.rating}
-        />
+        <div className="flex flex-col pt-8" key={review.id}>
+          <div className="flex flex-row justify-around mb-2 drop-shadow-sm">
+            {/* replace with component like DELETE BUTTON */}
+            {/* <div className="float-left">
+              <Link className="text-indigo-600" href="#">
+                <Edit fontSize="large" />
+                Edit Review
+              </Link>
+            </div> */}
+            <div className="float-right">
+              <DeleteButton id={review.id} />
+            </div>
+          </div>
+          <ReviewCard
+            authorId={review.authorId}
+            placeId={review.placeId}
+            restaurant={review.locationName}
+            address={review.locationAddress}
+            review={review.content}
+            rating={review.rating}
+            date={review.createdAt.toLocaleString()}
+            accessible={review.accessible}
+            genderNeutral={review.genderNeutral}
+            babyChanging={review.changingTable}
+            clothTowels={review.clothTowels}
+            handDryer={review.handDryer}
+          />
+        </div>
       ))}
     </div>
   );
