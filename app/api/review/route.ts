@@ -62,6 +62,5 @@ export async function DELETE(request: NextRequest) {
       id: id,
     },
   });
-
   return new Response("Review deleted");
 }

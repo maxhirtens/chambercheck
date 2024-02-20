@@ -2,6 +2,7 @@ import prisma from "@/app/lib/prisma";
 import Subtitle from "@/app/components/Subtitle";
 import Link from "next/link";
 import SimpleReviewCard from "@/app/components/SimpleReviewCard";
+import Image from "next/image";
 
 interface RouteParams {
   params: {
@@ -34,7 +35,13 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
         {reviews[0].accessible && <div>Accessible</div>}
         <div>Average Rating: {averageRating()}</div>
         {averageRating() >= "4.0" && (
-          <div>ChamberCheck Golden Toilet Award</div>
+          <Image
+            alt="golden toilet award"
+            src="/img/golden_toilet.png"
+            width={120}
+            height={120}
+            className="items-center mx-auto"
+          />
         )}
       </div>
       <Link

@@ -44,6 +44,7 @@ const Review: React.FC<{
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    if (!rating) return alert("Please leave a star rating!");
     try {
       const body = {
         authorName,
@@ -76,9 +77,13 @@ const Review: React.FC<{
       <div className="container mx-auto p-8 max-w-[800px]">
         <form className="flex flex-col space-y-6" onSubmit={submitData}>
           <Subtitle text="New Review" />
-          <RestaurantCard restaurant={locationName} address={locationAddress} />
+          <RestaurantCard
+            restaurant={locationName}
+            address={locationAddress}
+            placeId={placeId}
+          />
           {/*  Star Ratings -- help from https://dev.to/michaelburrows/create-a-custom-react-star-rating-component-5o6 */}
-          <div className="cursor-pointer text-center drop-shadow-md">
+          <div className={`cursor-pointer text-center drop-shadow-md`}>
             {[...Array(5)].map((star, index) => {
               index += 1;
               return (
@@ -150,16 +155,15 @@ const Review: React.FC<{
               />
             </FormGroup>
           </span>
-          <div>
+          <div className="flex flex-row justify-center">
             <button
-              disabled={!rating || !content}
               type="submit"
-              className="p-3 px-6 mr-2 w-36 text-white bg-darkBlue rounded-full baseline text-xl hover:bg-blue-800"
+              className="p-3 px-6 mr-2 w-36 text-white bg-teal-600 rounded-lg baseline text-xl hover:bg-teal-800"
             >
               Submit
             </button>
             <a
-              className="button p-4 px-10 mr-2 w-36 text-white bg-red-400 rounded-full baseline text-xl hover:bg-red-500"
+              className="button p-4 px-10 mr-2 w-36 text-white bg-brightRed hover:bg-brightRedLight rounded-lg baseline text-xl"
               href="/"
             >
               Cancel

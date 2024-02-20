@@ -1,15 +1,25 @@
 "use client";
 import { Delete } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
 const DeleteButton = (props: { id: number }) => {
+  const router = useRouter();
+
   const handleDelete = (id: number) => async () => {
-    const response = await fetch("/api/review", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: id }),
-    });
+    const shouldRemove = confirm(
+      "are you sure you want to delete this review?"
+    );
+
+    if (shouldRemove) {
+      await fetch("/api/review", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: id }),
+      });
+      router.refresh();
+    }
   };
 
   return (

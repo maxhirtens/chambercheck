@@ -1,20 +1,19 @@
-import prisma from "@/app/lib/prisma";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ReviewCard from "@/app/components/ReviewCard";
 import UserCard from "@/app/components/UserCard";
 import Subtitle from "@/app/components/Subtitle";
-import { Edit, Delete } from "@mui/icons-material";
-import Link from "next/link";
 import DeleteButton from "@/app/components/DeleteButton";
+import prisma from "@/app/lib/prisma";
 
 const UserProfile = async () => {
   // get logged in user details.
-  // replace with useSession hook.
   const session = await getServerSession(authOptions);
-  // get their reviews from db.
+
   const reviews = await prisma.review.findMany({
-    where: { author: { id: session!.user!.id } },
+    where: {
+      authorId: session!.user.id,
+    },
     orderBy: {
       createdAt: "desc",
     },

@@ -66,7 +66,6 @@ const MapBox = () => {
   }, []);
 
   // get nearby restaurants and reviews
-  // *** don't query WHOLE database, how to fix? ***
   useEffect(() => {
     // get nearby restaurants
     fetch(
@@ -77,6 +76,7 @@ const MapBox = () => {
         setRestaurants(data.product.results);
       });
     // get nearby reviews
+    // *** don't query WHOLE database, how to fix? ***
     fetch("/api/review", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
