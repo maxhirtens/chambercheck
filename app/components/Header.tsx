@@ -4,6 +4,7 @@ import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import Button from "./Button";
 import AvatarDropDown from "./AvatarDropDown";
+import Subtitle from "./Subtitle";
 
 function AuthButton() {
   const { data: session } = useSession();
@@ -57,6 +58,7 @@ const Header = () => {
             <AuthButton />
           </div>
         </div>
+        <Subtitle text="Real Restaurant Restroom Reviews" />
       </nav>
     </div>
   );

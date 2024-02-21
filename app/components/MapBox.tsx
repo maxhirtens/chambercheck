@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Button from "./Button";
 import LoadingPage from "../loading";
 import Image from "next/image";
-import SearchBar from "./SearchBar";
 import Subtitle from "./Subtitle";
 import {
   APIProvider,
@@ -175,7 +174,7 @@ const MapBox = () => {
   try {
     return (
       <div id="search" className="container drop-shadow-2xl">
-        <Subtitle text="Real Restaurant Restroom Reviews" />
+        <Subtitle text="Search by Location" />
         <div className="flex flex-col items-center">
           <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] mt-6 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
             {generateMapContent()}

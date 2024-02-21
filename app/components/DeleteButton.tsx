@@ -7,7 +7,7 @@ const DeleteButton = (props: { id: number }) => {
 
   const handleDelete = (id: number) => async () => {
     const shouldRemove = confirm(
-      "are you sure you want to delete this review?"
+      "Are you sure you want to delete this review?"
     );
 
     if (shouldRemove) {

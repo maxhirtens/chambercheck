@@ -33,7 +33,14 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
         <Subtitle text={`${reviews[0].locationName}`} />
         <div className="text-purple-800 py-6">{reviews[0].locationAddress}</div>
         {reviews[0].accessible && <div>Accessible</div>}
-        <div>Average Rating: {averageRating()}</div>
+        <div>
+          <p className="text-orange-400">
+            {reviews.length} Review{reviews.length > 1 && "s"}
+          </p>
+          <br />
+          Average Restroom Rating:{" "}
+          <p className="text-orange-400">{averageRating()}</p>
+        </div>
         {averageRating() >= "4.0" && (
           <Image
             alt="golden toilet award"
@@ -45,7 +52,7 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
         )}
       </div>
       <Link
-        className="mx-8 bg-blue-800 text-white whitespace-nowrap p-2 shadow-inner rounded-lg hover:bg-blue-500 px-12"
+        className="mx-8 bg-teal-600 text-white whitespace-nowrap p-2 shadow-inner rounded-lg hover:bg-blue-500 px-12"
         href={{
           pathname: "/reviews/new",
           query: {

@@ -34,11 +34,7 @@ const SimpleReviewCard = async (props: {
     <div className="min-w-md bg-slate-100 rounded-xl drop-shadow-md overflow-hidden">
       <div className="md:flex">
         <div className="md:shrink-0"></div>
-        <div className="p-8">
-          <div className="flex flex-col uppercase tracking-wide text-sm text-slate-500 font-semibold">
-            Review By: {authorName}
-            <p>Date: {props.date}</p>
-          </div>
+        <div className="p-6">
           <div>
             {/* Star Rating */}
             {[...Array(5)].map((star, index) => {
@@ -97,6 +93,10 @@ const SimpleReviewCard = async (props: {
                 <DryOutlined fontSize="large" />
               </Tooltip>
             )}
+          </div>
+          <div className="flex flex-col uppercase tracking-wide text-sm text-slate-500 font-semibold mt-6">
+            Review By: {authorName}
+            <p>Date: {props.date}</p>
           </div>
         </div>
       </div>
