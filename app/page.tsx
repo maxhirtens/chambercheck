@@ -1,12 +1,12 @@
 import ReviewsBox from "./components/ReviewsBox";
 import MapBox from "./components/MapBox";
-import SearchBox from "./components/SearchBox";
+import { Divider } from "@mui/material";
 
 const HomePage = async () => {
   return (
     <>
       <div className="relative container mx-auto p-12">
-        <SearchBox />
+        <Divider />
         <MapBox />
         <ReviewsBox />
       </div>

@@ -28,7 +28,6 @@ export default function ReviewPage() {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setRestoData(data);
       });
   }, [placeId]);

@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import Button from "./Button";
 import LoadingPage from "../loading";
 import Image from "next/image";
-import Subtitle from "./Subtitle";
+import SmallTitle from "./SmallTitle";
 import {
   APIProvider,
   Map,
-  Marker,
+  AdvancedMarker,
   ControlPosition,
 } from "@vis.gl/react-google-maps";
 import { MarkerWithInfowindow } from "./MarkerWithInfoWindow";
@@ -139,13 +139,12 @@ const MapBox = () => {
             disableDefaultUI={true}
             onDragend={() => {
               setLocation(center);
-              console.log(location);
             }}
             onCenterChanged={(res) => {
               setCenter(res.detail.center);
             }}
           >
-            <Marker position={center} />;
+            <AdvancedMarker position={center} />;
             {restaurants.map((restaurant, idx) => (
               <MarkerWithInfowindow
                 key={idx}
@@ -174,9 +173,9 @@ const MapBox = () => {
   try {
     return (
       <div id="search" className="container drop-shadow-2xl">
-        <Subtitle text="Search by Location" />
+        <SmallTitle text="Restaurants Near You" />
         <div className="flex flex-col items-center">
-          <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] mt-6 border-4 border-white-500 rounded-xl shadow-md overflow-hidden">
+          <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] mt-6 border-4 border-white-500 rounded-xl shadow-md">
             {generateMapContent()}
           </div>
           <div className="flex bottom-20 z-10 relative">

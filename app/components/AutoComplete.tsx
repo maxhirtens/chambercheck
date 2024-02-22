@@ -18,6 +18,7 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
 
     const options = {
       fields: ["geometry", "name", "formatted_address"],
+      types: ["restaurant"],
     };
 
     setPlaceAutocomplete(new places.Autocomplete(inputRef.current, options));

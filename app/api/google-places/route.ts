@@ -12,7 +12,6 @@ export async function GET(request: NextRequest) {
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
 
-  console.log("lat: " + lat + " lng: " + lng);
   const res = await fetch(
     BASE_URL +
       "/textsearch/json?query=" +

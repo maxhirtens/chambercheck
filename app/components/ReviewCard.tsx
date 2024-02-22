@@ -38,7 +38,7 @@ const ReviewCard = async (props: {
       <div className="md:flex">
         <div className="md:shrink-0"></div>
         <div className="p-8">
-          <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+          <div className="uppercase tracking-wide text-sm text-indigo-800 font-semibold">
             {props.address}
           </div>
           <a

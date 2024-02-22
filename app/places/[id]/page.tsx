@@ -1,5 +1,5 @@
 import prisma from "@/app/lib/prisma";
-import Subtitle from "@/app/components/Subtitle";
+import SmallTitle from "@/app/components/SmallTitle";
 import Link from "next/link";
 import SimpleReviewCard from "@/app/components/SimpleReviewCard";
 import Image from "next/image";
@@ -29,8 +29,8 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
 
   return (
     <div className="flex flex-col items-center space-y-8 p-12 mb-4 drop-shadow-2xl">
-      <div className="min-w-md mx-auto text-center pb-8 bg-slate-100 rounded-xl shadow-md overflow-hidden">
-        <Subtitle text={`${reviews[0].locationName}`} />
+      <div className="min-w-md mx-auto text-center pb-8 px-12 bg-slate-100 rounded-xl shadow-md overflow-hidden">
+        <SmallTitle text={`${reviews[0].locationName}`} />
         <div className="text-purple-800 py-6">{reviews[0].locationAddress}</div>
         {reviews[0].accessible && <div>Accessible</div>}
         <div>

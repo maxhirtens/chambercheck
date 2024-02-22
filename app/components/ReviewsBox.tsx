@@ -1,5 +1,5 @@
 import ReviewCard from "./ReviewCard";
-import Subtitle from "./Subtitle";
+import SmallTitle from "./SmallTitle";
 import prisma from "@/app/lib/prisma";
 
 const ReviewsBox = async () => {
@@ -13,9 +13,9 @@ const ReviewsBox = async () => {
   return (
     <div
       id="reviews"
-      className="flex flex-col h-screen items-center space-y-12 p-12 drop-shadow-2xl"
+      className="flex flex-col h-screen items-center space-y-12 drop-shadow-2xl"
     >
-      <Subtitle text="Recent Reviews" />
+      <SmallTitle text="Recent Reviews" />
       <div className="min-w-1/2 max-h-screen overflow-y-auto">
         {reviews.map((review: any) => (
           <div key={review.id} className="mb-6 pr-6">
