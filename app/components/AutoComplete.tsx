@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useMapsLibrary } from "@vis.gl/react-google-maps";
+import { useRouter } from "next/navigation";
 
 interface Props {
   onPlaceSelect: (place: google.maps.places.PlaceResult | null) => void;
@@ -12,12 +13,13 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
     useState<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const places = useMapsLibrary("places");
+  const router = useRouter();
 
   useEffect(() => {
     if (!places || !inputRef.current) return;
 
     const options = {
-      fields: ["geometry", "name", "formatted_address"],
+      fields: ["place_id"],
       types: ["restaurant"],
     };
 
@@ -29,8 +31,10 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
 
     placeAutocomplete.addListener("place_changed", () => {
       onPlaceSelect(placeAutocomplete.getPlace());
+      const { place_id } = placeAutocomplete.getPlace();
+      router.push(`/places/${place_id}`);
     });
-  }, [onPlaceSelect, placeAutocomplete]);
+  }, [onPlaceSelect, placeAutocomplete, router]);
 
   return (
     <div className="autocomplete-container">

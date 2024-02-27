@@ -19,15 +19,6 @@ const RestaurantCard = (props: {
             {props.restaurant}
           </a>
         </div>
-        {/* replace with live map API result */}
-        <div className="mt-5 pr-8">
-          <Image
-            src="/img/blurred-map.jpg"
-            alt="Map of restaurant location"
-            width={60}
-            height={60}
-          />
-        </div>
       </div>
     </div>
   );

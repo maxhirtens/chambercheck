@@ -1,29 +1,41 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import Subtitle from "./Subtitle";
+import SmallTitle from "./SmallTitle";
 import { StarIcon } from "./StarIcon";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import RestaurantCard from "./RestaurantCard";
 
-const Review: React.FC<{
+type ReviewProps = {
   authorName: string;
   authorEmail: string;
   locationName: string;
   locationAddress: string;
   placeId: string;
-}> = ({ authorName, authorEmail, locationName, locationAddress, placeId }) => {
+};
+
+const Review: React.FC<ReviewProps> = ({
+  authorName,
+  authorEmail,
+  locationName,
+  locationAddress,
+  placeId,
+}) => {
+  const router = useRouter();
+  // state for star ratings.
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
-  const [content, setContent] = useState("");
-  const [accessible, setAccessible] = useState(false);
-  const [genderNeutral, setGenderNeutral] = useState(false);
-  const [changingTable, setChangingTable] = useState(false);
-  const [clothTowels, setClothTowels] = useState(false);
-  const [handDryer, setHandDryer] = useState(false);
-  const router = useRouter();
+  // state for form data.
+  const [form, setForm] = useState({
+    content: "",
+    accessible: false,
+    genderNeutral: false,
+    changingTable: false,
+    clothTowels: false,
+    handDryer: false,
+  });
 
   const starText = () => {
     switch (hover) {
@@ -53,12 +65,7 @@ const Review: React.FC<{
         locationAddress,
         placeId,
         rating,
-        content,
-        accessible,
-        genderNeutral,
-        changingTable,
-        clothTowels,
-        handDryer,
+        ...form,
       };
       await fetch("/api/review", {
         method: "POST",
@@ -76,7 +83,7 @@ const Review: React.FC<{
     <>
       <div className="container mx-auto p-8 max-w-[800px]">
         <form className="flex flex-col space-y-6" onSubmit={submitData}>
-          <Subtitle text="New Review" />
+          <SmallTitle text="New Review" />
           <RestaurantCard
             restaurant={locationName}
             address={locationAddress}
@@ -110,48 +117,58 @@ const Review: React.FC<{
           <textarea
             cols={50}
             maxLength={240}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={(e) => setForm({ ...form, content: e.target.value })}
             placeholder="Type a brief review here!"
             rows={8}
             required
-            value={content}
+            value={form.content}
             className="rounded-xl p-5"
           />
           {/* Characters Remaining Div */}
-          <div className="ml-auto">
-            <span className="text-indigo-800">{240 - content.length}</span>{" "}
+          <div className="ml-auto relative bottom-14 right-4">
+            <span className="text-indigo-800">{240 - form.content.length}</span>{" "}
             Characters Remaining
           </div>
-          <span className="flex flex-col md:flex-row justify-evenly">
+          <span className="flex flex-col md:flex-row justify-evenly min-w-md bg-slate-100 rounded-xl drop-shadow-md overflow-hidden p-8">
             <FormGroup>
               <FormControlLabel
                 control={<Checkbox />}
-                label="Accessible for Wheelchair Users"
-                onChange={() => setAccessible(!accessible)}
+                label="Accessible to Wheelchairs"
+                onChange={() =>
+                  setForm({ ...form, accessible: !form.accessible })
+                }
               />
 
               <FormControlLabel
                 control={<Checkbox />}
                 label="Gender Neutral Option"
-                onChange={() => setGenderNeutral(!genderNeutral)}
+                onChange={() =>
+                  setForm({ ...form, genderNeutral: !form.genderNeutral })
+                }
               />
 
               <FormControlLabel
                 control={<Checkbox />}
                 label="Changing Table"
-                onChange={() => setChangingTable(!changingTable)}
+                onChange={() =>
+                  setForm({ ...form, changingTable: !form.changingTable })
+                }
               />
             </FormGroup>
             <FormGroup>
               <FormControlLabel
                 control={<Checkbox />}
                 label="Cloth Hand Towels"
-                onChange={() => setClothTowels(!clothTowels)}
+                onChange={() =>
+                  setForm({ ...form, clothTowels: !form.clothTowels })
+                }
               />
               <FormControlLabel
                 control={<Checkbox />}
                 label="Hot Air Hand Dryer"
-                onChange={() => setHandDryer(!handDryer)}
+                onChange={() =>
+                  setForm({ ...form, handDryer: !form.handDryer })
+                }
               />
             </FormGroup>
           </span>
