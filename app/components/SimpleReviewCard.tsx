@@ -67,7 +67,7 @@ const SimpleReviewCard = async (props: {
             </p>
           </div>
           {/* amenities list */}
-          <div className="flex flex-row space-x-5 pt-4 text-teal-400">
+          <div className="flex flex-row space-x-5 pt-4 text-teal-500">
             {props.accessible && (
               <Tooltip title="Reviewer Noticed Restroom was Accessible">
                 <AccessibleOutlined fontSize="large" />

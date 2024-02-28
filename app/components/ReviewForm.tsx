@@ -175,7 +175,7 @@ const Review: React.FC<ReviewProps> = ({
           <div className="flex flex-row justify-center">
             <button
               type="submit"
-              className="p-3 px-6 mr-2 w-36 text-white bg-teal-600 rounded-lg baseline text-xl hover:bg-teal-800"
+              className="p-3 px-6 mr-2 w-36 text-white bg-teal-500 rounded-lg baseline text-xl hover:bg-teal-800"
             >
               Submit
             </button>

@@ -4,13 +4,13 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 200, 255, 255;
+  --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 50, 200, 220;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  /* background: rgb(var(--background-start-rgb)); */
+  /* background: rgb(239, 239, 239); */
   background: linear-gradient(
       to bottom,
       transparent,
@@ -59,7 +59,7 @@ body {
 
 /* Star Rating */
 .on {
-  color: indigo;
+  color: darkorange;
 }
 .off {
   color: #ccc;

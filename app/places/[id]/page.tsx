@@ -69,10 +69,10 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
             </div>
           </Tooltip>
         </div>
-        <div className="text-purple-800 py-6">{locationAddress}</div>
+        <div className="text-indigo-800 py-6">{locationAddress}</div>
         <div>
           Reviews:
-          <p className="text-teal-600">{reviews.length}</p>
+          <p className="text-teal-500">{reviews.length}</p>
           <br />
           Average Restroom Rating:{" "}
           <p className="text-orange-400">{averageRating()}</p>
@@ -107,7 +107,7 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
         </div>
       </div>
       <Link
-        className="mx-8 bg-teal-600 text-white whitespace-nowrap p-2 shadow-inner rounded-lg hover:bg-blue-500 px-12"
+        className="mx-8 bg-teal-500 text-white whitespace-nowrap p-2 shadow-inner rounded-lg hover:bg-blue-500 px-12"
         href={{
           pathname: "/reviews/new",
           query: {

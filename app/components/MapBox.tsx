@@ -153,7 +153,7 @@ const MapBox = () => {
                 placeId={restaurant.place_id}
                 color={
                   reviews.includes(restaurant.place_id)
-                    ? "text-emerald-600"
+                    ? "text-teal-500"
                     : "text-black-500"
                 }
                 hasReviews={reviews.includes(restaurant.place_id)}
@@ -173,9 +173,9 @@ const MapBox = () => {
   try {
     return (
       <div id="search" className="container drop-shadow-2xl">
-        <SmallTitle text="Restaurants Near You" />
+        <SmallTitle text="Search Restaurants" />
         <div className="flex flex-col items-center">
-          <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] mt-6 border-4 border-white-500 rounded-xl shadow-md">
+          <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] lg:w-[1000px] mt-6 border-4 border-white-500 rounded-xl overflow-hidden">
             {generateMapContent()}
           </div>
           <div className="flex bottom-20 z-10 relative">

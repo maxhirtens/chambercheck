@@ -1,12 +1,14 @@
-import React from "react";
+import { Silkscreen } from "next/font/google";
+
+const font = Silkscreen({ subsets: ["latin"], weight: ["400"] });
 
 const Subtitle = (props: { text: string }) => {
   return (
     <div className="mt-8 mx-12">
-      <h1 className="font-extrabold text-center text-4xl lg:text-6xl">
-        <span className="text-transparent bg-clip-text bg-gradient-to-l to-teal-600 from-indigo-800">
-          {props.text}
-        </span>
+      <h1
+        className={`${font.className} text-slate-300 text-center text-3xl lg:text-4xl`}
+      >
+        <span className="">{props.text}</span>
       </h1>
     </div>
   );

@@ -42,7 +42,7 @@ export default function AvatarDropDownProps(props: AvatarDropDownProps) {
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
-            className="mx-2 bg-teal-600 text-white whitespace-nowrap p-2 shadow-inner rounded-lg hover:bg-blue-500 px-4"
+            className="mx-2 bg-teal-500 text-sm text-white whitespace-nowrap p-2 shadow-inner rounded-lg hover:bg-teal-800 px-4"
           >
             <UserCircleIcon />
             <div className="ml-4 hidden md:block">{props.userName}</div>

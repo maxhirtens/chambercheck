@@ -1,10 +1,10 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import Button from "./Button";
 import AvatarDropDown from "./AvatarDropDown";
 import Subtitle from "./Subtitle";
+import { Divider } from "@mui/material";
+import MainLogo from "./MainLogo";
 
 function AuthButton() {
   const { data: session } = useSession();
@@ -23,7 +23,7 @@ function AuthButton() {
   } else
     return (
       <>
-        <Button onClick={() => signIn()} text="Sign In" />
+        <Button onClick={() => signIn()} text="avatar" />
       </>
     );
 }
@@ -32,27 +32,10 @@ const Header = () => {
   return (
     <div className="relative container mx-auto drop-shadow-2xl">
       {/* // Navbar */}
-      <nav>
+      <nav className="pb-6">
         {/* Flex Container */}
         <div className="flex flex-row items-center justify-around">
-          {/* Logo */}
-          <div className="pt-2">
-            <Link href="/">
-              <Image
-                src="/img/cc-logo-2.jpg"
-                alt="main ChamberCheck logo"
-                priority
-                width={250}
-                height={100}
-                style={{
-                  objectFit: "cover",
-                  borderRadius: "50px",
-                  width: "auto",
-                  height: "auto",
-                }}
-              ></Image>
-            </Link>
-          </div>
+          <MainLogo />
           {/* Button */}
           <div className="mt-2">
             <AuthButton />
@@ -60,6 +43,7 @@ const Header = () => {
         </div>
         <Subtitle text="Real Restaurant Restroom Reviews" />
       </nav>
+      <Divider />
     </div>
   );
 };

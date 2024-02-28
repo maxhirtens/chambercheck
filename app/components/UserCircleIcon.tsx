@@ -8,7 +8,7 @@ const UserCircleIcon = () => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="white"
-        className="w-8 h-8"
+        className="w-6 h-6"
       >
         <path
           fillRule="evenodd"

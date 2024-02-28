@@ -44,7 +44,7 @@ export const MarkerWithInfowindow = ({
           {name}
           <br />
           {hasReviews ? (
-            <Link className="text-blue-500" href={`/places/${placeId}`}>
+            <Link className="text-teal-600" href={`/places/${placeId}`}>
               See Reviews
             </Link>
           ) : (
@@ -53,7 +53,7 @@ export const MarkerWithInfowindow = ({
           <br />
           Click{" "}
           <Link
-            className="text-blue-500"
+            className="text-teal-600"
             href={{
               pathname: "/reviews/new",
               query: {
