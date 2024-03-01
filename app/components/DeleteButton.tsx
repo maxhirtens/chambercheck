@@ -24,12 +24,14 @@ const DeleteButton = (props: { id: number }) => {
 
   return (
     <button
-      className="bg-red-800 text-white whitespace-nowrap p-2 shadow-inner rounded-lg hover:bg-red-600 px-4"
+      className="bg-red-700 text-white whitespace-nowrap p-2 shadow-inner rounded-lg hover:bg-red-600 px-4"
       type="button"
       onClick={handleDelete(props.id)}
     >
-      <Delete fontSize="large" />
-      Delete Review
+      <span className="flex flex-row">
+        <Delete fontSize="medium" />
+        <div className="hidden md:block">Delete Review</div>
+      </span>
     </button>
   );
 };

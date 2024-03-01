@@ -1,5 +1,6 @@
 import prisma from "@/app/lib/prisma";
 import SmallTitle from "@/app/components/SmallTitle";
+import Subtitle from "@/app/components/Subtitle";
 import Link from "next/link";
 import SimpleReviewCard from "@/app/components/SimpleReviewCard";
 import Image from "next/image";
@@ -28,8 +29,8 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
       return data;
     });
 
-  const locationName = response?.displayName?.text ?? "Unknown";
-  const locationAddress = response?.formattedAddress ?? "Unknown";
+  const locationName = response?.displayName?.text ?? "Loading...";
+  const locationAddress = response?.formattedAddress ?? "Loading...";
 
   //   get reviews from db.
   const reviews = await prisma.review.findMany({
@@ -60,8 +61,10 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
                     <Image
                       alt="golden toilet award"
                       src="/img/golden_toilet.png"
-                      width={40}
-                      height={40}
+                      width="0"
+                      height="0"
+                      sizes="100vw"
+                      style={{ width: "50px", height: "auto" }}
                       className="items-center mx-auto rounded-3xl shadow-md overflow-hidden pt-4"
                     />
                   </div>
@@ -69,13 +72,12 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
             </div>
           </Tooltip>
         </div>
-        <div className="text-indigo-800 py-6">{locationAddress}</div>
-        <div>
-          Reviews:
-          <p className="text-teal-500">{reviews.length}</p>
-          <br />
+        <div className="text-slate-500 py-6">{locationAddress}</div>
+        <div className="text-lg">
           Average Restroom Rating:{" "}
-          <p className="text-orange-400">{averageRating()}</p>
+          <div className="-mt-6">
+            <SmallTitle text={averageRating()} />
+          </div>
         </div>
         {/* amenities list */}
         <div className="flex flex-row justify-center space-x-5 pt-4 text-teal-400">
@@ -107,7 +109,7 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
         </div>
       </div>
       <Link
-        className="mx-8 bg-teal-500 text-white whitespace-nowrap p-2 shadow-inner rounded-lg hover:bg-blue-500 px-12"
+        className="mx-8 bg-teal-500 text-white whitespace-nowrap p-2 shadow-inner rounded-lg hover:bg-teal-800 px-12"
         href={{
           pathname: "/reviews/new",
           query: {

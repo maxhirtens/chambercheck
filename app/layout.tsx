@@ -5,6 +5,9 @@ import "./globals.css";
 import { getServerSession } from "next-auth";
 import SessionProvider from "./components/SessionProvider";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import { Rubik } from "next/font/google";
+
+const font = Rubik({ subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
   title: "ChamberCheck",
@@ -20,7 +23,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen relative lg:pb-36 pb-[500px]">
+      <body className={`${font.className} flex flex-col min-h-screen relative`}>
         <main>
           <SessionProvider session={session}>
             <Header />

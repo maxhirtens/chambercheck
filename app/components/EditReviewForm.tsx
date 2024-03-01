@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import SmallTitle from "./SmallTitle";
 import { StarIcon } from "./StarIcon";
@@ -9,33 +9,28 @@ import Checkbox from "@mui/material/Checkbox";
 import RestaurantCard from "./RestaurantCard";
 
 type ReviewProps = {
-  authorName: string;
-  authorEmail: string;
-  locationName: string;
-  locationAddress: string;
-  placeId: string;
+  formData: {
+    id: string;
+    locationName: string;
+    locationAddress: string;
+    placeId: string;
+    rating: number;
+    content: string;
+    accessible: boolean;
+    changingTable: boolean;
+    genderNeutral: boolean;
+    clothTowels: boolean;
+    handDryer: boolean;
+  };
 };
 
-const Review: React.FC<ReviewProps> = ({
-  authorName,
-  authorEmail,
-  locationName,
-  locationAddress,
-  placeId,
-}) => {
+const EditReviewForm: React.FC<ReviewProps> = ({ formData }) => {
   const router = useRouter();
-  // state for star ratings.
-  const [rating, setRating] = useState(0);
+  // states for star rating.
+  const [rating, setRating] = useState(formData.rating);
   const [hover, setHover] = useState(0);
   // state for form data.
-  const [form, setForm] = useState({
-    content: "",
-    accessible: false,
-    genderNeutral: false,
-    changingTable: false,
-    clothTowels: false,
-    handDryer: false,
-  });
+  const [form, setForm] = useState(formData);
 
   const starText = () => {
     switch (hover) {
@@ -59,20 +54,14 @@ const Review: React.FC<ReviewProps> = ({
     if (!rating) return alert("Please leave a star rating!");
     try {
       const body = {
-        authorName,
-        authorEmail,
-        locationName,
-        locationAddress,
-        placeId,
-        rating,
         ...form,
       };
       await fetch("/api/review", {
-        method: "POST",
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      router.push(`/places/${placeId}`);
+      router.push(`/places/${form.placeId}`);
       router.refresh();
     } catch (error) {
       console.error(error);
@@ -83,12 +72,13 @@ const Review: React.FC<ReviewProps> = ({
     <>
       <div className="container mx-auto p-8 max-w-[800px]">
         <form className="flex flex-col space-y-6" onSubmit={submitData}>
-          <SmallTitle text="New Review" />
+          <SmallTitle text="Edit Your Review" />
           <RestaurantCard
-            restaurant={locationName}
-            address={locationAddress}
-            placeId={placeId}
+            restaurant={form.locationName}
+            address={form.locationAddress}
+            placeId={form.placeId}
           />
+
           {/*  Star Ratings -- help from https://dev.to/michaelburrows/create-a-custom-react-star-rating-component-5o6 */}
           <div className={`cursor-pointer text-center drop-shadow-md`}>
             {[...Array(5)].map((star, index) => {
@@ -97,7 +87,7 @@ const Review: React.FC<ReviewProps> = ({
                 <button
                   type="button"
                   key={index}
-                  className={index <= (hover || rating) ? "on" : "off"}
+                  className={index <= (hover || form.rating) ? "on" : "off"}
                   onClick={() => setRating(index)}
                   onMouseEnter={() => setHover(index)}
                   onMouseLeave={() => setHover(rating)}
@@ -134,13 +124,14 @@ const Review: React.FC<ReviewProps> = ({
               <FormControlLabel
                 control={<Checkbox />}
                 label="Accessible to Wheelchairs"
+                checked={form.accessible}
                 onChange={() =>
                   setForm({ ...form, accessible: !form.accessible })
                 }
               />
 
               <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox checked={form.genderNeutral} />}
                 label="Gender Neutral Option"
                 onChange={() =>
                   setForm({ ...form, genderNeutral: !form.genderNeutral })
@@ -148,7 +139,7 @@ const Review: React.FC<ReviewProps> = ({
               />
 
               <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox checked={form.changingTable} />}
                 label="Changing Table"
                 onChange={() =>
                   setForm({ ...form, changingTable: !form.changingTable })
@@ -157,14 +148,14 @@ const Review: React.FC<ReviewProps> = ({
             </FormGroup>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox checked={form.clothTowels} />}
                 label="Cloth Hand Towels"
                 onChange={() =>
                   setForm({ ...form, clothTowels: !form.clothTowels })
                 }
               />
               <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox checked={form.handDryer} />}
                 label="Hot Air Hand Dryer"
                 onChange={() =>
                   setForm({ ...form, handDryer: !form.handDryer })
@@ -179,12 +170,13 @@ const Review: React.FC<ReviewProps> = ({
             >
               Submit
             </button>
-            <a
+            <button
+              type="reset"
               className="button p-4 px-10 mr-2 w-36 text-white bg-brightRed hover:bg-brightRedLight rounded-lg baseline text-xl"
-              href="/"
+              onClick={() => router.back()}
             >
               Cancel
-            </a>
+            </button>
           </div>
         </form>
       </div>
@@ -192,4 +184,4 @@ const Review: React.FC<ReviewProps> = ({
   );
 };
 
-export default Review;
+export default EditReviewForm;

@@ -37,19 +37,18 @@ const ReviewCard = async (props: {
     <div className="min-w-md mx-auto bg-slate-100 rounded-xl shadow-md overflow-hidden">
       <div className="md:flex">
         <div className="md:shrink-0"></div>
-        <div className="p-8">
-          <div className="uppercase tracking-wide text-sm text-indigo-800 font-semibold">
-            {props.address}
-          </div>
+        <div className="p-6">
           <a
             href={`/places/${props.placeId}`}
-            className="block mt-1 text-lg leading-tight font-medium text-black hover:underline"
+            className="block mt-1 mb-1 text-2xl leading-tight font-medium text-black hover:underline"
           >
             {props.restaurant}
           </a>
-          <div className="uppercase tracking-wide text-sm text-slate-500 font-semibold">
-            Review By: {authorName}
+
+          <div className="uppercase tracking-wide text-sm text-teal-500 font-semibold">
+            {props.address}
           </div>
+
           <div className="drop-shadow-md">
             {/* Star Rating */}
             {[...Array(5)].map((star, index) => {
@@ -68,7 +67,7 @@ const ReviewCard = async (props: {
               );
             })}
           </div>
-          {/* User avatar and text review */}
+          {/* User avatar, name, and text review */}
           <div className="flex items-center mt-4">
             <Image
               src={authorImage!}
@@ -77,9 +76,12 @@ const ReviewCard = async (props: {
               height={40}
               className="rounded-full"
             />
-            <p className="mt-2 px-6 text-slate-500 text-center md:text-left">
+            <p className="mt-2 px-6 text-slate-500 text-center md:text-left max-w-4xl">
               {props.review}
             </p>
+          </div>
+          <div className="pt-4 uppercase tracking-wide text-sm text-slate-500 font-semibold">
+            Review By: {authorName}
           </div>
           {/* amenities list */}
           <div className="flex flex-row space-x-5 pt-4 text-teal-500">

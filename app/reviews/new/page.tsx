@@ -7,10 +7,12 @@ import { useSession } from "next-auth/react";
 
 // protected route for logged in users
 export default function ReviewPage() {
+  const loading = "Loading...";
+
   const [restoData, setRestoData] = useState({
-    displayName: { text: "Unknown" },
-    formattedAddress: "Unknown",
-    placeId: "Unknown",
+    displayName: { text: loading },
+    formattedAddress: loading,
+    placeId: loading,
   });
 
   const session = useSession();
@@ -32,10 +34,10 @@ export default function ReviewPage() {
       });
   }, [placeId]);
 
-  const authorName = session?.data?.user?.name ?? "Anonymous";
-  const authorEmail = session?.data?.user?.email ?? "anon@anon.com";
-  const locationName = restoData?.displayName?.text ?? "Unknown";
-  const locationAddress = restoData?.formattedAddress ?? "Unknown";
+  const authorName = session?.data?.user?.name ?? loading;
+  const authorEmail = session?.data?.user?.email ?? loading;
+  const locationName = restoData?.displayName?.text ?? loading;
+  const locationAddress = restoData?.formattedAddress ?? loading;
 
   return (
     <div className="relative container mx-auto p-12">

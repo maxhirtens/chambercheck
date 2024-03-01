@@ -3,6 +3,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ReviewCard from "@/app/components/ReviewCard";
 import UserCard from "@/app/components/UserCard";
 import DeleteButton from "@/app/components/DeleteButton";
+import EditButton from "@/app/components/EditButton";
 import prisma from "@/app/lib/prisma";
 import SmallTitle from "@/app/components/SmallTitle";
 
@@ -46,8 +47,8 @@ const UserProfile = async () => {
               clothTowels={review.clothTowels}
               handDryer={review.handDryer}
             />
-            <div className="text-center mt-2">
-              {/* EDIT component like DELETE BUTTON */}
+            <div className="text-center space-x-4 mt-2">
+              <EditButton id={review.id} />
               <DeleteButton id={review.id} />
             </div>
           </div>

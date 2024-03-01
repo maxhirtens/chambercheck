@@ -59,7 +59,7 @@ body {
 
 /* Star Rating */
 .on {
-  color: darkorange;
+  color: rgb(254, 149, 69);
 }
 .off {
   color: #ccc;

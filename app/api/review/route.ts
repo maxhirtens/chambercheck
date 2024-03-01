@@ -53,14 +53,45 @@ export async function POST(request: NextRequest) {
   });
 }
 
+// Edit user review.
+export async function PATCH(request: NextRequest) {
+  const {
+    id,
+    rating,
+    accessible,
+    content,
+    changingTable,
+    clothTowels,
+    genderNeutral,
+    handDryer,
+  } = await request.json();
+
+  const result = await prisma.review.update({
+    where: {
+      id: id,
+    },
+    data: {
+      rating: rating,
+      content: content,
+      changingTable: changingTable,
+      clothTowels: clothTowels,
+      genderNeutral: genderNeutral,
+      handDryer: handDryer,
+      accessible: accessible,
+    },
+  });
+  console.log("Editing review " + id);
+  return NextResponse.json({ message: "Review edited", result: result });
+}
+
 // Delete user review.
 export async function DELETE(request: NextRequest) {
   const { id } = await request.json();
-  console.log("deleting:", id);
   await prisma.review.delete({
     where: {
       id: id,
     },
   });
-  return new Response("Review deleted");
+  console.log("Deleting review " + id);
+  return NextResponse.json("Review Deleted");
 }
