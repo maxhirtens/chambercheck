@@ -10,6 +10,7 @@ import {
   DryOutlined,
   WcOutlined,
   DryCleaningOutlined,
+  WarningAmberOutlined,
 } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 
@@ -40,12 +41,19 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
     },
   });
 
+  //  calculate average rating.
   function averageRating() {
     const avg =
       reviews.reduce((acc: number, res: any) => acc + res.rating, 0) /
       reviews.length;
 
     return avg > 0 ? avg.toFixed(1) : "No Reviews Yet";
+  }
+
+  // calculate if recent reviews indicate a mess.
+  function recentMess() {
+    const recent = reviews.slice(-3);
+    return recent.some((review) => review.notClean === true);
   }
 
   return (
@@ -80,32 +88,41 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
           </div>
         </div>
         {/* amenities list */}
-        <div className="flex flex-row justify-center space-x-5 pt-4 text-teal-400">
-          {reviews.some((review) => review.accessible === true) && (
-            <Tooltip title="Reviewers Noticed Restroom was Accessible">
-              <AccessibleOutlined fontSize="large" />
-            </Tooltip>
-          )}
-          {reviews.some((review) => review.genderNeutral === true) && (
-            <Tooltip title="Reviewers Noticed All-Gender Restrooms">
-              <WcOutlined fontSize="large" />
-            </Tooltip>
-          )}
-          {reviews.some((review) => review.changingTable === true) && (
-            <Tooltip title="Reviewer Noticed a Baby Changing Station">
-              <BabyChangingStationOutlined fontSize="large" />
-            </Tooltip>
-          )}
-          {reviews.some((review) => review.clothTowels === true) && (
-            <Tooltip title="Reviewers Noticed Cloth Hand Towels. Fancy!">
-              <DryCleaningOutlined fontSize="large" />
-            </Tooltip>
-          )}
-          {reviews.some((review) => review.handDryer === true) && (
-            <Tooltip title="Reviewers Noticed a Hot-Air Hand Dryer">
-              <DryOutlined fontSize="large" />
-            </Tooltip>
-          )}
+        <div className="flex flex-row justify-center space-x-5 pt-4 ">
+          <div className="text-teal-400 space-x-5">
+            {reviews.some((review) => review.accessible === true) && (
+              <Tooltip title="Reviewers Noticed Restroom was Accessible">
+                <AccessibleOutlined fontSize="large" />
+              </Tooltip>
+            )}
+            {reviews.some((review) => review.genderNeutral === true) && (
+              <Tooltip title="Reviewers Noticed All-Gender Restrooms">
+                <WcOutlined fontSize="large" />
+              </Tooltip>
+            )}
+            {reviews.some((review) => review.changingTable === true) && (
+              <Tooltip title="Reviewers Noticed a Baby Changing Station">
+                <BabyChangingStationOutlined fontSize="large" />
+              </Tooltip>
+            )}
+            {reviews.some((review) => review.clothTowels === true) && (
+              <Tooltip title="Reviewers Noticed Cloth Hand Towels. Fancy!">
+                <DryCleaningOutlined fontSize="large" />
+              </Tooltip>
+            )}
+            {reviews.some((review) => review.handDryer === true) && (
+              <Tooltip title="Reviewers Noticed a Hot-Air Hand Dryer">
+                <DryOutlined fontSize="large" />
+              </Tooltip>
+            )}
+          </div>
+          <div className="text-orange-600">
+            {recentMess() && (
+              <Tooltip title="Recent Reviewers Noticed A Mess or Other Issues">
+                <WarningAmberOutlined fontSize="large" />
+              </Tooltip>
+            )}
+          </div>
         </div>
       </div>
       <Link
@@ -131,6 +148,7 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
           babyChanging={review.changingTable}
           clothTowels={review.clothTowels}
           handDryer={review.handDryer}
+          notClean={review.notClean}
         />
       ))}
     </div>

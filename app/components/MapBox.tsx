@@ -109,6 +109,11 @@ const MapBox = () => {
     });
   };
 
+  // refresh location-based results.
+  const refreshResults = () => {
+    setLocation(center);
+  };
+
   // generate map content based on state
   const generateMapContent = () => {
     if (loading) {
@@ -137,12 +142,14 @@ const MapBox = () => {
             center={center}
             zoom={16}
             disableDefaultUI={true}
-            onDragend={() => {
-              setLocation(center);
-            }}
+            // onDragend={() => {
+            //   setLocation(center);
+            // }}
             onCenterChanged={(res) => {
               setCenter(res.detail.center);
             }}
+            minZoom={14}
+            maxZoom={17}
           >
             <AdvancedMarker position={center} />;
             {restaurants.map((restaurant, idx) => (
@@ -175,11 +182,16 @@ const MapBox = () => {
       <div id="search" className="container drop-shadow-2xl">
         <SmallTitle text="Search Restaurants" />
         <div className="flex flex-col items-center">
-          <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] lg:w-[1000px] mt-6 border-4 border-white-500 rounded-xl overflow-hidden">
+          <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] lg:w-[960px] mt-6 border-4 border-white-500 rounded-xl overflow-hidden">
             {generateMapContent()}
           </div>
           <div className="flex bottom-20 z-10 relative">
-            <Button text="Locate Me" onClick={getGeo} />
+            <Button color="teal" text="Locate Me" onClick={getGeo} />
+            <Button
+              color="orange"
+              text="Refresh Results"
+              onClick={refreshResults}
+            />
           </div>
         </div>
       </div>

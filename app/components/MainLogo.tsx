@@ -3,11 +3,6 @@ import { Monofett } from "next/font/google";
 
 const font = Monofett({ subsets: ["latin"], weight: ["400"] });
 
-// type MainLogoProps = {
-//   color1: string;
-//   color2: string;
-// };
-
 const MainLogo = () => {
   return (
     <div

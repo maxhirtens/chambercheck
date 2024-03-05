@@ -1,6 +1,6 @@
 const LoadingPage = () => {
   return (
-    <div className="container flex justify-center">
+    <div className="flex justify-center">
       <div className="spinner"></div>
     </div>
   );

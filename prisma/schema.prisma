@@ -21,6 +21,7 @@ model Review {
   genderNeutral   Boolean? @default(false)
   clothTowels     Boolean? @default(false)
   handDryer       Boolean? @default(false)
+  notClean        Boolean? @default(false)
   published       Boolean  @default(false)
   viewCount       Int      @default(0)
   author          User     @relation(fields: [authorId], references: [id], onDelete: Cascade)

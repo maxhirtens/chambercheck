@@ -4,7 +4,7 @@ import MapBox from "./components/MapBox";
 const HomePage = async () => {
   return (
     <>
-      <div className="relative container mx-auto p-10">
+      <div className="relative container mx-auto p-6">
         <MapBox />
         <ReviewsBox />
       </div>

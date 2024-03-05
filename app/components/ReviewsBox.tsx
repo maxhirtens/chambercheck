@@ -13,7 +13,7 @@ const ReviewsBox = async () => {
   return (
     <div
       id="reviews"
-      className="flex flex-col h-screen items-center space-y-12 drop-shadow-2xl"
+      className="flex flex-col h-screen items-center space-y-8 mb-8 drop-shadow-2xl"
     >
       <SmallTitle text="Recent Reviews" />
       <div className="min-w-1/2 max-h-screen overflow-y-auto">
@@ -32,6 +32,7 @@ const ReviewsBox = async () => {
               babyChanging={review.changingTable}
               clothTowels={review.clothTowels}
               handDryer={review.handDryer}
+              notClean={review.notClean}
             />
           </div>
         ))}

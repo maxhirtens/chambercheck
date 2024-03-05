@@ -7,6 +7,11 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import RestaurantCard from "./RestaurantCard";
+import {
+  RegExpMatcher,
+  englishDataset,
+  englishRecommendedTransformers,
+} from "obscenity";
 
 type ReviewProps = {
   authorName: string;
@@ -35,6 +40,12 @@ const Review: React.FC<ReviewProps> = ({
     changingTable: false,
     clothTowels: false,
     handDryer: false,
+    notClean: false,
+  });
+
+  const matcher = new RegExpMatcher({
+    ...englishDataset.build(),
+    ...englishRecommendedTransformers,
   });
 
   const starText = () => {
@@ -57,6 +68,10 @@ const Review: React.FC<ReviewProps> = ({
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (!rating) return alert("Please leave a star rating!");
+    if (matcher.hasMatch(form.content)) {
+      alert("Looks like the review contains profanities. Please remove.");
+      return;
+    }
     try {
       const body = {
         authorName,
@@ -169,6 +184,11 @@ const Review: React.FC<ReviewProps> = ({
                 onChange={() =>
                   setForm({ ...form, handDryer: !form.handDryer })
                 }
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Unsanitary or Needs Repairs"
+                onChange={() => setForm({ ...form, notClean: !form.notClean })}
               />
             </FormGroup>
           </span>

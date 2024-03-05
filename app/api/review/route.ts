@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
     changingTable,
     clothTowels,
     handDryer,
+    notClean,
   } = await request.json();
 
   const authorResult = await prisma.user.findUniqueOrThrow({
@@ -44,6 +45,7 @@ export async function POST(request: NextRequest) {
       changingTable,
       clothTowels,
       handDryer,
+      notClean,
     },
   });
 
@@ -64,6 +66,7 @@ export async function PATCH(request: NextRequest) {
     clothTowels,
     genderNeutral,
     handDryer,
+    notClean,
   } = await request.json();
 
   const result = await prisma.review.update({
@@ -78,6 +81,7 @@ export async function PATCH(request: NextRequest) {
       genderNeutral: genderNeutral,
       handDryer: handDryer,
       accessible: accessible,
+      notClean: notClean,
     },
   });
   console.log("Editing review " + id);

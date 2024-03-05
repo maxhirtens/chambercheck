@@ -14,15 +14,16 @@ const AdminReviewList = async () => {
             <tr>
               <th>Review ID</th>
               <th>Restaurant Name</th>
-              <th>City</th>
+              <th>Address</th>
+              <th>Created At</th>
               <th>Rating</th>
               <th>Content</th>
               <th>Accessible</th>
               <th>Gender Neutral</th>
               <th>Changing Table</th>
-              <th>Date</th>
-              <th>Author</th>
-              <th>Live?</th>
+              <th>Cloth Towels</th>
+              <th>Hot Air Hand Dryer</th>
+              <th>Dirty</th>
             </tr>
           </thead>
           <tbody>
@@ -33,15 +34,16 @@ const AdminReviewList = async () => {
               >
                 <td>{review.id}</td>
                 <td>{review.locationName}</td>
-                <td>{review.locationCity}</td>
+                <td>{review.locationAddress}</td>
+                <td>{review.createdAt.toLocaleString()}</td>
                 <td>{review.rating}</td>
                 <td>{review.content}</td>
                 <td>{review.accessible?.toString()}</td>
                 <td>{review.genderNeutral?.toString()}</td>
                 <td>{review.changingTable?.toString()}</td>
-                <td>{review.createdAt.toLocaleString()}</td>
-                <td>{review.authorId}</td>
-                <td>{review.published.toString()}</td>
+                <td>{review.clothTowels?.toString()}</td>
+                <td>{review.handDryer?.toString()}</td>
+                <td>{review.notClean?.toString()}</td>
               </tr>
             ))}
           </tbody>
