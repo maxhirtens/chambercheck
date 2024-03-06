@@ -13,6 +13,7 @@ import {
 import { MarkerWithInfowindow } from "./MarkerWithInfoWindow";
 import MapHandler from "../lib/map-handler";
 import CustomMapControl from "../lib/map-control";
+import MapLegend from "./MapLegend";
 
 interface RestaurantsState {
   name: string;
@@ -55,9 +56,10 @@ const MapBox = () => {
 
   // useEffect to get client-side lat,lng from localStorage
   useEffect(() => {
-    // Get the value from local storage if it exists
+    // Get the value from local storage if it exists, otherwise set to downtown SF.
     let value =
-      localStorage.getItem("cc_coords") || JSON.stringify({ lat: 0, lng: 0 });
+      localStorage.getItem("cc_coords") ||
+      JSON.stringify({ lat: 37.7749, lng: -122.4194 });
     let parsedValue = JSON.parse(value);
     let { lat, lng } = parsedValue;
     setCenter({ lat, lng });
@@ -109,9 +111,10 @@ const MapBox = () => {
     });
   };
 
-  // refresh location-based results.
+  // refresh location-based results, save center pin to localStorage.
   const refreshResults = () => {
     setLocation(center);
+    localStorage.setItem("cc_coords", JSON.stringify(center));
   };
 
   // generate map content based on state
@@ -124,7 +127,7 @@ const MapBox = () => {
         <Image
           priority
           src="/img/blurred-map.jpg"
-          alt="local map"
+          alt="map background"
           width={1000}
           height={600}
           className="w-full brightness-50"
@@ -148,7 +151,7 @@ const MapBox = () => {
             onCenterChanged={(res) => {
               setCenter(res.detail.center);
             }}
-            minZoom={14}
+            minZoom={12}
             maxZoom={17}
           >
             <AdvancedMarker position={center} />;
@@ -194,6 +197,7 @@ const MapBox = () => {
             />
           </div>
         </div>
+        <MapLegend />
       </div>
     );
   } catch (err) {

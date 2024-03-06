@@ -8,7 +8,8 @@ const AboutPage = () => {
   return (
     <div className="container mx-auto p-12 max-w-96">
       <Subtitle text="What is ChamberCheck?" />
-      <p className="mt-12 text-xl font-normal text-gray-200 lg:text-xl">
+
+      <p className="mt-12 text-xl font-normal text-gray-800 lg:text-xl">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit
         molestiae ipsam, et aut consequatur ipsum voluptates quasi, quos
         recusandae doloribus provident consequuntur amet nobis est voluptate

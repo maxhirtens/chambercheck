@@ -36,7 +36,7 @@ const ReviewCard = async (props: {
   const ratingInt = parseInt(props.rating);
 
   return (
-    <div className="min-w-md mx-auto bg-slate-100 rounded-xl shadow-md overflow-hidden">
+    <div className="min-w-md mx-auto max-w-3xl bg-slate-100 rounded-xl shadow-md overflow-hidden">
       <div className="md:flex">
         <div className="md:shrink-0"></div>
         <div className="p-6">
@@ -82,10 +82,7 @@ const ReviewCard = async (props: {
               {props.review}
             </p>
           </div>
-          <div className="pt-4 uppercase tracking-wide text-sm text-slate-500 font-semibold">
-            Review By: {authorName}
-            <p>Date: {props.date}</p>
-          </div>
+
           {/* amenities list */}
           <div className="flex flex-row space-x-5 pt-4 ">
             <div className="text-teal-500 space-x-5">
@@ -122,6 +119,10 @@ const ReviewCard = async (props: {
                 </Tooltip>
               )}
             </div>
+          </div>
+          <div className="pt-4 uppercase tracking-wide text-sm text-slate-500 font-semibold">
+            Review By: {authorName}
+            <p>Date: {props.date}</p>
           </div>
         </div>
       </div>

@@ -177,7 +177,7 @@ const EditReviewForm: React.FC<ReviewProps> = ({ formData }) => {
                 }
               />
               <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox checked={form.notClean} />}
                 label="Unsanitary or Needs Repairs"
                 onChange={() => setForm({ ...form, notClean: !form.notClean })}
               />

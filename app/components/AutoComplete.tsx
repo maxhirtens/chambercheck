@@ -19,8 +19,8 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
     if (!places || !inputRef.current) return;
 
     const options = {
-      fields: ["place_id"],
-      types: ["restaurant"],
+      fields: ["place_id", "geometry"],
+      types: ["restaurant", "locality"],
     };
 
     setPlaceAutocomplete(new places.Autocomplete(inputRef.current, options));
@@ -29,9 +29,11 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
   useEffect(() => {
     if (!placeAutocomplete) return;
 
+    // On autocomplete select, save coords to localStorage and redirect to place page.
     placeAutocomplete.addListener("place_changed", () => {
       onPlaceSelect(placeAutocomplete.getPlace());
-      const { place_id } = placeAutocomplete.getPlace();
+      const { place_id, geometry } = placeAutocomplete.getPlace();
+      localStorage.setItem("cc_coords", JSON.stringify(geometry?.location));
       router.push(`/places/${place_id}`);
     });
   }, [onPlaceSelect, placeAutocomplete, router]);
@@ -41,7 +43,7 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
       <input
         className="mt-4 h-12 w-96 text-center rounded-lg text-lg border-2 border-gray-300 tex-teal-500"
         ref={inputRef}
-        placeholder="Search for a Restaurant"
+        placeholder="Search by Restaurant or Location"
       />
     </div>
   );

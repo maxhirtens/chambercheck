@@ -1,6 +1,5 @@
 import prisma from "@/app/lib/prisma";
 import SmallTitle from "@/app/components/SmallTitle";
-import Subtitle from "@/app/components/Subtitle";
 import Link from "next/link";
 import SimpleReviewCard from "@/app/components/SimpleReviewCard";
 import Image from "next/image";
@@ -61,6 +60,8 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
       <div className="min-w-md mx-auto text-center pb-8 px-12 bg-slate-100 rounded-xl overflow-hidden">
         <div className="flex flex-col">
           <SmallTitle text={locationName} />
+          <div className="text-slate-500 py-6">{locationAddress}</div>
+          {/* <p className="text-4xl">{locationName}</p> */}
           <Tooltip title="ChamberCheck Certified Top Restroom">
             <div>
               {averageRating() !== "No Reviews Yet" &&
@@ -73,14 +74,14 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
                       height="0"
                       sizes="100vw"
                       style={{ width: "50px", height: "auto" }}
-                      className="items-center mx-auto rounded-3xl shadow-md overflow-hidden pt-4"
+                      className="items-center mx-auto rounded-3xl shadow-md overflow-hidden mb-4"
                     />
                   </div>
                 )}
             </div>
           </Tooltip>
         </div>
-        <div className="text-slate-500 py-6">{locationAddress}</div>
+
         <div className="text-lg">
           Average Restroom Rating:{" "}
           <div className="-mt-6">

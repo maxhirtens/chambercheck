@@ -29,7 +29,7 @@ const UserProfile = async () => {
         avatar={session!.user.image}
       />
       <SmallTitle text="Your Reviews" />
-      <div className="min-w-1/2 max-h-screen overflow-y-auto">
+      <div className="min-w-[450px] max-h-screen overflow-y-auto">
         {reviews.map((review: any) => (
           <div className="flex-col pt-2 p-8" key={review.id}>
             <div className="flex-row justify-around mb-2 drop-shadow-sm"></div>
@@ -46,6 +46,7 @@ const UserProfile = async () => {
               babyChanging={review.changingTable}
               clothTowels={review.clothTowels}
               handDryer={review.handDryer}
+              notClean={review.notClean}
             />
             <div className="text-center space-x-4 mt-2">
               <EditButton id={review.id} />

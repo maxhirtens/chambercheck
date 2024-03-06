@@ -33,7 +33,7 @@ const SimpleReviewCard = async (props: {
   const ratingInt = parseInt(props.rating);
 
   return (
-    <div className="min-w-md bg-slate-100 rounded-xl drop-shadow-md overflow-hidden">
+    <div className="min-w-md max-w-3xl bg-slate-100 rounded-xl drop-shadow-md overflow-hidden">
       <div className="md:flex">
         <div className="md:shrink-0"></div>
         <div className="p-6">
