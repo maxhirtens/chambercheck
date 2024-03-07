@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 import "./globals.css";
 import { getServerSession } from "next-auth";
 import SessionProvider from "./components/SessionProvider";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { authOptions } from "./lib/auth";
 import { Rubik } from "next/font/google";
 
 const font = Rubik({ subsets: ["latin"], weight: ["400"] });

@@ -1,11 +1,11 @@
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ReviewCard from "@/app/components/ReviewCard";
 import UserCard from "@/app/components/UserCard";
 import DeleteButton from "@/app/components/DeleteButton";
 import EditButton from "@/app/components/EditButton";
 import prisma from "@/app/lib/prisma";
 import SmallTitle from "@/app/components/SmallTitle";
+import { authOptions } from "@/app/lib/auth";
 
 const UserProfile = async () => {
   // get logged in user details.
