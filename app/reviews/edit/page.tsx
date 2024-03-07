@@ -8,7 +8,6 @@ import EditReviewForm from "@/app/components/EditReviewForm";
 // protected route for logged in users
 export default function EditReviewPage() {
   const session = useSession();
-  const loading = "Loading...";
 
   const [formData, setFormData] = useState();
 
@@ -19,14 +18,14 @@ export default function EditReviewPage() {
   const searchParams = useSearchParams();
   const reviewId: string = searchParams.get("id") ?? "No Info Available";
 
-  const authorName = session?.data?.user?.name ?? loading;
-  const authorEmail = session?.data?.user?.email ?? loading;
-
   useEffect(() => {
     fetch(`/api/single-review/${reviewId}`)
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: any) => {
         setFormData(data.review);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
   }, [reviewId]);
 

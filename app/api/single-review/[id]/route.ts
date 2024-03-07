@@ -9,6 +9,10 @@ export async function GET(
     where: {
       id: parseInt(params.id),
     },
+    include: {
+      author: true,
+    },
   });
+
   return NextResponse.json({ review });
 }

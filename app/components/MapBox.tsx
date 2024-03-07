@@ -98,6 +98,7 @@ const MapBox = () => {
 
   // turn user location into lat,lng object.
   const getLocation = async () => {
+    setLoading(true);
     let pos = { lat: 0, lng: 0 };
 
     let position: any = await getCoords();
@@ -105,17 +106,16 @@ const MapBox = () => {
 
     pos.lat = position?.coords.latitude;
     pos.lng = position?.coords.longitude;
+    setLoading(false);
     return pos;
   };
 
   // set user location to center of map, save to localStorage.
   const refreshLocation = async () => {
-    setLoading(true);
     getLocation().then((res) => {
       setCenter(res);
       localStorage.setItem("cc_coords", JSON.stringify(res));
     });
-    setLoading(false);
   };
 
   // refresh location-based results, save center pin to localStorage.
@@ -175,7 +175,6 @@ const MapBox = () => {
             ))}
           </Map>
           <CustomMapControl
-            center={center}
             controlPosition={ControlPosition.TOP}
             onPlaceSelect={setSelectedPlace}
           />
@@ -194,12 +193,8 @@ const MapBox = () => {
             {generateMapContent()}
           </div>
           <div className="flex bottom-20 z-10 relative">
-            <Button color="teal" text="Locate Me" onClick={refreshLocation} />
-            <Button
-              color="orange"
-              text="Refresh Results"
-              onClick={refreshResults}
-            />
+            <Button text="Locate Me" onClick={refreshLocation} />
+            <Button text="Refresh Nearby Results" onClick={refreshResults} />
           </div>
         </div>
         <MapLegend />

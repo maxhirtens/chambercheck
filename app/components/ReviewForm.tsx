@@ -187,6 +187,7 @@ const Review: React.FC<ReviewProps> = ({
               />
               <FormControlLabel
                 control={<Checkbox />}
+                className="bg-red-100 pr-4 rounded-xl"
                 label="Unsanitary or Needs Repairs"
                 onChange={() => setForm({ ...form, notClean: !form.notClean })}
               />

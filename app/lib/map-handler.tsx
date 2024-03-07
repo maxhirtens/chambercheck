@@ -15,7 +15,6 @@ const MapHandler = ({ place }: Props) => {
       map.fitBounds(place.geometry?.viewport);
     }
   }, [map, place]);
-
   return null;
 };
 
