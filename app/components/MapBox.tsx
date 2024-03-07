@@ -88,27 +88,34 @@ const MapBox = () => {
       });
   }, [location]);
 
-  // get user location with permission from button click
-  const getGeo = () => {
-    setLoading(true);
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLocation({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      });
-      setCenter({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      });
-      localStorage.setItem(
-        "cc_coords",
-        JSON.stringify({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        })
-      );
-      setLoading(false);
+  // get user location via promise.
+  const getCoords = () => {
+    return new Promise((resolve, reject) => {
+      console.log("getting coords");
+      navigator.geolocation.getCurrentPosition(resolve, reject);
     });
+  };
+
+  // turn user location into lat,lng object.
+  const getLocation = async () => {
+    let pos = { lat: 0, lng: 0 };
+
+    let position: any = await getCoords();
+    console.log("position", position);
+
+    pos.lat = position?.coords.latitude;
+    pos.lng = position?.coords.longitude;
+    return pos;
+  };
+
+  // set user location to center of map, save to localStorage.
+  const refreshLocation = async () => {
+    setLoading(true);
+    getLocation().then((res) => {
+      setCenter(res);
+      localStorage.setItem("cc_coords", JSON.stringify(res));
+    });
+    setLoading(false);
   };
 
   // refresh location-based results, save center pin to localStorage.
@@ -145,9 +152,6 @@ const MapBox = () => {
             center={center}
             zoom={16}
             disableDefaultUI={true}
-            // onDragend={() => {
-            //   setLocation(center);
-            // }}
             onCenterChanged={(res) => {
               setCenter(res.detail.center);
             }}
@@ -171,6 +175,7 @@ const MapBox = () => {
             ))}
           </Map>
           <CustomMapControl
+            center={center}
             controlPosition={ControlPosition.TOP}
             onPlaceSelect={setSelectedPlace}
           />
@@ -189,7 +194,7 @@ const MapBox = () => {
             {generateMapContent()}
           </div>
           <div className="flex bottom-20 z-10 relative">
-            <Button color="teal" text="Locate Me" onClick={getGeo} />
+            <Button color="teal" text="Locate Me" onClick={refreshLocation} />
             <Button
               color="orange"
               text="Refresh Results"
