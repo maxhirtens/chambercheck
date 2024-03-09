@@ -9,7 +9,11 @@ import {
   DryCleaningOutlined,
   WarningAmberOutlined,
 } from "@mui/icons-material";
-import { Tooltip } from "@mui/material";
+
+import dynamic from "next/dynamic";
+const Tooltip = dynamic(() => import("@mui/material/Tooltip"), {
+  ssr: false,
+});
 
 const SimpleReviewCard = async (props: {
   date: string;
@@ -107,7 +111,7 @@ const SimpleReviewCard = async (props: {
           </div>
           <div className="flex flex-col uppercase tracking-wide text-sm text-slate-500 font-semibold mt-6">
             Review By: {authorName}
-            <p>Date: {props.date}</p>
+            <div>Date: {props.date}</div>
           </div>
         </div>
       </div>

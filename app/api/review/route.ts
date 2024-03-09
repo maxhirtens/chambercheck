@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import prisma from "@/app/lib/prisma";
+import prisma from "../../lib/prisma";
 
 // GET all user reviews
 export async function GET(request: NextRequest) {

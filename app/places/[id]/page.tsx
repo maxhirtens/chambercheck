@@ -1,4 +1,4 @@
-import prisma from "@/app/lib/prisma";
+import prisma from "../../lib/prisma";
 import SmallTitle from "@/app/components/SmallTitle";
 import Link from "next/link";
 import SimpleReviewCard from "@/app/components/SimpleReviewCard";
@@ -65,7 +65,7 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
           <Tooltip title="ChamberCheck Certified Top Restroom">
             <div>
               {averageRating() !== "No Reviews Yet" &&
-                averageRating() >= "4.0" && (
+                averageRating() >= "4.5" && (
                   <div className="flex-col flex">
                     <Image
                       alt="golden toilet award"

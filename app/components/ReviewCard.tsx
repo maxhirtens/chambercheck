@@ -1,5 +1,6 @@
 import Image from "next/image";
-import prisma from "@/app/lib/prisma";
+import Link from "next/link";
+import prisma from "../lib/prisma";
 import { StarIcon } from "./StarIcon";
 import {
   BabyChangingStationOutlined,
@@ -9,7 +10,11 @@ import {
   DryCleaningOutlined,
   WarningAmberOutlined,
 } from "@mui/icons-material";
-import { Tooltip } from "@mui/material";
+
+import dynamic from "next/dynamic";
+const Tooltip = dynamic(() => import("@mui/material/Tooltip"), {
+  ssr: false,
+});
 
 const ReviewCard = async (props: {
   date: string;
@@ -40,12 +45,12 @@ const ReviewCard = async (props: {
       <div className="md:flex">
         <div className="md:shrink-0"></div>
         <div className="p-6">
-          <a
+          <Link
             href={`/places/${props.placeId}`}
             className="block mt-1 mb-1 text-2xl leading-tight font-medium text-black hover:underline"
           >
             {props.restaurant}
-          </a>
+          </Link>
 
           <div className="uppercase tracking-wide text-sm text-teal-500 font-semibold">
             {props.address}
@@ -122,7 +127,7 @@ const ReviewCard = async (props: {
           </div>
           <div className="pt-4 uppercase tracking-wide text-sm text-slate-500 font-semibold">
             Review By: {authorName}
-            <p>Date: {props.date}</p>
+            <div>Date: {props.date}</div>
           </div>
         </div>
       </div>

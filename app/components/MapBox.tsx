@@ -68,14 +68,6 @@ const MapBox = () => {
 
   // get nearby restaurants and reviews
   useEffect(() => {
-    // get nearby restaurants
-    fetch(
-      `http://localhost:3000/api/google-places/?lat=${location.lat}&lng=${location.lng}`
-    )
-      .then((data) => data.json())
-      .then((data) => {
-        setRestaurants(data.product.results);
-      });
     // get nearby reviews
     // *** don't query WHOLE database, how to fix? ***
     fetch("/api/review", {
@@ -85,6 +77,14 @@ const MapBox = () => {
       .then((data) => data.json())
       .then((data) => {
         setReviews(data.reviews.map((review: any) => review.placeId));
+      });
+    // get nearby restaurants
+    fetch(
+      `http://localhost:3000/api/google-places/?lat=${location.lat}&lng=${location.lng}`
+    )
+      .then((data) => data.json())
+      .then((data) => {
+        setRestaurants(data.product.results);
       });
   }, [location]);
 

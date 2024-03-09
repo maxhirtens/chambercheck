@@ -1,6 +1,6 @@
 import ReviewCard from "./ReviewCard";
 import SmallTitle from "./SmallTitle";
-import prisma from "@/app/lib/prisma";
+import prisma from "../lib/prisma";
 
 const ReviewsBox = async () => {
   const reviews = await prisma.review.findMany({

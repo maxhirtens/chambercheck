@@ -70,6 +70,7 @@ const EditReviewForm: React.FC<ReviewProps> = ({ formData }) => {
     try {
       const body = {
         ...form,
+        rating: rating,
       };
       await fetch("/api/review", {
         method: "PATCH",
@@ -178,6 +179,7 @@ const EditReviewForm: React.FC<ReviewProps> = ({ formData }) => {
               />
               <FormControlLabel
                 control={<Checkbox checked={form.notClean} />}
+                className="bg-red-100 pr-4 rounded-xl"
                 label="Unsanitary or Needs Repairs"
                 onChange={() => setForm({ ...form, notClean: !form.notClean })}
               />
@@ -185,17 +187,17 @@ const EditReviewForm: React.FC<ReviewProps> = ({ formData }) => {
           </span>
           <div className="flex flex-row justify-center">
             <button
-              type="submit"
-              className="p-3 px-6 mr-2 w-36 text-white bg-teal-500 rounded-lg baseline text-xl hover:bg-teal-800"
-            >
-              Submit
-            </button>
-            <button
               type="reset"
               className="button p-4 px-10 mr-2 w-36 text-white bg-brightRed hover:bg-brightRedLight rounded-lg baseline text-xl"
               onClick={() => router.back()}
             >
               Cancel
+            </button>
+            <button
+              type="submit"
+              className="p-3 px-6 mr-2 w-36 text-white bg-teal-500 rounded-lg baseline text-xl hover:bg-teal-800"
+            >
+              Submit
             </button>
           </div>
         </form>

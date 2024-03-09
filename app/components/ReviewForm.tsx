@@ -195,17 +195,17 @@ const Review: React.FC<ReviewProps> = ({
           </span>
           <div className="flex flex-row justify-center">
             <button
+              className="button p-4 px-10 mr-2 w-36 text-white bg-brightRed hover:bg-brightRedLight rounded-lg baseline text-xl"
+              onClick={() => router.back()}
+            >
+              Cancel
+            </button>
+            <button
               type="submit"
               className="p-3 px-6 mr-2 w-36 text-white bg-teal-500 rounded-lg baseline text-xl hover:bg-teal-800"
             >
               Submit
             </button>
-            <a
-              className="button p-4 px-10 mr-2 w-36 text-white bg-brightRed hover:bg-brightRedLight rounded-lg baseline text-xl"
-              href="/"
-            >
-              Cancel
-            </a>
           </div>
         </form>
       </div>

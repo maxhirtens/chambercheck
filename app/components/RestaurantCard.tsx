@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const RestaurantCard = (props: {
   restaurant: string;
   address: string;
@@ -7,12 +9,12 @@ const RestaurantCard = (props: {
     <div className="max-w-md mx-auto bg-slate-100 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
       <div className="flex flex-col md:flex-row">
         <div className="p-8">
-          <a
+          <Link
             href={`/places/${props.placeId}`}
             className="block mb-1 text-xl leading-tight font-medium text-black hover:underline"
           >
             {props.restaurant}
-          </a>
+          </Link>
           <div className="uppercase tracking-wide text-xs text-teal-500 font-semibold">
             {props.address}
           </div>
