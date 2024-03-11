@@ -29,9 +29,6 @@ interface RestaurantsState {
 type RestaurantsType = Array<RestaurantsState>;
 
 const MapBox = () => {
-  const BASE_URL =
-    process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000";
-
   // loading state for MapBox.
   const [loading, setLoading] = useState(false);
 
@@ -82,14 +79,12 @@ const MapBox = () => {
         setReviews(data.reviews.map((review: any) => review.placeId));
       });
     // get nearby restaurants
-    fetch(
-      `${BASE_URL}/api/google-places/?lat=${location.lat}&lng=${location.lng}`
-    )
+    fetch(`/api/google-places/?lat=${location.lat}&lng=${location.lng}`)
       .then((data) => data.json())
       .then((data) => {
         setRestaurants(data.product.results);
       });
-  }, [location, BASE_URL]);
+  }, [location]);
 
   // get user location via promise.
   const getCoords = () => {
