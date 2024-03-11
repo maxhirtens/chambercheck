@@ -113,6 +113,7 @@ const MapBox = () => {
   // set user location to center of map, save to localStorage.
   const refreshLocation = async () => {
     getLocation().then((res) => {
+      console.log("res", res);
       setCenter(res);
       localStorage.setItem("cc_coords", JSON.stringify(res));
     });

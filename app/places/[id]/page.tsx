@@ -62,7 +62,7 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
           <SmallTitle text={locationName} />
           <div className="text-slate-500 py-6">{locationAddress}</div>
           {/* <p className="text-4xl">{locationName}</p> */}
-          <Tooltip title="ChamberCheck Certified Top Restroom">
+          <Tooltip title="ChamberCheck Certified Top Restroom" placement="top">
             <div>
               {averageRating() !== "No Reviews Yet" &&
                 averageRating() >= "4.5" && (

@@ -1,13 +1,13 @@
 import SmallTitle from "../components/SmallTitle";
 
 export const metadata = {
-  title: "About ChamberCheck",
+  title: "How ChamberCheck Works",
 };
 
-const AboutPage = () => {
+const HowItWorksPage = () => {
   return (
     <div className="container mx-auto p-12 max-w-96">
-      <SmallTitle text="What is ChamberCheck?" />
+      <SmallTitle text="How It Works" />
 
       <p className="mt-12 text-xl font-normal text-gray-800 lg:text-xl">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit
@@ -20,4 +20,4 @@ const AboutPage = () => {
     </div>
   );
 };
-export default AboutPage;
+export default HowItWorksPage;
