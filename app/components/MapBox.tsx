@@ -29,7 +29,8 @@ interface RestaurantsState {
 type RestaurantsType = Array<RestaurantsState>;
 
 const MapBox = () => {
-  const BASE_URL = process.env.VERCEL_URL || "http://localhost:3000";
+  const BASE_URL =
+    process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000";
 
   // loading state for MapBox.
   const [loading, setLoading] = useState(false);
