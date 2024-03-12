@@ -16,7 +16,7 @@ const Tooltip = dynamic(() => import("@mui/material/Tooltip"), {
   ssr: false,
 });
 
-const ReviewCard = async (props: {
+interface ReviewCardProps {
   date: string;
   restaurant: string;
   address: string;
@@ -30,7 +30,9 @@ const ReviewCard = async (props: {
   clothTowels: boolean;
   handDryer: boolean;
   notClean: boolean;
-}) => {
+}
+
+const ReviewCard = async (props: ReviewCardProps) => {
   const authorResult = await prisma.user.findFirstOrThrow({
     where: {
       id: props.authorId,

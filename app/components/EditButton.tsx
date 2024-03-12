@@ -1,11 +1,16 @@
 "use client";
 import { Edit } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-const EditButton = (props: { id: number }) => {
+const EditButton = (props: { id: number; authorId: string }) => {
   const router = useRouter();
+  const session = useSession();
 
   const handleEdit = async () => {
+    if (session?.data?.user?.id !== props.authorId) {
+      router.push("/api/auth/signin");
+    }
     router.push(`/reviews/edit?id=${props.id}`);
   };
 

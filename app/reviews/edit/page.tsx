@@ -8,8 +8,9 @@ import EditReviewForm from "@/app/components/EditReviewForm";
 // protected route for logged in users
 export default function EditReviewPage() {
   const session = useSession();
+  const router = useRouter();
 
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState<any>();
 
   if (!session?.data?.user?.name) {
     redirect("/api/auth/signin");
@@ -28,6 +29,10 @@ export default function EditReviewPage() {
         console.error("Error:", error);
       });
   }, [reviewId]);
+
+  if (formData && formData.authorId !== session?.data?.user?.id) {
+    router.push("/not-found");
+  }
 
   return (
     <div className="relative container mx-auto mb-24 p-12">

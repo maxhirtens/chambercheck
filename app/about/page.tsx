@@ -6,17 +6,25 @@ export const metadata = {
 
 const AboutPage = () => {
   return (
-    <div className="p-12 max-w-96 mb-24">
+    <div className="p-12 mb-24">
       <SmallTitle text="What is ChamberCheck?" />
 
-      <p className="mt-12 text-xl font-normal text-gray-800 lg:text-xl">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit
-        molestiae ipsam, et aut consequatur ipsum voluptates quasi, quos
-        recusandae doloribus provident consequuntur amet nobis est voluptate
-        perferendis quaerat distinctio saepe dolores perspiciatis ex ab nostrum
-        eaque! Porro perspiciatis possimus, sed a quidem sunt sit doloremque
-        molestiae maiores blanditiis quasi quod.
-      </p>
+      <div className="flex flex-col m-auto justify-center mt-12 max-w-3xl text-xl font-normal text-gray-500">
+        <p>
+          ChamberCheck was started by two restaurant fans who wanted to help
+          others seek out great new restaurants based on the most underrated
+          aspect of any establishment: the bathroom. We believe that a clean,
+          well-maintained bathroom is a sign of a well-run restaurant, and we
+          want to help you find the best ones.
+        </p>
+        <br />
+        <p>
+          So while there are plenty of restaurant review sites out there to
+          check up on the food, service, and ambience, ChamberCheck is here to
+          help you find the best restaurant restrooms in town. Now get out there
+          and start reviewing!
+        </p>
+      </div>
     </div>
   );
 };

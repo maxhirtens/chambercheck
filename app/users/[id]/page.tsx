@@ -51,7 +51,7 @@ const UserProfile = async () => {
               notClean={review.notClean}
             />
             <div className="text-center space-x-4 mt-2">
-              <EditButton id={review.id} />
+              <EditButton id={review.id} authorId={review.authorId} />
               <DeleteButton id={review.id} />
             </div>
           </div>

@@ -13,11 +13,12 @@ import {
   englishRecommendedTransformers,
 } from "obscenity";
 
-type ReviewProps = {
+export type ReviewProps = {
   formData: {
     id: string;
     locationName: string;
     locationAddress: string;
+    authorId: string;
     placeId: string;
     rating: number;
     content: string;

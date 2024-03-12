@@ -90,7 +90,7 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
         </div>
         {/* amenities list */}
         <div className="flex flex-row justify-center space-x-5 pt-4">
-          <div className="text-teal-400 space-x-3">
+          <div className="text-teal-500 space-x-3">
             {reviews.some((review) => review.accessible === true) && (
               <Tooltip title="Reviewers Noticed Restroom was Accessible">
                 <AccessibleOutlined fontSize="medium" />
