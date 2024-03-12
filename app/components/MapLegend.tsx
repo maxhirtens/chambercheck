@@ -1,14 +1,11 @@
-import { Shadows_Into_Light_Two } from "next/font/google";
 import SmallTitle from "./SmallTitle";
-
-const font = Shadows_Into_Light_Two({ subsets: ["latin"], weight: ["400"] });
 
 const MapLegend = () => {
   return (
     <div>
       <SmallTitle text="Map Legend" />
       <div
-        className={`flex text-xl mb-12 mt-8 rounded-xl border-4 bg-slate-100 m-auto max-w-xl flex-row justify-evenly ${font.className}`}
+        className={`flex text-lg mb-12 mt-8 rounded-xl border-4 bg-slate-100 m-auto max-w-xl flex-row justify-evenly`}
       >
         <div className="flex flex-col items-center">
           <svg
@@ -25,7 +22,7 @@ const MapLegend = () => {
               clipRule="evenodd"
             ></path>
           </svg>
-          Has ChamberCheck Reviews
+          Has Reviews
         </div>
         <div className="flex flex-col items-center">
           <svg

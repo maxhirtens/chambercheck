@@ -20,8 +20,9 @@ const UserCard = async (props: {
               className="rounded-full"
             />
             <p className="mt-2 px-6 text-slate-500 text-center md:text-left">
-              Username: {props.username}
+              Username:
             </p>
+            <p>{props.username}</p>
             <p className="mt-2 px-6 text-slate-500 text-center md:text-left">
               Email: {props.email}
             </p>

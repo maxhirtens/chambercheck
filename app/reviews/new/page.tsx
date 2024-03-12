@@ -40,7 +40,7 @@ export default function ReviewPage() {
   const locationAddress = restoData?.formattedAddress ?? loading;
 
   return (
-    <div className="relative container mx-auto p-12">
+    <div className="relative container mx-auto mb-24 p-12">
       <ReviewForm
         authorName={authorName}
         authorEmail={authorEmail}

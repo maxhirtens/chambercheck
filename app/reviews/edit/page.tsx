@@ -30,7 +30,7 @@ export default function EditReviewPage() {
   }, [reviewId]);
 
   return (
-    <div className="relative container mx-auto p-12">
+    <div className="relative container mx-auto mb-24 p-12">
       {formData && <EditReviewForm formData={formData!} />}
     </div>
   );

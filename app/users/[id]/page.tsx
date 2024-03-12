@@ -21,7 +21,7 @@ const UserProfile = async () => {
   });
 
   return (
-    <div className="flex flex-col items-center space-y-12 p-12 mb-8 drop-shadow-2xl">
+    <div className="flex flex-col items-center space-y-12 p-12 mb-24 drop-shadow-2xl">
       <SmallTitle text="Your Info" />
       <UserCard
         username={session!.user.name}
@@ -29,10 +29,12 @@ const UserProfile = async () => {
         avatar={session!.user.image}
       />
       <SmallTitle text="Your Reviews" />
-      <div className="min-w-[450px] max-h-screen overflow-y-auto">
+      <div className="min-w-[350px] max-h-screen overflow-y-auto">
         {reviews.map((review: any) => (
-          <div className="flex-col pt-2 p-8" key={review.id}>
-            <div className="flex-row justify-around mb-2 drop-shadow-sm"></div>
+          <div
+            className="flex-col m-auto pt-2 p-8 w-80 md:w-auto"
+            key={review.id}
+          >
             <ReviewCard
               authorId={review.authorId}
               placeId={review.placeId}

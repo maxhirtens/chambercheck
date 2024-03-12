@@ -4,7 +4,7 @@ const font = Silkscreen({ subsets: ["latin"], weight: ["400"] });
 
 const SmallTitle = (props: { text: string }) => {
   return (
-    <div className="mt-8 mx-12">
+    <div>
       <h1
         className={`${font.className} font-bold text-center text-3xl lg:text-4xl`}
       >

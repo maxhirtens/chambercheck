@@ -131,14 +131,15 @@ const EditReviewForm: React.FC<ReviewProps> = ({ formData }) => {
             className="rounded-xl p-5"
           />
           {/* Characters Remaining Div */}
-          <div className="ml-auto relative bottom-14 right-4">
+          <div className="ml-auto relative bottom-14 right-2">
             <span className="text-teal-500">{240 - form.content.length}</span>{" "}
             Characters Remaining
           </div>
-          <span className="flex flex-col md:flex-row justify-evenly min-w-md bg-slate-100 rounded-xl drop-shadow-md overflow-hidden p-8">
+          <span className="flex flex-col min-w-sm md:flex-row justify-evenly min-w-md bg-slate-100 rounded-xl drop-shadow-md overflow-hidden p-8">
             <FormGroup>
               <FormControlLabel
                 control={<Checkbox />}
+                className="mb-4"
                 label="Accessible to Wheelchairs"
                 checked={form.accessible}
                 onChange={() =>
@@ -148,6 +149,7 @@ const EditReviewForm: React.FC<ReviewProps> = ({ formData }) => {
 
               <FormControlLabel
                 control={<Checkbox checked={form.genderNeutral} />}
+                className="mb-4"
                 label="Gender Neutral Option"
                 onChange={() =>
                   setForm({ ...form, genderNeutral: !form.genderNeutral })
@@ -156,6 +158,7 @@ const EditReviewForm: React.FC<ReviewProps> = ({ formData }) => {
 
               <FormControlLabel
                 control={<Checkbox checked={form.changingTable} />}
+                className="mb-4"
                 label="Changing Table"
                 onChange={() =>
                   setForm({ ...form, changingTable: !form.changingTable })
@@ -165,6 +168,7 @@ const EditReviewForm: React.FC<ReviewProps> = ({ formData }) => {
             <FormGroup>
               <FormControlLabel
                 control={<Checkbox checked={form.clothTowels} />}
+                className="mb-4"
                 label="Cloth Hand Towels"
                 onChange={() =>
                   setForm({ ...form, clothTowels: !form.clothTowels })
@@ -172,6 +176,7 @@ const EditReviewForm: React.FC<ReviewProps> = ({ formData }) => {
               />
               <FormControlLabel
                 control={<Checkbox checked={form.handDryer} />}
+                className="mb-4"
                 label="Hot Air Hand Dryer"
                 onChange={() =>
                   setForm({ ...form, handDryer: !form.handDryer })
@@ -188,7 +193,7 @@ const EditReviewForm: React.FC<ReviewProps> = ({ formData }) => {
           <div className="flex flex-row justify-center">
             <button
               type="reset"
-              className="button p-4 px-10 mr-2 w-36 text-white bg-brightRed hover:bg-brightRedLight rounded-lg baseline text-xl"
+              className="p-3 px-6 mr-2 w-36 text-white bg-brightRed hover:bg-brightRedLight rounded-lg baseline text-xl"
               onClick={() => router.back()}
             >
               Cancel

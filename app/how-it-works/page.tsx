@@ -6,7 +6,7 @@ export const metadata = {
 
 const HowItWorksPage = () => {
   return (
-    <div className="container mx-auto p-12 max-w-96">
+    <div className="mb-24 p-12 max-w-96">
       <SmallTitle text="How It Works" />
 
       <p className="mt-12 text-xl font-normal text-gray-800 lg:text-xl">

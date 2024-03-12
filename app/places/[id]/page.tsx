@@ -56,8 +56,8 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
   }
 
   return (
-    <div className="flex flex-col items-center space-y-8 p-12 mb-4 drop-shadow-2xl">
-      <div className="min-w-md mx-auto text-center pb-8 px-12 bg-slate-100 rounded-xl overflow-hidden">
+    <div className="flex flex-col items-center space-y-8 p-12 mb-24 drop-shadow-2xl">
+      <div className="min-w-md mx-auto text-center pt-6 pb-8 px-6 bg-slate-100 rounded-xl overflow-hidden">
         <div className="flex flex-col">
           <SmallTitle text={locationName} />
           <div className="text-slate-500 py-6">{locationAddress}</div>
@@ -84,43 +84,43 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
 
         <div className="text-lg">
           Average Restroom Rating:{" "}
-          <div className="-mt-6">
+          <div>
             <SmallTitle text={averageRating()} />
           </div>
         </div>
         {/* amenities list */}
-        <div className="flex flex-row justify-center space-x-5 pt-4 ">
-          <div className="text-teal-400 space-x-5">
+        <div className="flex flex-row justify-center space-x-5 pt-4">
+          <div className="text-teal-400 space-x-3">
             {reviews.some((review) => review.accessible === true) && (
               <Tooltip title="Reviewers Noticed Restroom was Accessible">
-                <AccessibleOutlined fontSize="large" />
+                <AccessibleOutlined fontSize="medium" />
               </Tooltip>
             )}
             {reviews.some((review) => review.genderNeutral === true) && (
               <Tooltip title="Reviewers Noticed All-Gender Restrooms">
-                <WcOutlined fontSize="large" />
+                <WcOutlined fontSize="medium" />
               </Tooltip>
             )}
             {reviews.some((review) => review.changingTable === true) && (
               <Tooltip title="Reviewers Noticed a Baby Changing Station">
-                <BabyChangingStationOutlined fontSize="large" />
+                <BabyChangingStationOutlined fontSize="medium" />
               </Tooltip>
             )}
             {reviews.some((review) => review.clothTowels === true) && (
               <Tooltip title="Reviewers Noticed Cloth Hand Towels. Fancy!">
-                <DryCleaningOutlined fontSize="large" />
+                <DryCleaningOutlined fontSize="medium" />
               </Tooltip>
             )}
             {reviews.some((review) => review.handDryer === true) && (
               <Tooltip title="Reviewers Noticed a Hot-Air Hand Dryer">
-                <DryOutlined fontSize="large" />
+                <DryOutlined fontSize="medium" />
               </Tooltip>
             )}
           </div>
           <div className="text-orange-600">
             {recentMess() && (
               <Tooltip title="Recent Reviewers Noticed A Mess or Other Issues">
-                <WarningAmberOutlined fontSize="large" />
+                <WarningAmberOutlined fontSize="medium" />
               </Tooltip>
             )}
           </div>

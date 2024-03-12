@@ -6,7 +6,7 @@ export const metadata = {
 
 const AboutPage = () => {
   return (
-    <div className="container mx-auto p-12 max-w-96">
+    <div className="p-12 max-w-96 mb-24">
       <SmallTitle text="What is ChamberCheck?" />
 
       <p className="mt-12 text-xl font-normal text-gray-800 lg:text-xl">

@@ -90,37 +90,37 @@ const ReviewCard = async (props: {
 
           {/* amenities list */}
           <div className="flex flex-row space-x-5 pt-4 ">
-            <div className="text-teal-500 space-x-5">
+            <div className="text-teal-500 space-x-3">
               {props.accessible && (
                 <Tooltip title="Reviewer Noticed Restroom was Accessible">
-                  <AccessibleOutlined fontSize="large" />
+                  <AccessibleOutlined fontSize="medium" />
                 </Tooltip>
               )}
               {props.genderNeutral && (
                 <Tooltip title="Reviewer Noticed All-Gender Restrooms">
-                  <WcOutlined fontSize="large" />
+                  <WcOutlined fontSize="medium" />
                 </Tooltip>
               )}
               {props.babyChanging && (
                 <Tooltip title="Reviewer Noticed a Baby Changing Station">
-                  <BabyChangingStationOutlined fontSize="large" />
+                  <BabyChangingStationOutlined fontSize="medium" />
                 </Tooltip>
               )}
               {props.clothTowels && (
                 <Tooltip title="Reviewer Noticed Cloth Hand Towels. Fancy!">
-                  <DryCleaningOutlined fontSize="large" />
+                  <DryCleaningOutlined fontSize="medium" />
                 </Tooltip>
               )}
               {props.handDryer && (
                 <Tooltip title="Reviewer Noticed a Hot-Air Hand Dryer">
-                  <DryOutlined fontSize="large" />
+                  <DryOutlined fontSize="medium" />
                 </Tooltip>
               )}
             </div>
             <div className="text-orange-600">
               {props.notClean && (
                 <Tooltip title="Reviewer Noticed A Mess or Other Issues">
-                  <WarningAmberOutlined fontSize="large" />
+                  <WarningAmberOutlined fontSize="medium" />
                 </Tooltip>
               )}
             </div>

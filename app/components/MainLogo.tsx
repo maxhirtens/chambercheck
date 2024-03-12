@@ -6,7 +6,7 @@ const font = Monofett({ subsets: ["latin"], weight: ["400"] });
 const MainLogo = () => {
   return (
     <div
-      className={`${font.className} mt-1 text-5xl text-transparent bg-clip-text bg-gradient-to-r to-teal-400 from-teal-800`}
+      className={`${font.className} mt-1 text-4xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-r to-teal-400 from-teal-800`}
     >
       <Link href="/">ChamberCheck</Link>
     </div>

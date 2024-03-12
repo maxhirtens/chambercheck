@@ -188,12 +188,12 @@ const MapBox = () => {
       <div id="search" className="container drop-shadow-2xl">
         <SmallTitle text="Search Restaurants" />
         <div className="flex flex-col items-center">
-          <div className="w-[450px] h-[450px] md:w-[800px] md:h-[600px] lg:w-[960px] mt-6 border-4 border-white-500 rounded-xl overflow-hidden">
+          <div className="w-[375px] h-[375px] md:w-[800px] md:h-[600px] lg:w-[960px] mt-6 border-4 border-white-500 rounded-xl overflow-hidden">
             {generateMapContent()}
           </div>
           <div className="flex bottom-20 z-10 relative">
             <Button text="Locate Me" onClick={refreshLocation} />
-            <Button text="Refresh Nearby Results" onClick={refreshResults} />
+            <Button text="Refresh Map Results" onClick={refreshResults} />
           </div>
         </div>
         <MapLegend />
