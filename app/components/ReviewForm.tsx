@@ -201,7 +201,7 @@ const Review: React.FC<ReviewProps> = ({
           <div className="flex flex-row justify-center">
             <button
               type="reset"
-              className="p-3 px-6 mr-2 w-36 text-white bg-brightRed hover:bg-brightRedLight rounded-lg baseline text-xl"
+              className="p-3 px-6 mr-2 w-36 text-white bg-red-600 hover:bg-red-400 rounded-lg baseline text-xl"
               onClick={() => router.back()}
             >
               Cancel

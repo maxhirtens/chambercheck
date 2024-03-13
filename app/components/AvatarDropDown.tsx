@@ -6,7 +6,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
@@ -42,7 +41,7 @@ export default function AvatarDropDownProps(props: AvatarDropDownProps) {
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
-            className="mx-2 bg-teal-500 text-sm text-white whitespace-nowrap p-2 shadow-inner rounded-lg hover:bg-teal-800 px-4"
+            className="mx-2 bg-teal-500 text-sm text-white whitespace-nowrap p-2 shadow-inner rounded-xl hover:bg-teal-800 px-4"
           >
             <UserCircleIcon />
             <div className="ml-4 hidden md:block">{props.userName}</div>
@@ -72,12 +71,6 @@ export default function AvatarDropDownProps(props: AvatarDropDownProps) {
           </Link>
         </MenuItem>
         <Divider />
-        {/* <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem> */}
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
