@@ -7,7 +7,7 @@ export const metadata = {
 
 const HowItWorksPage = () => {
   return (
-    <div className="mb-24 p-12 max-w-96">
+    <div className="mb-24 p-12">
       <SmallTitle text="How It Works" />
 
       <div className="flex flex-col m-auto justify-center mt-12 max-w-4xl text-xl font-normal text-gray-500">

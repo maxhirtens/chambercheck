@@ -109,7 +109,7 @@ const SimpleReviewCard = async (props: {
               )}
             </div>
           </div>
-          <div className="flex flex-col uppercase tracking-wide text-sm text-slate-500 font-semibold mt-6">
+          <div className="flex flex-col uppercase tracking-wide text-xs text-slate-500 font-semibold mt-6">
             Review By: {authorName}
             <div>Date: {props.date}</div>
           </div>

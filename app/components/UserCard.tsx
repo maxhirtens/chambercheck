@@ -24,8 +24,9 @@ const UserCard = async (props: {
             </p>
             <p>{props.username}</p>
             <p className="mt-2 px-6 text-slate-500 text-center md:text-left">
-              Email: {props.email}
+              Email:
             </p>
+            <p>{props.email}</p>
           </div>
         </div>
       </div>
