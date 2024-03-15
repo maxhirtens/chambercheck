@@ -27,7 +27,7 @@ export const MarkerWithInfowindow = ({
     <>
       <AdvancedMarker
         ref={markerRef}
-        onClick={() => setInfowindowOpen(true)}
+        onClick={() => setInfowindowOpen(!infowindowOpen)}
         position={position}
         title={name}
       >
@@ -38,32 +38,35 @@ export const MarkerWithInfowindow = ({
       {infowindowOpen && (
         <InfoWindow
           anchor={marker}
-          maxWidth={200}
+          maxWidth={300}
           onCloseClick={() => setInfowindowOpen(false)}
+          disableAutoPan={true}
         >
-          {name}
+          <div className="text-lg">{name}</div>
           <br />
-          {hasReviews ? (
-            <Link className="text-teal-600" href={`/places/${placeId}`}>
-              See Reviews
-            </Link>
-          ) : (
-            "No Reviews Yet"
-          )}
-          <br />
-          Click{" "}
-          <Link
-            className="text-teal-600"
-            href={{
-              pathname: "/reviews/new",
-              query: {
-                id: placeId,
-              },
-            }}
-          >
-            HERE
-          </Link>{" "}
-          to leave a review!
+          <div className="text-md">
+            {hasReviews ? (
+              <Link className="text-teal-600" href={`/places/${placeId}`}>
+                See Reviews
+              </Link>
+            ) : (
+              "No Reviews Yet"
+            )}
+            <br />
+            Click{" "}
+            <Link
+              className="text-teal-600"
+              href={{
+                pathname: "/reviews/new",
+                query: {
+                  id: placeId,
+                },
+              }}
+            >
+              HERE
+            </Link>{" "}
+            to leave a review!
+          </div>
         </InfoWindow>
       )}
     </>

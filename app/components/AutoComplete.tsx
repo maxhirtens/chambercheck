@@ -55,7 +55,7 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
       <input
         className="mt-4 h-12 w-80 md:w-96 text-center rounded-lg text-lg border-2 border-gray-300 tex-teal-500"
         ref={inputRef}
-        placeholder="Search Restaurant or Location"
+        placeholder="Search Restaurant or City"
       />
     </div>
   );

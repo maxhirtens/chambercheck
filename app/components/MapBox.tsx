@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import Button from "./Button";
 import LoadingPage from "../loading";
 import Image from "next/image";
@@ -66,10 +66,11 @@ const MapBox = () => {
     setLocation({ lat, lng });
   }, []);
 
-  // get nearby restaurants and reviews
   useEffect(() => {
     // get nearby reviews
+    // * with a persistent rating, can implement top restaurant gold markers *
     // *** don't query WHOLE database, how to fix? ***
+
     fetch("/api/review", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -78,6 +79,9 @@ const MapBox = () => {
       .then((data) => {
         setReviews(data.reviews.map((review: any) => review.placeId));
       });
+  }, []);
+
+  useEffect(() => {
     // get nearby restaurants
     fetch(`/api/google-places/?lat=${location.lat}&lng=${location.lng}`)
       .then((data) => data.json())
@@ -186,7 +190,7 @@ const MapBox = () => {
   try {
     return (
       <div id="search" className="container drop-shadow-2xl">
-        <SmallTitle text="Search Restaurants" />
+        <SmallTitle text="Find Restaurants" />
         <div className="flex flex-col items-center">
           <div className="w-[375px] h-[375px] md:w-[800px] md:h-[600px] lg:w-[960px] mt-6 border-4 border-white-500 rounded-xl overflow-hidden">
             {generateMapContent()}

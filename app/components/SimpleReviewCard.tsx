@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import prisma from "@/app/lib/prisma";
 import { StarIcon } from "./StarIcon";
 import {
@@ -109,8 +110,14 @@ const SimpleReviewCard = async (props: {
               )}
             </div>
           </div>
-          <div className="flex flex-col uppercase tracking-wide text-xs text-slate-500 font-semibold mt-6">
-            Review By: {authorName}
+          <div className="pt-4 uppercase tracking-wide text-xs text-slate-500 font-semibold">
+            Review By:{" "}
+            <Link
+              className="hover:text-chamberCheckBlue"
+              href={`/users/${props.authorId}`}
+            >
+              {authorName}
+            </Link>
             <div>Date: {props.date}</div>
           </div>
         </div>

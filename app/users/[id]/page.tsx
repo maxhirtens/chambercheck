@@ -7,27 +7,37 @@ import prisma from "@/app/lib/prisma";
 import SmallTitle from "@/app/components/SmallTitle";
 import { authOptions } from "@/app/lib/auth";
 
-const UserProfile = async () => {
+interface RouteParams {
+  params: {
+    id: string;
+  };
+}
+
+const UserProfile = async ({ params: { id } }: RouteParams) => {
   // get logged in user details.
   const session = await getServerSession(authOptions);
 
+  const user = await prisma.user.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
   const reviews = await prisma.review.findMany({
     where: {
-      authorId: session!.user.id,
+      authorId: id,
     },
     orderBy: {
       createdAt: "desc",
     },
   });
 
+  let authorizedUser = reviews[0].authorId === session!.user.id;
+
   return (
     <div className="flex flex-col items-center space-y-12 p-12 mb-24 drop-shadow-2xl">
       <SmallTitle text="Your Info" />
-      <UserCard
-        username={session!.user.name}
-        email={session!.user.email}
-        avatar={session!.user.image}
-      />
+      <UserCard username={user.name} email={user.email} avatar={user.image} />
       <SmallTitle text="Your Reviews" />
       <div className="min-w-[350px] max-h-screen overflow-y-auto">
         {reviews.map((review: any) => (
@@ -51,8 +61,10 @@ const UserProfile = async () => {
               notClean={review.notClean}
             />
             <div className="text-center space-x-4 mt-2">
-              <EditButton id={review.id} authorId={review.authorId} />
-              <DeleteButton id={review.id} />
+              {authorizedUser && (
+                <EditButton id={review.id} authorId={review.authorId} />
+              )}
+              {authorizedUser && <DeleteButton id={review.id} />}
             </div>
           </div>
         ))}
