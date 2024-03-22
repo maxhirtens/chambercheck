@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const UserCard = async (props: {
   username: string;
-  email: string;
   avatar: string;
+  status: string;
 }) => {
   return (
     <div className="max-w-md mx-auto bg-slate-100 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
@@ -24,9 +24,9 @@ const UserCard = async (props: {
             </p>
             <p>{props.username}</p>
             <p className="mt-2 px-6 text-slate-500 text-center md:text-left">
-              Email:
+              Status:
             </p>
-            <p>{props.email}</p>
+            <p className="text-teal-500">{props.status}</p>
           </div>
         </div>
       </div>

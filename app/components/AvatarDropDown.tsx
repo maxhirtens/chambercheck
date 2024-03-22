@@ -59,15 +59,17 @@ export default function AvatarDropDownProps(props: AvatarDropDownProps) {
         className="mt-2"
       >
         <MenuItem onClick={handleClose}>
-          <Image
-            src={props.userImage!}
-            alt=""
-            width={25}
-            height={25}
-            className="rounded-full mr-3"
-          />{" "}
           <Link href="/users/[id]" as={`/users/${props.userId}`}>
-            Profile
+            <div className="flex flex-row">
+              <Image
+                src={props.userImage!}
+                alt=""
+                width={25}
+                height={25}
+                className="rounded-full mr-3"
+              />
+              <div>Profile</div>
+            </div>
           </Link>
         </MenuItem>
         <Divider />

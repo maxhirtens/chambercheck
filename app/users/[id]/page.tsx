@@ -32,13 +32,25 @@ const UserProfile = async ({ params: { id } }: RouteParams) => {
     },
   });
 
-  let authorizedUser = reviews[0].authorId === session!.user.id;
+  // check for logged in user, and if the user is the owner of the profile page.
+  let authorizedUser: Boolean = false;
+
+  if (session) {
+    authorizedUser = reviews[0].authorId === session!.user.id;
+  }
+
+  // check for power user status.
+  let status = "Verified User";
+
+  if (reviews.length > 3) {
+    status = "ChamberCheck Expert Reviewer";
+  }
 
   return (
     <div className="flex flex-col items-center space-y-12 p-12 mb-24 drop-shadow-2xl">
-      <SmallTitle text="Your Info" />
-      <UserCard username={user.name} email={user.email} avatar={user.image} />
-      <SmallTitle text="Your Reviews" />
+      <SmallTitle text="User Info" />
+      <UserCard username={user.name} avatar={user.image} status={status} />
+      <SmallTitle text="User Reviews" />
       <div className="min-w-[350px] max-h-screen overflow-y-auto">
         {reviews.map((review: any) => (
           <div

@@ -4,6 +4,7 @@ import ReviewForm from "@/app/components/ReviewForm";
 import { useSearchParams } from "next/navigation";
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 // protected route for logged in users
 export default function ReviewPage() {
@@ -18,7 +19,7 @@ export default function ReviewPage() {
   const session = useSession();
 
   if (!session?.data?.user?.name) {
-    redirect("/api/auth/signin");
+    signIn();
   }
 
   const searchParams = useSearchParams();

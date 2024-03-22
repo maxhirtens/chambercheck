@@ -42,7 +42,7 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
       console.log("autocomplete listener engaged");
       onPlaceSelect(placeAutocomplete.getPlace());
       const { place_id, geometry, types } = placeAutocomplete.getPlace();
-      // localStorage.setItem("cc_coords", JSON.stringify(geometry?.location));
+      localStorage.setItem("cc_coords", JSON.stringify(geometry?.location));
       if (place_id !== undefined && !types?.includes("locality")) {
         router.push(`/places/${place_id}`);
       }

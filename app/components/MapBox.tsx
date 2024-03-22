@@ -62,6 +62,11 @@ const MapBox = () => {
       JSON.stringify({ lat: 37.7749, lng: -122.4194 });
     let parsedValue = JSON.parse(value);
     let { lat, lng } = parsedValue;
+    console.log(
+      "useEffect running to get coords from localStorage. coords: ",
+      lat,
+      lng
+    );
     setCenter({ lat, lng });
     setLocation({ lat, lng });
   }, []);
@@ -69,7 +74,7 @@ const MapBox = () => {
   useEffect(() => {
     // get nearby reviews
     // * with a persistent rating, can implement top restaurant gold markers *
-    // *** don't query WHOLE database, how to fix? ***
+    // *** don't query WHOLE database? ***
 
     fetch("/api/review", {
       method: "GET",
@@ -104,7 +109,6 @@ const MapBox = () => {
     let pos = { lat: 0, lng: 0 };
 
     let position: any = await getCoords();
-    console.log("position", position);
 
     pos.lat = position?.coords.latitude;
     pos.lng = position?.coords.longitude;
@@ -115,7 +119,6 @@ const MapBox = () => {
   // set user location to center of map, save to localStorage.
   const refreshLocation = async () => {
     getLocation().then((res) => {
-      console.log("res", res);
       setCenter(res);
       localStorage.setItem("cc_coords", JSON.stringify(res));
     });

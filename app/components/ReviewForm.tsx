@@ -140,7 +140,7 @@ const Review: React.FC<ReviewProps> = ({
             className="rounded-xl p-5"
           />
           {/* Characters Remaining Div */}
-          <div className="ml-auto relative bottom-14 right-2">
+          <div className="ml-auto text-sm text-slate-400 relative bottom-14 right-2">
             <span className="text-teal-500">{240 - form.content.length}</span>{" "}
             Characters Remaining
           </div>
@@ -202,7 +202,7 @@ const Review: React.FC<ReviewProps> = ({
             <button
               type="reset"
               className="p-3 px-6 mr-2 w-36 text-white bg-red-600 hover:bg-red-400 rounded-lg baseline text-xl"
-              onClick={() => router.back()}
+              onClick={() => router.push("/")}
             >
               Cancel
             </button>
