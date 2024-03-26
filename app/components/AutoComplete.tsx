@@ -24,11 +24,20 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
   };
 
   useEffect(() => {
+    const SAN_FRANCISCO = { lat: 37.7749, lng: -122.4194 };
+    const defaultBounds = {
+      north: SAN_FRANCISCO.lat + 0.15,
+      south: SAN_FRANCISCO.lat - 0.15,
+      east: SAN_FRANCISCO.lng + 0.15,
+      west: SAN_FRANCISCO.lng - 0.15,
+    };
     if (!places || !inputRef.current) return;
     console.log("placeAutocomplete listener engaged");
     const options = {
+      bounds: defaultBounds,
+      strictBounds: true,
       fields: ["place_id", "geometry", "type"],
-      types: ["restaurant", "locality"],
+      types: ["restaurant"],
     };
 
     setPlaceAutocomplete(new places.Autocomplete(inputRef.current, options));
@@ -43,9 +52,9 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
       onPlaceSelect(placeAutocomplete.getPlace());
       const { place_id, geometry, types } = placeAutocomplete.getPlace();
       localStorage.setItem("cc_coords", JSON.stringify(geometry?.location));
-      if (place_id !== undefined && !types?.includes("locality")) {
-        router.push(`/places/${place_id}`);
-      }
+
+      router.push(`/places/${place_id}`);
+
       clearInput();
     });
   }, [onPlaceSelect, placeAutocomplete, router]);
@@ -55,7 +64,7 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
       <input
         className="mt-4 h-12 w-80 md:w-96 text-center rounded-lg text-lg border-2 border-gray-300 tex-teal-500"
         ref={inputRef}
-        placeholder="Search Restaurant or City"
+        placeholder="Search for a Restaurant"
       />
     </div>
   );

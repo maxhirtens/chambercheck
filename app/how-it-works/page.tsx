@@ -22,7 +22,7 @@ const HowItWorksPage = () => {
             width="375"
             height="375"
             sizes="100vw"
-            className="items-center mx-auto rounded-3xl shadow-md overflow-hidden mb-8"
+            className="items-center border-4 mx-auto rounded-3xl shadow-md overflow-hidden mb-8"
           />
         </div>
         <br />
@@ -36,12 +36,12 @@ const HowItWorksPage = () => {
           width="375"
           height="375"
           sizes="100vw"
-          className="items-center mx-auto rounded-3xl shadow-md overflow-hidden mb-4"
+          className="items-center mx-auto border-4 rounded-3xl shadow-md overflow-hidden mb-4"
         />
         <br />
         <p>
-          Step 3: That&apos;s it! ChamberCheck works all over the world. Check
-          out all your favorite restaurants!
+          Step 3: That&apos;s it! ChamberCheck is available at most San
+          Francisco restaurants. Get out there and leave a ChamberCheck!
         </p>
         <br />
       </div>

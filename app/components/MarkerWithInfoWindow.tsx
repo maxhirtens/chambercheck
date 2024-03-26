@@ -7,19 +7,23 @@ import {
 } from "@vis.gl/react-google-maps";
 import { MapPinIcon } from "@heroicons/react/16/solid";
 
+type MarkerWithInfowindowProps = {
+  position: { lat: number; lng: number };
+  name: string;
+  placeId: string;
+  color: string;
+  hasReviews: boolean;
+  accessible: boolean;
+};
+
 export const MarkerWithInfowindow = ({
   position,
   name,
   placeId,
   color,
   hasReviews,
-}: {
-  position: { lat: number; lng: number };
-  name: string;
-  placeId: string;
-  color: string;
-  hasReviews: boolean;
-}) => {
+  accessible,
+}: MarkerWithInfowindowProps) => {
   const [infowindowOpen, setInfowindowOpen] = useState(false);
   const [markerRef, marker] = useAdvancedMarkerRef();
 

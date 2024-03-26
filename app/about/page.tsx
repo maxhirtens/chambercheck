@@ -11,11 +11,11 @@ const AboutPage = () => {
 
       <div className="flex flex-col m-auto justify-center mt-12 max-w-3xl text-xl font-normal text-gray-500">
         <p>
-          ChamberCheck was started by two restaurant fans who wanted to help
-          others seek out great new restaurants based on the most underrated
-          aspect of any establishment: the bathroom. We believe that a clean,
-          well-maintained bathroom is a sign of a well-run restaurant, and we
-          want to help you find the best ones.
+          ChamberCheck was started by two San Francisco restaurant fans who
+          wanted to help others seek out great new restaurants based on the most
+          underrated aspect of any establishment: the restroom. We believe that
+          a clean, well-maintained restroom is a sign of a well-run restaurant,
+          and we want to help you find the best ones.
         </p>
         <br />
         <p>

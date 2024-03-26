@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import Button from "./Button";
 import LoadingPage from "../loading";
 import Image from "next/image";
@@ -28,18 +28,28 @@ interface RestaurantsState {
 
 type RestaurantsType = Array<RestaurantsState>;
 
+type LatLngType = { lat: number; lng: number };
+
 const MapBox = () => {
+  // bounds for MapBox.
+  const SF_BOUNDS = {
+    north: 37.87,
+    south: 37.66,
+    west: -122.6,
+    east: -122.28,
+  };
+
   // loading state for MapBox.
   const [loading, setLoading] = useState(false);
 
   // state for location, non-persisting.
-  const [location, setLocation] = useState<{ lat: number; lng: number }>({
+  const [location, setLocation] = useState<LatLngType>({
     lat: 0,
     lng: 0,
   });
 
   // center lat, lng for map marker.
-  const [center, setCenter] = useState<{ lat: number; lng: number }>({
+  const [center, setCenter] = useState<LatLngType>({
     lat: 0,
     lng: 0,
   });
@@ -82,6 +92,7 @@ const MapBox = () => {
     })
       .then((data) => data.json())
       .then((data) => {
+        // change this to return more info about the reviews?
         setReviews(data.reviews.map((review: any) => review.placeId));
       });
   }, []);
@@ -120,6 +131,7 @@ const MapBox = () => {
   const refreshLocation = async () => {
     getLocation().then((res) => {
       setCenter(res);
+      setLocation(res);
       localStorage.setItem("cc_coords", JSON.stringify(res));
     });
   };
@@ -154,6 +166,7 @@ const MapBox = () => {
         >
           <Map
             mapId={"1aceaad6651fe7f1"}
+            restriction={{ latLngBounds: SF_BOUNDS, strictBounds: false }}
             gestureHandling={"greedy"}
             center={center}
             zoom={16}
@@ -161,8 +174,8 @@ const MapBox = () => {
             onCenterChanged={(res) => {
               setCenter(res.detail.center);
             }}
-            minZoom={12}
-            maxZoom={17}
+            minZoom={13}
+            maxZoom={16}
           >
             <AdvancedMarker position={center} />;
             {restaurants.map((restaurant, idx) => (
@@ -177,6 +190,7 @@ const MapBox = () => {
                     : "text-black-500"
                 }
                 hasReviews={reviews.includes(restaurant.place_id)}
+                accessible={false}
               />
             ))}
           </Map>
@@ -193,7 +207,7 @@ const MapBox = () => {
   try {
     return (
       <div id="search" className="container drop-shadow-2xl">
-        <SmallTitle text="Find Restaurants" />
+        <SmallTitle text="Find Restaurants in SF" />
         <div className="flex flex-col items-center">
           <div className="w-[375px] h-[375px] md:w-[800px] md:h-[600px] lg:w-[960px] mt-6 border-4 border-white-500 rounded-xl overflow-hidden">
             {generateMapContent()}
@@ -202,6 +216,9 @@ const MapBox = () => {
             <Button text="Locate Me" onClick={refreshLocation} />
             <Button text="Refresh Map Results" onClick={refreshResults} />
           </div>
+          Center: {center.lat}, {center.lng}
+          <br />
+          Location: {location.lat}, {location.lng}
         </div>
         <MapLegend />
       </div>
