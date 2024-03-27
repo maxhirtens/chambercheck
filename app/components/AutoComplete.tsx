@@ -26,9 +26,9 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
   useEffect(() => {
     const SAN_FRANCISCO = { lat: 37.7749, lng: -122.4194 };
     const defaultBounds = {
-      north: SAN_FRANCISCO.lat + 0.15,
-      south: SAN_FRANCISCO.lat - 0.15,
-      east: SAN_FRANCISCO.lng + 0.15,
+      north: SAN_FRANCISCO.lat + 0.1,
+      south: SAN_FRANCISCO.lat - 0.08,
+      east: SAN_FRANCISCO.lng + 0.1,
       west: SAN_FRANCISCO.lng - 0.15,
     };
     if (!places || !inputRef.current) return;
@@ -36,7 +36,7 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
     const options = {
       bounds: defaultBounds,
       strictBounds: true,
-      fields: ["place_id", "geometry", "type"],
+      fields: ["place_id", "geometry"],
       types: ["restaurant"],
     };
 
@@ -50,7 +50,7 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
     placeAutocomplete.addListener("place_changed", () => {
       console.log("autocomplete listener engaged");
       onPlaceSelect(placeAutocomplete.getPlace());
-      const { place_id, geometry, types } = placeAutocomplete.getPlace();
+      const { place_id, geometry } = placeAutocomplete.getPlace();
       localStorage.setItem("cc_coords", JSON.stringify(geometry?.location));
 
       router.push(`/places/${place_id}`);

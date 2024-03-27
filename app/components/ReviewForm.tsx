@@ -8,10 +8,18 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import RestaurantCard from "./RestaurantCard";
 import {
+  FormControl,
+  InputLabel,
+  Select,
+  SelectChangeEvent,
+  MenuItem,
+} from "@mui/material";
+import {
   RegExpMatcher,
   englishDataset,
   englishRecommendedTransformers,
 } from "obscenity";
+import { BathroomType } from "@prisma/client";
 
 type ReviewProps = {
   authorName: string;
@@ -30,8 +38,10 @@ const Review: React.FC<ReviewProps> = ({
 }) => {
   const router = useRouter();
   // state for star ratings.
-  const [rating, setRating] = useState(0);
-  const [hover, setHover] = useState(0);
+  const [rating, setRating] = useState<number>(0);
+  const [hover, setHover] = useState<number>(0);
+  // state for bathroom type.
+  const [type, setType] = useState<BathroomType>(BathroomType.SHARED);
   // state for form data.
   const [form, setForm] = useState({
     content: "",
@@ -47,6 +57,10 @@ const Review: React.FC<ReviewProps> = ({
     ...englishDataset.build(),
     ...englishRecommendedTransformers,
   });
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setType(event.target.value as BathroomType);
+  };
 
   const starText = () => {
     switch (hover) {
@@ -80,6 +94,7 @@ const Review: React.FC<ReviewProps> = ({
         locationAddress,
         placeId,
         rating,
+        type,
         ...form,
       };
       await fetch("/api/review", {
@@ -144,6 +159,25 @@ const Review: React.FC<ReviewProps> = ({
             <span className="text-teal-500">{240 - form.content.length}</span>{" "}
             Characters Remaining
           </div>
+          {/* Bathroom Type Select */}
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Restroom Type</InputLabel>
+            <Select
+              labelId="restroom-type-label"
+              required
+              id="restroom-type-select"
+              value={type}
+              label="Restroom Type"
+              onChange={handleChange}
+              className="rounded-xl bg-slate-100"
+            >
+              <MenuItem value={BathroomType.SHARED}>Shared</MenuItem>
+              <MenuItem value={BathroomType.MENS}>Men&apos;s</MenuItem>
+              <MenuItem value={BathroomType.WOMENS}>Women&apos;s</MenuItem>
+              <MenuItem value={BathroomType.FAMILY}>Family</MenuItem>
+            </Select>
+          </FormControl>
+          {/* Amenities Checkboxes */}
           <span className="flex flex-col md:flex-row justify-evenly min-w-md bg-slate-100 rounded-xl drop-shadow-md overflow-hidden p-6">
             <FormGroup>
               <FormControlLabel

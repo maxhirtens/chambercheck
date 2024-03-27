@@ -141,6 +141,7 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
         <SimpleReviewCard
           key={review.id}
           date={review.createdAt.toLocaleString()}
+          type={review.type}
           review={review.content}
           rating={review.rating}
           authorId={review.authorId}

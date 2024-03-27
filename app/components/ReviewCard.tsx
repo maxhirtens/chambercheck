@@ -21,6 +21,7 @@ interface ReviewCardProps {
   restaurant: string;
   address: string;
   placeId: string;
+  type: string;
   review: string;
   rating: string;
   authorId: string;
@@ -135,6 +136,7 @@ const ReviewCard = async (props: ReviewCardProps) => {
             >
               {authorName}
             </Link>
+            <div>Rating of the {props.type} restroom.</div>
             <div>Date: {props.date}</div>
           </div>
         </div>

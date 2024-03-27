@@ -62,6 +62,7 @@ const UserProfile = async ({ params: { id } }: RouteParams) => {
               placeId={review.placeId}
               restaurant={review.locationName}
               address={review.locationAddress}
+              type={review.type}
               review={review.content}
               rating={review.rating}
               date={review.createdAt.toLocaleString()}

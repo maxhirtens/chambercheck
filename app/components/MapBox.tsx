@@ -14,6 +14,7 @@ import { MarkerWithInfowindow } from "./MarkerWithInfoWindow";
 import MapHandler from "../lib/map-handler";
 import CustomMapControl from "../lib/map-control";
 import MapLegend from "./MapLegend";
+import { Divider } from "@mui/material";
 
 interface RestaurantsState {
   name: string;
@@ -58,6 +59,7 @@ const MapBox = () => {
   const [restaurants, setRestaurants] = useState<RestaurantsType>([]);
 
   // reviews from ChamberCheck API, non-persisting.
+  // *** fix this type ***
   const [reviews, setReviews] = useState<any>([]);
 
   // place state for Google auto-complete
@@ -187,7 +189,7 @@ const MapBox = () => {
                 color={
                   reviews.includes(restaurant.place_id)
                     ? "text-teal-500"
-                    : "text-black-500"
+                    : "text-slate-500"
                 }
                 hasReviews={reviews.includes(restaurant.place_id)}
                 accessible={false}
@@ -207,7 +209,7 @@ const MapBox = () => {
   try {
     return (
       <div id="search" className="container drop-shadow-2xl">
-        <SmallTitle text="Find Restaurants in SF" />
+        <SmallTitle text="Find Restaurants" />
         <div className="flex flex-col items-center">
           <div className="w-[375px] h-[375px] md:w-[800px] md:h-[600px] lg:w-[960px] mt-6 border-4 border-white-500 rounded-xl overflow-hidden">
             {generateMapContent()}
@@ -216,11 +218,9 @@ const MapBox = () => {
             <Button text="Locate Me" onClick={refreshLocation} />
             <Button text="Refresh Map Results" onClick={refreshResults} />
           </div>
-          Center: {center.lat}, {center.lng}
-          <br />
-          Location: {location.lat}, {location.lng}
         </div>
         <MapLegend />
+        <Divider className="mb-8" />
       </div>
     );
   } catch (err) {

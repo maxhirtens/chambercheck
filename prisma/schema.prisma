@@ -16,23 +16,24 @@ datasource db {
 }
 
 model Review {
-  id              Int      @id @default(autoincrement())
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id              Int          @id @default(autoincrement())
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
   locationName    String
   locationAddress String
   placeId         String
+  type            BathroomType @default(SHARED)
   rating          Int
-  content         String?  @db.VarChar(240)
-  accessible      Boolean? @default(false)
-  changingTable   Boolean? @default(false)
-  genderNeutral   Boolean? @default(false)
-  clothTowels     Boolean? @default(false)
-  handDryer       Boolean? @default(false)
-  notClean        Boolean? @default(false)
-  published       Boolean  @default(false)
-  viewCount       Int      @default(0)
-  author          User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  content         String?      @db.VarChar(240)
+  accessible      Boolean?     @default(false)
+  changingTable   Boolean?     @default(false)
+  genderNeutral   Boolean?     @default(false)
+  clothTowels     Boolean?     @default(false)
+  handDryer       Boolean?     @default(false)
+  notClean        Boolean?     @default(false)
+  published       Boolean      @default(false)
+  viewCount       Int          @default(0)
+  author          User         @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId        String
 }
 
@@ -80,4 +81,11 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum BathroomType {
+  SHARED
+  MENS
+  WOMENS
+  FAMILY
 }

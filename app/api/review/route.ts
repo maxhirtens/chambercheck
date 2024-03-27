@@ -14,6 +14,7 @@ export async function POST(request: NextRequest) {
     locationName,
     locationAddress,
     placeId,
+    type,
     rating,
     content,
     accessible,
@@ -38,6 +39,7 @@ export async function POST(request: NextRequest) {
       locationName,
       locationAddress,
       placeId,
+      type,
       rating,
       content,
       accessible,
@@ -59,6 +61,7 @@ export async function POST(request: NextRequest) {
 export async function PATCH(request: NextRequest) {
   const {
     id,
+    type,
     rating,
     accessible,
     content,
@@ -75,6 +78,7 @@ export async function PATCH(request: NextRequest) {
     },
     data: {
       rating: rating,
+      type: type,
       content: content,
       changingTable: changingTable,
       clothTowels: clothTowels,

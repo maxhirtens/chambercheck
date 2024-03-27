@@ -24,6 +24,7 @@ const ReviewsBox = async () => {
               restaurant={review.locationName}
               address={review.locationAddress}
               placeId={review.placeId}
+              type={review.type}
               review={review.content}
               rating={review.rating}
               date={review.createdAt.toLocaleString()}

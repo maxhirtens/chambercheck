@@ -20,6 +20,7 @@ const SimpleReviewCard = async (props: {
   date: string;
   review: string;
   rating: string;
+  type: string;
   authorId: string;
   accessible: boolean;
   genderNeutral: boolean;
@@ -118,6 +119,7 @@ const SimpleReviewCard = async (props: {
             >
               {authorName}
             </Link>
+            <div>Rating of the {props.type} restroom.</div>
             <div>Date: {props.date}</div>
           </div>
         </div>

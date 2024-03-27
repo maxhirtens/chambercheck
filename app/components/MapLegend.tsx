@@ -5,7 +5,7 @@ const MapLegend = () => {
     <div>
       <SmallTitle text="Map Legend" />
       <div
-        className={`flex text-lg mb-12 mt-8 rounded-xl border-4 bg-slate-100 m-auto max-w-sm flex-row justify-evenly`}
+        className={`flex text-lg text-slate-500 mb-12 mt-8 rounded-xl border-4 bg-slate-100 m-auto max-w-sm flex-row justify-evenly`}
       >
         <div className="flex flex-col items-center">
           <svg
