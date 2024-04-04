@@ -131,12 +131,12 @@ const ReviewCard = async (props: ReviewCardProps) => {
           <div className="pt-4 uppercase tracking-wide text-xs text-slate-500 font-semibold">
             Review By:{" "}
             <Link
-              className="hover:text-chamberCheckBlue"
+              className="hover:text-chamberCheckBlue text-teal-600"
               href={`/users/${props.authorId}`}
             >
               {authorName}
             </Link>
-            <div>Rating of the {props.type} restroom.</div>
+            <div>Rating For: The {props.type} restroom</div>
             <div>Date: {props.date}</div>
           </div>
         </div>

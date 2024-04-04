@@ -51,9 +51,46 @@ export async function POST(request: NextRequest) {
     },
   });
 
+  const locationExistenceCheck = await prisma.location.findUnique({
+    where: {
+      id: placeId,
+    },
+  });
+
+  if (!locationExistenceCheck) {
+    await prisma.location.create({
+      data: {
+        locationName,
+        locationAddress,
+        id: placeId,
+        rating,
+        accessible,
+        genderNeutral,
+        changingTable,
+        clothTowels,
+        handDryer,
+      },
+    });
+  } else {
+    await prisma.location.update({
+      where: {
+        id: placeId,
+      },
+      data: {
+        rating: (locationExistenceCheck.rating + rating) / 2,
+        accessible: accessible || locationExistenceCheck.accessible,
+        genderNeutral: genderNeutral || locationExistenceCheck.genderNeutral,
+        changingTable: changingTable || locationExistenceCheck.changingTable,
+        clothTowels: clothTowels || locationExistenceCheck.clothTowels,
+        handDryer: handDryer || locationExistenceCheck.handDryer,
+      },
+    });
+  }
+
   return NextResponse.json({
     message: "Review submitted",
     result: result,
+    locationExistenceCheck: locationExistenceCheck,
   });
 }
 

@@ -1,31 +1,61 @@
 import { useState } from "react";
 import Link from "next/link";
+import { Tooltip } from "@mui/material";
+import { StarIconSmall } from "./StarIconSmall";
 import {
   AdvancedMarker,
   InfoWindow,
   useAdvancedMarkerRef,
 } from "@vis.gl/react-google-maps";
 import { MapPinIcon } from "@heroicons/react/16/solid";
+import {
+  BabyChangingStationOutlined,
+  AccessibleOutlined,
+  DryOutlined,
+  WcOutlined,
+  DryCleaningOutlined,
+  WarningAmberOutlined,
+} from "@mui/icons-material";
 
 type MarkerWithInfowindowProps = {
   position: { lat: number; lng: number };
   name: string;
   placeId: string;
-  color: string;
   hasReviews: boolean;
+  rating: number;
   accessible: boolean;
+  genderNeutral: boolean;
+  babyChanging: boolean;
+  clothTowels: boolean;
+  handDryer: boolean;
+  notClean: boolean;
 };
 
 export const MarkerWithInfowindow = ({
   position,
   name,
   placeId,
-  color,
   hasReviews,
+  rating,
   accessible,
+  genderNeutral,
+  babyChanging,
+  clothTowels,
+  handDryer,
+  notClean,
 }: MarkerWithInfowindowProps) => {
   const [infowindowOpen, setInfowindowOpen] = useState(false);
   const [markerRef, marker] = useAdvancedMarkerRef();
+
+  const getColor = () => {
+    if (rating >= 4.5) {
+      return "text-yellow-500";
+    } else if (hasReviews) {
+      return "text-teal-500";
+    } else {
+      return "text-slate-600";
+    }
+  };
 
   return (
     <>
@@ -36,7 +66,7 @@ export const MarkerWithInfowindow = ({
         title={name}
       >
         <div>
-          <MapPinIcon className={`w-8 h-8 rounded-xl ${color}`} />
+          <MapPinIcon className={`w-9 h-9 rounded-xl ${getColor()}`} />
         </div>
       </AdvancedMarker>
       {infowindowOpen && (
@@ -47,16 +77,67 @@ export const MarkerWithInfowindow = ({
           disableAutoPan={true}
         >
           <div className="text-lg">{name}</div>
-          <br />
+          {hasReviews ? (
+            <div>
+              <div className="flex flex-row">
+                Average Rating: {rating.toFixed(1)}/5.0{" "}
+                <div className="pt-1">
+                  <StarIconSmall />
+                </div>
+              </div>
+              <div className="flex flex-row space-x-5 pt-4 ">
+                <div className="text-teal-500 space-x-4 mb-4">
+                  {accessible && (
+                    <Tooltip title="Reviewers Noticed Restroom was Accessible">
+                      <AccessibleOutlined fontSize="medium" />
+                    </Tooltip>
+                  )}
+                  {genderNeutral && (
+                    <Tooltip title="Reviewers Noticed All-Gender Restrooms">
+                      <WcOutlined fontSize="medium" />
+                    </Tooltip>
+                  )}
+                  {babyChanging && (
+                    <Tooltip title="Reviewers Noticed a Baby Changing Station">
+                      <BabyChangingStationOutlined fontSize="medium" />
+                    </Tooltip>
+                  )}
+                  {clothTowels && (
+                    <Tooltip title="Reviewers Noticed Cloth Hand Towels. Fancy!">
+                      <DryCleaningOutlined fontSize="medium" />
+                    </Tooltip>
+                  )}
+                  {handDryer && (
+                    <Tooltip title="Reviewers Noticed a Hot-Air Hand Dryer">
+                      <DryOutlined fontSize="medium" />
+                    </Tooltip>
+                  )}
+                </div>
+                <div className="text-orange-600">
+                  {notClean && (
+                    <Tooltip title="Reviewers Noticed A Mess or Other Issues">
+                      <WarningAmberOutlined fontSize="medium" />
+                    </Tooltip>
+                  )}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div></div>
+          )}
           <div className="text-md">
             {hasReviews ? (
-              <Link className="text-teal-600" href={`/places/${placeId}`}>
-                See Reviews
-              </Link>
+              <div>
+                <Link
+                  className="text-teal-600 text-md"
+                  href={`/places/${placeId}`}
+                >
+                  SEE REVIEWS
+                </Link>
+              </div>
             ) : (
-              "No Reviews Yet"
+              <div>No Reviews Yet</div>
             )}
-            <br />
             Click{" "}
             <Link
               className="text-teal-600"

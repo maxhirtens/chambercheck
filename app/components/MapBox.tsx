@@ -34,10 +34,10 @@ type LatLngType = { lat: number; lng: number };
 const MapBox = () => {
   // bounds for MapBox.
   const SF_BOUNDS = {
-    north: 37.87,
+    north: 37.85,
     south: 37.66,
     west: -122.6,
-    east: -122.28,
+    east: -122.3,
   };
 
   // loading state for MapBox.
@@ -61,6 +61,7 @@ const MapBox = () => {
   // reviews from ChamberCheck API, non-persisting.
   // *** fix this type ***
   const [reviews, setReviews] = useState<any>([]);
+  const [reviewIds, setReviewIds] = useState<any>([]);
 
   // place state for Google auto-complete
   const [selectedPlace, setSelectedPlace] =
@@ -84,23 +85,20 @@ const MapBox = () => {
   }, []);
 
   useEffect(() => {
-    // get nearby reviews
-    // * with a persistent rating, can implement top restaurant gold markers *
-    // *** don't query WHOLE database? ***
-
-    fetch("/api/review", {
+    // get any nearby locations from ChamberCheck API
+    fetch("/api/location", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
       .then((data) => data.json())
       .then((data) => {
-        // change this to return more info about the reviews?
-        setReviews(data.reviews.map((review: any) => review.placeId));
+        setReviews(data.locations);
+        setReviewIds(data.locations.map((loc: any) => loc.id));
       });
   }, []);
 
   useEffect(() => {
-    // get nearby restaurants
+    // get nearby restaurants from Google Places API
     fetch(`/api/google-places/?lat=${location.lat}&lng=${location.lng}`)
       .then((data) => data.json())
       .then((data) => {
@@ -130,18 +128,34 @@ const MapBox = () => {
   };
 
   // set user location to center of map, save to localStorage.
+  // alert non-SF users.
   const refreshLocation = async () => {
     getLocation().then((res) => {
+      if (
+        res.lat < SF_BOUNDS.south ||
+        res.lat > SF_BOUNDS.north ||
+        res.lng < SF_BOUNDS.west ||
+        res.lng > SF_BOUNDS.east
+      ) {
+        alert("Sorry, it looks like you're not in San Francisco...");
+        return;
+      }
       setCenter(res);
       setLocation(res);
       localStorage.setItem("cc_coords", JSON.stringify(res));
     });
   };
 
-  // refresh location-based results, save center pin to localStorage.
+  // refresh location-based results, save pin center to localStorage.
   const refreshResults = () => {
     setLocation(center);
     localStorage.setItem("cc_coords", JSON.stringify(center));
+  };
+
+  // search locations for matching placeId.
+  const findLocation = (placeId: string) => {
+    let location = reviews.find((loc: any) => loc.id === placeId);
+    return location;
   };
 
   // generate map content based on state
@@ -177,7 +191,7 @@ const MapBox = () => {
               setCenter(res.detail.center);
             }}
             minZoom={13}
-            maxZoom={16}
+            maxZoom={18}
           >
             <AdvancedMarker position={center} />;
             {restaurants.map((restaurant, idx) => (
@@ -186,13 +200,14 @@ const MapBox = () => {
                 name={restaurant.name}
                 position={restaurant.geometry.location}
                 placeId={restaurant.place_id}
-                color={
-                  reviews.includes(restaurant.place_id)
-                    ? "text-teal-500"
-                    : "text-slate-500"
-                }
-                hasReviews={reviews.includes(restaurant.place_id)}
-                accessible={false}
+                hasReviews={reviewIds.includes(restaurant.place_id)}
+                rating={findLocation(restaurant.place_id)?.rating}
+                accessible={findLocation(restaurant.place_id)?.accessible}
+                genderNeutral={findLocation(restaurant.place_id)?.genderNeutral}
+                babyChanging={findLocation(restaurant.place_id)?.babyChanging}
+                clothTowels={findLocation(restaurant.place_id)?.clothTowels}
+                handDryer={findLocation(restaurant.place_id)?.handDryer}
+                notClean={false}
               />
             ))}
           </Map>

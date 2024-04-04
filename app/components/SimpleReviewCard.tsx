@@ -119,7 +119,7 @@ const SimpleReviewCard = async (props: {
             >
               {authorName}
             </Link>
-            <div>Rating of the {props.type} restroom.</div>
+            <div>Rating For: The {props.type} restroom</div>
             <div>Date: {props.date}</div>
           </div>
         </div>
