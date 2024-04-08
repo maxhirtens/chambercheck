@@ -36,19 +36,17 @@ const PlacesProfile = async ({ params: { id } }: RouteParams) => {
   const reviews = await prisma.review.findMany({
     where: { placeId: id },
     orderBy: {
-      createdAt: "desc",
+      createdAt: "asc",
     },
   });
 
-  //  get location.
-  const location = await prisma.location.findUnique({
-    where: {
-      id: id,
-    },
-  });
-
+  //  calculate average rating.
   function averageRating() {
-    return location.rating > 0 ? location.rating.toFixed(1) : "No Reviews Yet";
+    const avg =
+      reviews.reduce((acc: number, res: any) => acc + res.rating, 0) /
+      reviews.length;
+
+    return avg > 0 ? avg.toFixed(1) : "No Reviews Yet";
   }
 
   // calculate if recent reviews indicate a mess.

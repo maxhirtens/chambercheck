@@ -35,7 +35,7 @@ const UserProfile = async ({ params: { id } }: RouteParams) => {
   // check for logged in user, and if the user is the owner of the profile page.
   let authorizedUser: Boolean = false;
 
-  if (session) {
+  if (session && reviews.length > 0) {
     authorizedUser = reviews[0].authorId === session!.user.id;
   }
 

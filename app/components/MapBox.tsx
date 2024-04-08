@@ -15,6 +15,7 @@ import MapHandler from "../lib/map-handler";
 import CustomMapControl from "../lib/map-control";
 import MapLegend from "./MapLegend";
 import { Divider } from "@mui/material";
+import { access } from "fs";
 
 interface RestaurantsState {
   name: string;
@@ -85,15 +86,15 @@ const MapBox = () => {
   }, []);
 
   useEffect(() => {
-    // get any nearby locations from ChamberCheck API
-    fetch("/api/location", {
+    // get all reviews from ChamberCheck API
+    fetch("/api/review", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
       .then((data) => data.json())
       .then((data) => {
-        setReviews(data.locations);
-        setReviewIds(data.locations.map((loc: any) => loc.id));
+        setReviews(data.reviews);
+        setReviewIds(data.reviews.map((loc: any) => loc.placeId));
       });
   }, []);
 
@@ -153,9 +154,36 @@ const MapBox = () => {
   };
 
   // search locations for matching placeId.
-  const findLocation = (placeId: string) => {
-    let location = reviews.find((loc: any) => loc.id === placeId);
-    return location;
+  const findLocationRating = (placeId: string) => {
+    let location = reviews.filter((loc: any) => loc.placeId === placeId);
+    if (location.length > 0) {
+      const total = location.reduce(
+        (acc: number, loc: any) => acc + loc.rating,
+        0
+      );
+      return total / location.length;
+    } else {
+      return null;
+    }
+  };
+
+  // find location amenities based on placeId.
+  const findLocationAmenities = (placeId: string) => {
+    let location = reviews.filter((loc: any) => loc.placeId === placeId);
+    const accessible = location.some((loc: any) => loc.accessible);
+    const genderNeutral = location.some((loc: any) => loc.genderNeutral);
+    const babyChanging = location.some((loc: any) => loc.changingTable);
+    const clothTowels = location.some((loc: any) => loc.clothTowels);
+    const handDryer = location.some((loc: any) => loc.handDryer);
+    const notClean = location.some((loc: any) => loc.notClean);
+    return {
+      accessible: accessible,
+      genderNeutral: genderNeutral,
+      babyChanging: babyChanging,
+      clothTowels: clothTowels,
+      handDryer: handDryer,
+      notClean: notClean,
+    };
   };
 
   // generate map content based on state
@@ -201,12 +229,22 @@ const MapBox = () => {
                 position={restaurant.geometry.location}
                 placeId={restaurant.place_id}
                 hasReviews={reviewIds.includes(restaurant.place_id)}
-                rating={findLocation(restaurant.place_id)?.rating}
-                accessible={findLocation(restaurant.place_id)?.accessible}
-                genderNeutral={findLocation(restaurant.place_id)?.genderNeutral}
-                babyChanging={findLocation(restaurant.place_id)?.babyChanging}
-                clothTowels={findLocation(restaurant.place_id)?.clothTowels}
-                handDryer={findLocation(restaurant.place_id)?.handDryer}
+                rating={findLocationRating(restaurant.place_id)}
+                accessible={
+                  findLocationAmenities(restaurant.place_id)?.accessible
+                }
+                genderNeutral={
+                  findLocationAmenities(restaurant.place_id)?.genderNeutral
+                }
+                babyChanging={
+                  findLocationAmenities(restaurant.place_id)?.babyChanging
+                }
+                clothTowels={
+                  findLocationAmenities(restaurant.place_id)?.clothTowels
+                }
+                handDryer={
+                  findLocationAmenities(restaurant.place_id)?.handDryer
+                }
                 notClean={false}
               />
             ))}
