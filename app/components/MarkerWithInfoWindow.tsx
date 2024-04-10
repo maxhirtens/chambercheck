@@ -24,10 +24,15 @@ type MarkerWithInfowindowProps = {
   hasReviews: boolean;
   rating: number;
   accessible: boolean;
+  accessibleHighlight: boolean;
   genderNeutral: boolean;
+  genderNeutralHighlight: boolean;
   babyChanging: boolean;
+  babyChangingHighlight: boolean;
   clothTowels: boolean;
+  clothTowelsHighlight: boolean;
   handDryer: boolean;
+  handDryerHighlight: boolean;
   notClean: boolean;
 };
 
@@ -38,10 +43,15 @@ export const MarkerWithInfowindow = ({
   hasReviews,
   rating,
   accessible,
+  accessibleHighlight,
   genderNeutral,
+  genderNeutralHighlight,
   babyChanging,
+  babyChangingHighlight,
   clothTowels,
+  clothTowelsHighlight,
   handDryer,
+  handDryerHighlight,
   notClean,
 }: MarkerWithInfowindowProps) => {
   const [infowindowOpen, setInfowindowOpen] = useState(false);
@@ -57,6 +67,26 @@ export const MarkerWithInfowindow = ({
     }
   };
 
+  const getBorder = () => {
+    if (accessible && accessibleHighlight) {
+      return "border-4 border-red-500";
+    }
+    if (genderNeutral && genderNeutralHighlight) {
+      return "border-4 border-purple-400";
+    }
+    if (babyChanging && babyChangingHighlight) {
+      return "border-4 border-blue-500";
+    }
+    if (clothTowels && clothTowelsHighlight) {
+      return "border-4 border-green-500";
+    }
+    if (handDryer && handDryerHighlight) {
+      return "border-4 border-orange-500";
+    } else {
+      return;
+    }
+  };
+
   return (
     <>
       <AdvancedMarker
@@ -66,7 +96,9 @@ export const MarkerWithInfowindow = ({
         title={name}
       >
         <div>
-          <MapPinIcon className={`w-9 h-9 rounded-xl ${getColor()}`} />
+          <MapPinIcon
+            className={`w-9 h-9 rounded-xl ${getColor()} ${getBorder()}`}
+          />
         </div>
       </AdvancedMarker>
       {infowindowOpen && (

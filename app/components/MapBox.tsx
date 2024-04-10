@@ -15,7 +15,14 @@ import MapHandler from "../lib/map-handler";
 import CustomMapControl from "../lib/map-control";
 import MapLegend from "./MapLegend";
 import { Divider } from "@mui/material";
-import { access } from "fs";
+import {
+  BabyChangingStationOutlined,
+  AccessibleOutlined,
+  DryOutlined,
+  WcOutlined,
+  DryCleaningOutlined,
+} from "@mui/icons-material";
+import { Tooltip } from "@mui/material";
 
 interface RestaurantsState {
   name: string;
@@ -43,6 +50,22 @@ const MapBox = () => {
 
   // loading state for MapBox.
   const [loading, setLoading] = useState(false);
+
+  // state for filter options.
+  const [active, setActive] = useState({
+    accessible: false,
+    genderNeutral: false,
+    babyChanging: false,
+    clothTowels: false,
+    handDryer: false,
+  });
+  const [filterState, setFilterState] = useState({
+    accessible: false,
+    genderNeutral: false,
+    babyChanging: false,
+    clothTowels: false,
+    handDryer: false,
+  });
 
   // state for location, non-persisting.
   const [location, setLocation] = useState<LatLngType>({
@@ -233,18 +256,23 @@ const MapBox = () => {
                 accessible={
                   findLocationAmenities(restaurant.place_id)?.accessible
                 }
+                accessibleHighlight={filterState.accessible}
                 genderNeutral={
                   findLocationAmenities(restaurant.place_id)?.genderNeutral
                 }
+                genderNeutralHighlight={filterState.genderNeutral}
                 babyChanging={
                   findLocationAmenities(restaurant.place_id)?.babyChanging
                 }
+                babyChangingHighlight={filterState.babyChanging}
                 clothTowels={
                   findLocationAmenities(restaurant.place_id)?.clothTowels
                 }
+                clothTowelsHighlight={filterState.clothTowels}
                 handDryer={
                   findLocationAmenities(restaurant.place_id)?.handDryer
                 }
+                handDryerHighlight={filterState.handDryer}
                 notClean={false}
               />
             ))}
@@ -263,16 +291,126 @@ const MapBox = () => {
     return (
       <div id="search" className="container drop-shadow-2xl">
         <SmallTitle text="Find Restaurants" />
-        <div className="flex flex-col items-center">
-          <div className="w-[375px] h-[375px] md:w-[800px] md:h-[600px] lg:w-[960px] mt-6 border-4 border-white-500 rounded-xl overflow-hidden">
+        <div className="flex flex-col items-center justify-evenly">
+          <div className="flex flex-col space-x-6">
+            {/* Map Filters */}
+            <div>
+              <div className="flex flex-col -mb-4 mt-8 rounded-xl border-4 bg-slate-100 m-auto justify-evenly">
+                <p className="text-center text-teal-500 shadow-md">
+                  Map Filters
+                </p>
+                <div className="flex flex-row space-x-8 px-8 py-2 items-center">
+                  <button
+                    className={
+                      active.accessible ? "text-red-500" : "text-slate-500"
+                    }
+                    onClick={() => {
+                      setFilterState({
+                        ...filterState,
+                        accessible: !filterState.accessible,
+                      });
+                      setActive({ ...active, accessible: !active.accessible });
+                    }}
+                  >
+                    <Tooltip title="Search For an Accessible Restroom">
+                      <AccessibleOutlined fontSize="large" />
+                    </Tooltip>
+                  </button>
+                  <button
+                    className={
+                      active.genderNeutral
+                        ? "text-purple-400"
+                        : "text-slate-500"
+                    }
+                    onClick={() => {
+                      setFilterState({
+                        ...filterState,
+                        genderNeutral: !filterState.genderNeutral,
+                      });
+                      setActive({
+                        ...active,
+                        genderNeutral: !active.genderNeutral,
+                      });
+                    }}
+                  >
+                    <Tooltip title="Search For All-Gender Restrooms">
+                      <WcOutlined fontSize="large" />
+                    </Tooltip>
+                  </button>
+                  <button
+                    className={
+                      active.babyChanging ? "text-blue-500" : "text-slate-500"
+                    }
+                    onClick={() => {
+                      setFilterState({
+                        ...filterState,
+                        babyChanging: !filterState.babyChanging,
+                      });
+                      setActive({
+                        ...active,
+                        babyChanging: !active.babyChanging,
+                      });
+                    }}
+                  >
+                    <Tooltip title="Search For a Baby Changing Station">
+                      <BabyChangingStationOutlined fontSize="large" />
+                    </Tooltip>
+                  </button>
+                  <button
+                    className={
+                      active.clothTowels ? "text-green-500" : "text-slate-500"
+                    }
+                    onClick={() => {
+                      setFilterState({
+                        ...filterState,
+                        clothTowels: !filterState.clothTowels,
+                      });
+                      setActive({
+                        ...active,
+                        clothTowels: !active.clothTowels,
+                      });
+                    }}
+                  >
+                    <Tooltip title="Search For Cloth Hand Towels. Fancy!">
+                      <DryCleaningOutlined fontSize="large" />
+                    </Tooltip>
+                  </button>
+                  <button
+                    className={
+                      active.handDryer ? "text-orange-500" : "text-slate-500"
+                    }
+                    onClick={() => {
+                      setFilterState({
+                        ...filterState,
+                        handDryer: !filterState.handDryer,
+                      });
+                      setActive({
+                        ...active,
+                        handDryer: !active.handDryer,
+                      });
+                    }}
+                  >
+                    <Tooltip title="Search For Hot-Air Hand Dryers">
+                      <DryOutlined fontSize="large" />
+                    </Tooltip>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Map */}
+          <div className="w-[375px] h-[525px] md:w-[800px] md:h-[600px] lg:w-[960px] mt-6 border-4 border-white-500 rounded-xl overflow-hidden">
             {generateMapContent()}
           </div>
+          {/* Map Buttons */}
           <div className="flex bottom-20 z-10 relative">
             <Button text="Locate Me" onClick={refreshLocation} />
             <Button text="Refresh Map Results" onClick={refreshResults} />
           </div>
+          {/* Map Legend */}
+          <MapLegend />
         </div>
-        <MapLegend />
+
         <Divider className="mb-8" />
       </div>
     );
