@@ -1,6 +1,6 @@
 const MapLegend = () => {
   return (
-    <div className="flex flex-col -mt-7 mb-12 rounded-xl border-4 bg-slate-100 m-auto min-w-[375px] justify-evenly">
+    <div className="flex flex-col -mt-7 mb-12 rounded-xl border-4 bg-slate-100 min-w-[375px]">
       <p className="text-center text-teal-500 shadow-md">Map Legend</p>
       <div className="flex flex-row space-x-8 px-8 py-2 items-center text-sm">
         <div className="flex flex-col items-center">
