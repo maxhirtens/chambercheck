@@ -52,6 +52,8 @@ const Review: React.FC<ReviewProps> = ({
     handDryer: false,
     notClean: false,
   });
+  // prevent duplicate submissions.
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const matcher = new RegExpMatcher({
     ...englishDataset.build(),
@@ -81,6 +83,7 @@ const Review: React.FC<ReviewProps> = ({
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    setIsDisabled(true);
     if (!rating) return alert("Please leave a star rating!");
     if (matcher.hasMatch(form.content)) {
       alert("Looks like the review contains profanities. Please remove.");
@@ -105,6 +108,7 @@ const Review: React.FC<ReviewProps> = ({
       router.push(`/places/${placeId}`);
       router.refresh();
     } catch (error) {
+      setIsDisabled(false);
       console.error(error);
     }
   };
@@ -241,10 +245,13 @@ const Review: React.FC<ReviewProps> = ({
               Cancel
             </button>
             <button
+              disabled={isDisabled}
               type="submit"
-              className="p-3 px-6 mr-2 w-36 text-white bg-teal-500 rounded-lg baseline text-xl hover:bg-teal-800"
+              className={`p-3 px-6 mr-2 w-36 text-white ${
+                isDisabled ? "bg-slate-400" : "bg-teal-500 hover:bg-teal-800"
+              } rounded-lg baseline text-xl`}
             >
-              Submit
+              {isDisabled ? <i>Submitting</i> : "Submit"}
             </button>
           </div>
         </form>

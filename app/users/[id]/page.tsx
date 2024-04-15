@@ -52,6 +52,11 @@ const UserProfile = async ({ params: { id } }: RouteParams) => {
       <UserCard username={user.name} avatar={user.image} status={status} />
       <SmallTitle text="User Reviews" />
       <div className="min-w-[350px] max-h-screen overflow-y-auto">
+        {reviews.length === 0 && (
+          <div className="flex justify-center items-center h-96">
+            <p className="text-2xl">No reviews yet!</p>
+          </div>
+        )}
         {reviews.map((review: any) => (
           <div
             className="flex-col m-auto pt-2 p-8 w-80 md:w-auto"
