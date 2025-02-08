@@ -14,12 +14,18 @@ import {
 import { Tooltip } from "@mui/material";
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-const PlacesProfile = async ({ params: { id } }: RouteParams) => {
+const PlacesProfile = async (props: RouteParams) => {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   // get place details from Google Places API.
   const response = await fetch(
     `https://places.googleapis.com/v1/places/${id}?fields=addressComponents,formattedAddress,displayName&language_code=en&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`

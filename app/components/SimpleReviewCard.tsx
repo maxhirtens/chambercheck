@@ -2,19 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import prisma from "@/app/lib/prisma";
 import { StarIcon } from "./StarIcon";
-import {
-  BabyChangingStationOutlined,
-  AccessibleOutlined,
-  DryOutlined,
-  WcOutlined,
-  DryCleaningOutlined,
-  WarningAmberOutlined,
-} from "@mui/icons-material";
-
-import dynamic from "next/dynamic";
-const Tooltip = dynamic(() => import("@mui/material/Tooltip"), {
-  ssr: false,
-});
+import ReviewAmenities from "./ReviewAmenities";
 
 const SimpleReviewCard = async (props: {
   date: string;
@@ -76,40 +64,14 @@ const SimpleReviewCard = async (props: {
           </div>
           {/* amenities list */}
           <div className="flex flex-row space-x-5 pt-4">
-            <div className="text-teal-500 space-x-3">
-              {props.accessible && (
-                <Tooltip title="Reviewer Noticed Restroom was Accessible">
-                  <AccessibleOutlined fontSize="medium" />
-                </Tooltip>
-              )}
-              {props.genderNeutral && (
-                <Tooltip title="Reviewer Noticed All-Gender Restrooms">
-                  <WcOutlined fontSize="medium" />
-                </Tooltip>
-              )}
-              {props.babyChanging && (
-                <Tooltip title="Reviewer Noticed a Baby Changing Station">
-                  <BabyChangingStationOutlined fontSize="medium" />
-                </Tooltip>
-              )}
-              {props.clothTowels && (
-                <Tooltip title="Reviewer Noticed Cloth Hand Towels. Fancy!">
-                  <DryCleaningOutlined fontSize="medium" />
-                </Tooltip>
-              )}
-              {props.handDryer && (
-                <Tooltip title="Reviewer Noticed a Hot-Air Hand Dryer">
-                  <DryOutlined fontSize="medium" />
-                </Tooltip>
-              )}
-            </div>
-            <div className="text-orange-600">
-              {props.notClean && (
-                <Tooltip title="Reviewer Noticed A Mess or Other Issues">
-                  <WarningAmberOutlined fontSize="medium" />
-                </Tooltip>
-              )}
-            </div>
+            <ReviewAmenities
+              accessible={props.accessible}
+              genderNeutral={props.genderNeutral}
+              babyChanging={props.babyChanging}
+              clothTowels={props.clothTowels}
+              handDryer={props.handDryer}
+              notClean={props.notClean}
+            />
           </div>
           <div className="pt-4 uppercase tracking-wide text-xs text-slate-500 font-semibold">
             Review By:{" "}

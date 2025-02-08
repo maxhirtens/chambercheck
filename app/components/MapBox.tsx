@@ -22,7 +22,12 @@ import {
   WcOutlined,
   DryCleaningOutlined,
 } from "@mui/icons-material";
-import { Tooltip } from "@mui/material";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface RestaurantsState {
   name: string;
@@ -235,7 +240,7 @@ const MapBox = () => {
             mapId={"1aceaad6651fe7f1"}
             restriction={{ latLngBounds: SF_BOUNDS, strictBounds: false }}
             gestureHandling={"greedy"}
-            center={center}
+            defaultCenter={center}
             zoom={16}
             disableDefaultUI={true}
             onCenterChanged={(res) => {
@@ -300,100 +305,150 @@ const MapBox = () => {
                   Map Filters
                 </p>
                 <div className="flex flex-row space-x-8 px-8 py-2 items-center">
-                  <button
-                    className={
-                      active.accessible ? "text-red-500" : "text-slate-500"
-                    }
-                    onClick={() => {
-                      setFilterState({
-                        ...filterState,
-                        accessible: !filterState.accessible,
-                      });
-                      setActive({ ...active, accessible: !active.accessible });
-                    }}
-                  >
-                    <Tooltip title="Search For an Accessible Restroom">
-                      <AccessibleOutlined fontSize="large" />
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          className={
+                            active.accessible
+                              ? "text-red-500"
+                              : "text-slate-500"
+                          }
+                          onClick={() => {
+                            setFilterState({
+                              ...filterState,
+                              accessible: !filterState.accessible,
+                            });
+                            setActive({
+                              ...active,
+                              accessible: !active.accessible,
+                            });
+                          }}
+                        >
+                          <AccessibleOutlined fontSize="large" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Search For an Accessible Restroom</p>
+                      </TooltipContent>
                     </Tooltip>
-                  </button>
-                  <button
-                    className={
-                      active.genderNeutral
-                        ? "text-purple-400"
-                        : "text-slate-500"
-                    }
-                    onClick={() => {
-                      setFilterState({
-                        ...filterState,
-                        genderNeutral: !filterState.genderNeutral,
-                      });
-                      setActive({
-                        ...active,
-                        genderNeutral: !active.genderNeutral,
-                      });
-                    }}
-                  >
-                    <Tooltip title="Search For All-Gender Restrooms">
-                      <WcOutlined fontSize="large" />
+                  </TooltipProvider>
+
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          className={
+                            active.genderNeutral
+                              ? "text-purple-400"
+                              : "text-slate-500"
+                          }
+                          onClick={() => {
+                            setFilterState({
+                              ...filterState,
+                              genderNeutral: !filterState.genderNeutral,
+                            });
+                            setActive({
+                              ...active,
+                              genderNeutral: !active.genderNeutral,
+                            });
+                          }}
+                        >
+                          <WcOutlined fontSize="large" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Search For All-Gender Restrooms</p>
+                      </TooltipContent>
                     </Tooltip>
-                  </button>
-                  <button
-                    className={
-                      active.babyChanging ? "text-blue-500" : "text-slate-500"
-                    }
-                    onClick={() => {
-                      setFilterState({
-                        ...filterState,
-                        babyChanging: !filterState.babyChanging,
-                      });
-                      setActive({
-                        ...active,
-                        babyChanging: !active.babyChanging,
-                      });
-                    }}
-                  >
-                    <Tooltip title="Search For a Baby Changing Station">
-                      <BabyChangingStationOutlined fontSize="large" />
+                  </TooltipProvider>
+
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          className={
+                            active.babyChanging
+                              ? "text-blue-500"
+                              : "text-slate-500"
+                          }
+                          onClick={() => {
+                            setFilterState({
+                              ...filterState,
+                              babyChanging: !filterState.babyChanging,
+                            });
+                            setActive({
+                              ...active,
+                              babyChanging: !active.babyChanging,
+                            });
+                          }}
+                        >
+                          <BabyChangingStationOutlined fontSize="large" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Search For a Baby Changing Station</p>
+                      </TooltipContent>
                     </Tooltip>
-                  </button>
-                  <button
-                    className={
-                      active.clothTowels ? "text-green-500" : "text-slate-500"
-                    }
-                    onClick={() => {
-                      setFilterState({
-                        ...filterState,
-                        clothTowels: !filterState.clothTowels,
-                      });
-                      setActive({
-                        ...active,
-                        clothTowels: !active.clothTowels,
-                      });
-                    }}
-                  >
-                    <Tooltip title="Search For Cloth Hand Towels. Fancy!">
-                      <DryCleaningOutlined fontSize="large" />
+                  </TooltipProvider>
+
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          className={
+                            active.clothTowels
+                              ? "text-green-500"
+                              : "text-slate-500"
+                          }
+                          onClick={() => {
+                            setFilterState({
+                              ...filterState,
+                              clothTowels: !filterState.clothTowels,
+                            });
+                            setActive({
+                              ...active,
+                              clothTowels: !active.clothTowels,
+                            });
+                          }}
+                        >
+                          <DryCleaningOutlined fontSize="large" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Search For Cloth Hand Towels. Fancy!</p>
+                      </TooltipContent>
                     </Tooltip>
-                  </button>
-                  <button
-                    className={
-                      active.handDryer ? "text-orange-500" : "text-slate-500"
-                    }
-                    onClick={() => {
-                      setFilterState({
-                        ...filterState,
-                        handDryer: !filterState.handDryer,
-                      });
-                      setActive({
-                        ...active,
-                        handDryer: !active.handDryer,
-                      });
-                    }}
-                  >
-                    <Tooltip title="Search For Hot-Air Hand Dryers">
-                      <DryOutlined fontSize="large" />
+                  </TooltipProvider>
+
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          className={
+                            active.handDryer
+                              ? "text-orange-500"
+                              : "text-slate-500"
+                          }
+                          onClick={() => {
+                            setFilterState({
+                              ...filterState,
+                              handDryer: !filterState.handDryer,
+                            });
+                            setActive({
+                              ...active,
+                              handDryer: !active.handDryer,
+                            });
+                          }}
+                        >
+                          <DryOutlined fontSize="large" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Search For Hot-Air Hand Dryers</p>
+                      </TooltipContent>
                     </Tooltip>
-                  </button>
+                  </TooltipProvider>
                 </div>
               </div>
             </div>

@@ -8,12 +8,18 @@ import SmallTitle from "@/app/components/SmallTitle";
 import { authOptions } from "@/app/lib/auth";
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-const UserProfile = async ({ params: { id } }: RouteParams) => {
+const UserProfile = async (props: RouteParams) => {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   // get logged in user details.
   const session = await getServerSession(authOptions);
 
